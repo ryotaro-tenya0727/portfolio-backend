@@ -5,6 +5,7 @@ class AuthorizationService
 
   def current_user
     @auth_payload, @auth_header = verify_token
+    byebug
     @user = User.from_token_payload(@auth_payload)
   end
 
