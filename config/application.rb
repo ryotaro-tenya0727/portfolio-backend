@@ -36,5 +36,9 @@ module Backend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.generators do |g|
+      g.skip_routes   true # config/routes.rb を変更しない
+      g.helper false
+    end
   end
 end
