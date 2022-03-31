@@ -1,8 +1,8 @@
 class Api::V1::PostsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show]
+  skip_before_action :authorize_request, only: [:show]
 
   def index
-    posts = Post.all
+    posts = @current_user.posts
     render json: posts
   end
 
