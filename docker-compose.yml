@@ -4,12 +4,12 @@ version: '3'
 volumes:
   mysql_data:
 services:
-  backend:
+  api:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - '.:/backend/'
+      - '.:/api/'
     ports:
       - '3000:3000'
     tty: true
