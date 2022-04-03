@@ -1,8 +1,8 @@
 FROM ruby:2.7.4
 RUN apt-get update
 RUN apt-get install -y build-essential
-WORKDIR /api
-COPY Gemfile /api/
+WORKDIR /backend
+COPY Gemfile /backend/
 RUN bundle install
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
