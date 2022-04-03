@@ -4,7 +4,7 @@ version: '3'
 volumes:
   mysql_data:
 services:
-  api:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile
