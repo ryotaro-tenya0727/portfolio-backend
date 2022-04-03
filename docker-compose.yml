@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - '.:/api/'
+      - '.:/backend/'
     ports:
       - '3000:3000'
     tty: true
