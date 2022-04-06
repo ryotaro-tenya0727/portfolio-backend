@@ -5,12 +5,12 @@ require 'uri'
 class JsonWebToken
   def self.verify(token)
     JWT.decode(token, nil,
-              true, # Verify the signature of this token
-              algorithm: 'RS256',
-              iss: ENV['AUTH0_DOMAIN'],
-              verify_iss: true,
-              aud: ENV['AUTH0_IDENTIFIER'],
-              verify_aud: true) do |header|
+               true, # Verify the signature of this token
+               algorithm: 'RS256',
+               iss: ENV['AUTH0_DOMAIN'],
+               verify_iss: true,
+               aud: ENV['AUTH0_IDENTIFIER'],
+               verify_aud: true) do |header|
       jwks_hash[header['kid']]
     end
   end

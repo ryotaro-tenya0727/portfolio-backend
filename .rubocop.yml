@@ -1,0 +1,80 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'spec/**/*'
+    - 'node_modules/**/*'
+    - 'config/**/*'
+    - 'Gemfile'
+    - 'test/**/*'
+    - 'doc/**/**'
+  DisplayCopNames: true
+
+Layout/MultilineBlockLayout:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'Gemfile'
+    - 'config/**/*'
+    - 'spec/**/*_spec.rb'
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 300
+
+Metrics/CyclomaticComplexity:
+  Max: 30
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 30
+
+Naming/AccessorMethodName:
+  Exclude:
+    - 'app/controllers/**/*'
+
+NumericLiterals:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/WhileUntilModifier:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
