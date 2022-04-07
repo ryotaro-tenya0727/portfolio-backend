@@ -12,6 +12,7 @@ executors:
           DB_USER: $DB_USER
       - image: circleci/mysql:5.7
         environment:
+          MYSQL_USER: $DB_USER
           MYSQL_ROOT_PASSWORD: $DB_PASSWORD
     working_directory: ~/backend
 
