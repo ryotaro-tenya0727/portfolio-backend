@@ -13,6 +13,7 @@ executors:
       - image: circleci/mysql:5.7
         environment:
           - MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    working_directory: ~/backend
 
 commands:
   install_bundler:
@@ -21,10 +22,9 @@ commands:
       - run: gem install bundler -v 2.1.4
 
 jobs:
-  build:
+  bundle_dependencies:
     executor:
       name: backend_container
-    working_directory: ~/backend
     steps:
       - checkout
       - restore_cache:
@@ -40,3 +40,29 @@ jobs:
           paths:
             - vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+  rspec:
+    executor:
+      name: backend_container
+    parallelism: 2
+    steps:
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Watting for database connection
+          working_directory: api
+          command: |
+            dockerize -wait \
+            tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: create database
+          command: bundle exec rails db:create
+      - run:
+          name: migrate database
+          command: bundle exec rails db:migrate
+      - run:
+          name: Parallel RSpec
+          command: |
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings)
+            bundle exec rspec --format progress --format RspecJunitFormatter -o tmp/test-results/rspec.xml -- $TESTFILES
+      - store_test_results:
+          path: tmp/test-results
