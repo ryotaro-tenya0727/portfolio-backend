@@ -85,7 +85,7 @@ jobs:
 
   rubocop:
     executor:
-      name: default_container
+      name: backend_container
     steps:
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
