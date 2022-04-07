@@ -71,6 +71,6 @@ workflows:
   build:
     jobs:
       - bundle_dependencies
-      - rspec
+      - rspec:
           requires:
             - bundle_dependencies
