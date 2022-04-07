@@ -1,3 +1,4 @@
+require 'rails_helper'
 RSpec.describe 'Api::V1::Posts', type: :request do
   describe 'GET Posts index' do
     it 'statusが200であること' do

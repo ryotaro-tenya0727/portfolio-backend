@@ -1,0 +1,41 @@
+version: 2.1
+executors:
+  backend_container:
+    docker:
+      - image: circleci/ruby:2.7.4
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
+          - DB_HOST: 127.0.0.1
+          - DB_PORT: 3306
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ROOT_PASSWORD: password
+
+commands:
+  install_bundler:
+    description: Bundler install
+    steps:
+      - run: gem install bundler -v 2.1.4
+
+jobs:
+  build:
+    executor:
+      name: backend_container
+    working_directory: ~/backend
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - install_bundler
+      - run: pwd
+      - run:
+          name: Bundle Install Dependencies
+          command: |
+            bundle install --path vendor/bundle
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
