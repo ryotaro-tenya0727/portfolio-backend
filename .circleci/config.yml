@@ -81,6 +81,7 @@ workflows:
   version: 2
   build:
     jobs:
+      - fetch_source_code
       - bundle_dependencies:
           requires:
             - fetch_source_code
