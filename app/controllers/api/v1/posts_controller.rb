@@ -22,7 +22,7 @@ class Api::V1::PostsController < SecuredController
     end
   end
 
-   def destroy
+  def destroy
     post = Post.find(params[:id])
     post.delete
   end
