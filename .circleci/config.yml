@@ -22,11 +22,21 @@ commands:
       - run: gem install bundler -v 2.1.4
 
 jobs:
-  bundle_dependencies:
+  fetch_source_code:
     executor:
       name: backend_container
     steps:
       - checkout
+      - save_cache:
+          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/backend
+  bundle_dependencies:
+    executor:
+      name: backend_container
+    steps:
+      - restore_cache:
+          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -38,18 +48,19 @@ jobs:
             bundle install --path vendor/bundle
       - save_cache:
           paths:
-            - vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - vendor/bundle
   rspec:
     executor:
       name: backend_container
     parallelism: 2
     steps:
       - restore_cache:
+          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: Watting for database connection
-          working_directory: api
           command: |
             dockerize -wait \
             tcp://127.0.0.1:3306 -timeout 120s
