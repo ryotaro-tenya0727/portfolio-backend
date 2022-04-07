@@ -8,9 +8,11 @@ executors:
           - RAILS_ENV: 'test'
           - DB_HOST: 127.0.0.1
           - DB_PORT: 3306
+          - DB_PASSWORD: $DB_PASSWORD
+          - DB_USER: $DB_USER
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_ROOT_PASSWORD: password
+          - MYSQL_ROOT_PASSWORD: $DB_PASSWORD
 
 commands:
   install_bundler:
@@ -30,7 +32,6 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
       - install_bundler
-      - run: pwd
       - run:
           name: Bundle Install Dependencies
           command: |
