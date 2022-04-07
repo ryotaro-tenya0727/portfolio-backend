@@ -2,11 +2,11 @@ version: 2.1
 executors:
   backend_container:
     docker:
-      - image: circleci/ruby:2.7.4
+      - image: cimg/ruby:2.7.4
         environment:
           BUNDLER_VERSION: 2.1.4
           RAILS_ENV: 'test'
-      - image: circleci/mysql:5.7
+      - image: cimg/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: password
     environment:
@@ -98,7 +98,7 @@ jobs:
       - run:
           name: Execute rubocop
           command: |
-            bundle exec rubocop -a
+            bundle exec rubocop
 
 workflows:
   version: 2
