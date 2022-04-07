@@ -81,7 +81,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - bundle_dependencies
+      - bundle_dependencies:
           requires:
             - fetch_source_code
       - rspec:
