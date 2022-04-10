@@ -6,14 +6,13 @@ executors:
         environment:
           BUNDLER_VERSION: 2.1.4
           RAILS_ENV: 'test'
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_PASSWORD: password
+          DB_USER: root
       - image: cimg/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: password
-    environment:
-      DB_HOST: 127.0.0.1
-      DB_PORT: 3306
-      DB_PASSWORD: password
-      DB_USER: root
     working_directory: ~/backend
 
 commands:
