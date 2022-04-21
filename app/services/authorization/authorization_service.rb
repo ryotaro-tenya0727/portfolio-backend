@@ -3,9 +3,9 @@ class Authorization::AuthorizationService
     @headers = headers
   end
 
-  def current_user
+  def current_user(name)
     @auth_payload, @auth_header = verify_token
-    @user = User.from_token_payload(@auth_payload)
+    @user = User.from_token_payload(@auth_payload, name)
   end
 
   private
