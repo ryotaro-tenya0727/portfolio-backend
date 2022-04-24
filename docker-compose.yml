@@ -6,8 +6,9 @@ volumes:
 services:
   backend:
     build:
-    # build contextでありdockerdileのディレクトリ
+    # build context
       context: .
+    # -f に相当
       dockerfile: Dockerfile
     volumes:
       - '.:/backend/'
