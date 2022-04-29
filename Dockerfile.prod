@@ -4,8 +4,10 @@ RUN apt-get install -y build-essential \
   libpq-dev \
   sudo
 WORKDIR /backend
-COPY Gemfile /backend/
+COPY Gemfile .
+COPY Gemfile.lock .
 RUN bundle install
+COPY . .
 COPY entrypoint.prod.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.prod.sh
 ENTRYPOINT ["entrypoint.prod.sh"]
