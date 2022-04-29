@@ -5,8 +5,11 @@ working_directory root_path
 pid "#{root_path}/tmp/pids/unicorn.pid"
 listen 3000
 
-stderr_path "#{root_path}/log/unicorn.stderr.log"
-stdout_path "#{root_path}/log/unicorn.stdout.log"
+# stderr_path "#{root_path}/log/unicorn.stderr.log"
+# stdout_path "#{root_path}/log/unicorn.stdout.log"
+
+stderr_path = $stderr
+stdout_path = $stdout
 
 timeout 30
 preload_app true
