@@ -6,7 +6,7 @@ RUN apt-get install -y build-essential \
 WORKDIR /backend
 COPY Gemfile .
 COPY Gemfile.lock .
-RUN bundle install
+RUN bundle install --without test development
 COPY . .
 COPY entrypoint.prod.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.prod.sh
@@ -14,4 +14,4 @@ ENTRYPOINT ["entrypoint.prod.sh"]
 VOLUME /backend/public
 VOLUME /backend/tmp
 EXPOSE 3000
-CMD bundle exec unicorn -E production -c config/unicorn.rb -D
+CMD ["unicorn", "-p", "3000", "-c", "config/unicorn.rb", "-E", "production"]
