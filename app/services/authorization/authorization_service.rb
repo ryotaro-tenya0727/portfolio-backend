@@ -15,6 +15,6 @@ class Authorization::AuthorizationService
   end
 
   def verify_token
-    CreateJwtToken::CreateJwtTokenService.verify(http_token)
+    VerifyJwtToken::VerifyJwtTokenService.verify(http_token)
   end
 end
