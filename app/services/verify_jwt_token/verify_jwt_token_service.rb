@@ -5,7 +5,7 @@ require 'uri'
 class VerifyJwtToken::VerifyJwtTokenService
   def self.verify(token)
     JWT.decode(token, nil,
-               true, # Verify the signature of this token
+               true,
                algorithm: 'RS256',
                iss: ENV['AUTH0_DOMAIN'],
                verify_iss: true,
