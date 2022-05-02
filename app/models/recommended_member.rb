@@ -1,0 +1,2 @@
+class RecommendedMember < ApplicationRecord
+end

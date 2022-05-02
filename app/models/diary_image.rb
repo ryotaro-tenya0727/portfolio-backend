@@ -1,0 +1,2 @@
+class DiaryImage < ApplicationRecord
+end
