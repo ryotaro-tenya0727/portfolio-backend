@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_01_153610) do
-
-  create_table "posts", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "title"
-    t.text "caption"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2022_05_02_122811) do
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "sub"
@@ -28,5 +19,4 @@ ActiveRecord::Schema.define(version: 2022_05_01_153610) do
     t.string "name", null: false
   end
 
-  add_foreign_key "posts", "users"
 end
