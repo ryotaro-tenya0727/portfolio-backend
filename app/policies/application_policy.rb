@@ -20,21 +20,22 @@ class ApplicationPolicy
     false
   end
 
-  def new?
-    create?
-  end
-
   def update?
     false
   end
 
   def edit?
-    update?
+    false
   end
 
   def destroy?
     false
   end
+
+  # ApplicationPolicyを継承することによって
+  # 継承したクラスの中にScopeクラスが存在。
+  # 継承したクラスでScope < Scopeとすることで
+  # ApplicationPolicyのScopeを継承したScopeが作れる。
 
   class Scope
     def initialize(user, scope)
@@ -43,11 +44,17 @@ class ApplicationPolicy
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      raise NotImplementedError, '継承先でresolveメソッドが定義されていない'
     end
 
     private
 
     attr_reader :user, :scope
+  end
+
+  private
+
+  def check_current_user
+    !!current_user
   end
 end
