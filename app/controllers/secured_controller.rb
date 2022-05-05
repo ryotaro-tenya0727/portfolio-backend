@@ -1,5 +1,6 @@
 class SecuredController < ApplicationController
   before_action :authorize_request
+
   private
 
   def authorize_request
