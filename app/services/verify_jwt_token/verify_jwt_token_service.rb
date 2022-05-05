@@ -1,4 +1,3 @@
-# app/lib/json_web_token.rb
 require 'net/http'
 require 'uri'
 
