@@ -11,6 +11,8 @@ class SecuredController < ApplicationController
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
 
+  attr_reader :current_user
+
   def user_params
     params.permit(:name)
   end
