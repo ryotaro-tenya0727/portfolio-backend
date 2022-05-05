@@ -1,6 +1,5 @@
 class SecuredController < ApplicationController
   before_action :authorize_request
-
   private
 
   def authorize_request
@@ -14,6 +13,6 @@ class SecuredController < ApplicationController
   attr_reader :current_user
 
   def user_params
-    params.permit(:name)
+    params.require(:user).permit(:name)
   end
 end
