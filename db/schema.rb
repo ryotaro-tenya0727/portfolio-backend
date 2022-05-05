@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_02_184146) do
+ActiveRecord::Schema.define(version: 2022_05_05_210332) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2022_05_02_184146) do
     t.integer "role", default: 0, null: false
     t.string "user_image"
     t.string "uuid", null: false
+    t.index ["sub"], name: "index_users_on_sub", unique: true
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
