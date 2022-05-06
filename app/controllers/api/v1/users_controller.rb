@@ -3,7 +3,7 @@ class Api::V1::UsersController < SecuredController
 
   def create
     register_user
-    render json: { "status": '200' }, status: :ok
+    render json: { "register_user": true }, status: :ok
   end
 
   private
