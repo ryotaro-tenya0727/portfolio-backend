@@ -5,13 +5,13 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, RecommendedMember])
     recommended_members = current_user.recommended_members.all
     render_json = RecommendedMemberSerializer.new(recommended_members).serializable_hash.to_json
-    render json: render_json, status: 200
+    render json: render_json, status: :ok
   end
 
   def create
     authorize([:user, RecommendedMember])
     recommended_member = current_user.recommended_members.create!(recommended_member_params)
-    render json: { 'register_member': true }, status: 200
+    render json: { 'register_member': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, recommended_member.errors.full_messages)
   end
@@ -19,13 +19,13 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   def edit
     authorize([:user, @recommended_member])
     render_json = RecommendedMemberSerializer.new(@recommended_member).serializable_hash.to_json
-    render json: render_json, status: 200
+    render json: render_json, status: :ok
   end
 
   def update
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)
-    render json: { 'update_member': true }, status: 200
+    render json: { 'update_member': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, @recommended_member.errors.full_messages)
   end
@@ -34,7 +34,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
     # exception handling 500 in concern/api/exception_handler.rb
-    render json: { 'destroy_member': true }, status: 200
+    render json: { 'destroy_member': true }, status: :ok
   end
 
   private
