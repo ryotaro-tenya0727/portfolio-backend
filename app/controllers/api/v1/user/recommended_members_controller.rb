@@ -32,7 +32,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
     # 例外処理
-    render json: { 'destroy_member': 200 }, status: :ok
+    render json: { 'destroy_member': true }, status: :ok
   end
 
   private
