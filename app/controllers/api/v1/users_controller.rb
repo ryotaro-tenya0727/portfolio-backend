@@ -1,5 +1,5 @@
 class Api::V1::UsersController < SecuredController
-  skip_before_action :authorize_request
+  skip_before_action :authorize_request, only: [:create]
 
   def create
     register_user

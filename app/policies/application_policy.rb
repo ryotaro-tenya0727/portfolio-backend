@@ -55,6 +55,6 @@ class ApplicationPolicy
   private
 
   def check_current_user
-    !!current_user
+    !!user
   end
 end
