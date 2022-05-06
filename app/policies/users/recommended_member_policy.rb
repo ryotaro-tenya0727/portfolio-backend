@@ -1,6 +1,7 @@
 class Users::RecommendedMemberPolicy < ApplicationPolicy
   def initialize(user, record)
     raise Pundit::NotAuthorizedError unless user
+
     super
   end
 
