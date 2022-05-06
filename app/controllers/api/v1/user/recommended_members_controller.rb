@@ -12,7 +12,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, RecommendedMember])
     current_user.recommended_members.create!(recommended_member_params)
     # 例外処理
-    render json: { status: 200 }, status: :ok
+    render json: { 'register_member': true }, status: :ok
   end
 
   def edit
@@ -25,14 +25,14 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)
     # 例外処理
-    render json: { status: 200 }, status: :ok
+    render json: { 'update_member': true }, status: :ok
   end
 
   def destroy
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
     # 例外処理
-    render json: { status: 200 }, status: :ok
+    render json: { 'destroy_member': 200 }, status: :ok
   end
 
   private
