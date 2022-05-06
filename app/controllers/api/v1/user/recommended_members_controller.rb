@@ -5,34 +5,36 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, RecommendedMember])
     recommended_members = current_user.recommended_members.all
     render_json = RecommendedMemberSerializer.new(recommended_members).serializable_hash.to_json
-    render json: render_json, status: :ok
+    render json: render_json, status: 200
   end
 
   def create
     authorize([:user, RecommendedMember])
-    current_user.recommended_members.create!(recommended_member_params)
-    # 例外処理
-    render json: { 'register_member': true }, status: :ok
+    recommended_member = current_user.recommended_members.create!(recommended_member_params)
+    render json: { 'register_member': true }, status: 200
+  rescue ActiveRecord::RecordInvalid => e
+    render400(e, recommended_member.errors.full_messages)
   end
 
   def edit
     authorize([:user, @recommended_member])
     render_json = RecommendedMemberSerializer.new(@recommended_member).serializable_hash.to_json
-    render json: render_json, status: :ok
+    render json: render_json, status: 200
   end
 
   def update
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)
-    # 例外処理
-    render json: { 'update_member': true }, status: :ok
+    render json: { 'update_member': true }, status: 200
+  rescue ActiveRecord::RecordInvalid => e
+    render400(e, @recommended_member.errors.full_messages)
   end
 
   def destroy
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
-    # 例外処理
-    render json: { 'destroy_member': true }, status: :ok
+    # exception handling 500 in concern/api/exception_handler.rb
+    render json: { 'destroy_member': true }, status: 200
   end
 
   private
@@ -43,6 +45,6 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def set_recommended_member
     @recommended_member = current_user.recommended_members.find_by!(uuid: params[:uuid])
-    # 例外処理
+    # exception handling 404 in concern/api/exception_handler.rb
   end
 end
