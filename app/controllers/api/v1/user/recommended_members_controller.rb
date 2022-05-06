@@ -10,7 +10,8 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def create
     authorize([:user, RecommendedMember])
-    recommended_member = current_user.recommended_members.create!(recommended_member_params)
+    recommended_member = current_user.recommended_members.build(recommended_member_params)
+    recommended_member.save!
     render json: { 'register_member': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, recommended_member.errors.full_messages)

@@ -2,9 +2,9 @@ module Api::ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
+    rescue_from StandardError, with: :render500
     rescue_from Pundit::NotAuthorizedError, with: :render403
     rescue_from ActiveRecord::RecordNotFound, with: :render404
-    rescue_from StandardError, with: :render500
   end
 
   private
