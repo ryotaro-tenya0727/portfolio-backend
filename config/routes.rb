@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get :health_check, to: 'health_check#index'
       resources :users
       namespace :user do
-        resources :recommended_members
+        resources :recommended_members, param: :uuid
       end
     end
   end
