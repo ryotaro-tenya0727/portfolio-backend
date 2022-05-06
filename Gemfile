@@ -10,6 +10,10 @@ gem 'puma', '~> 5.0'
 gem 'dotenv-rails'
 # 認証
 gem 'jwt'
+# 権限管理
+gem 'pundit'
+# シリアライザー
+gem 'jsonapi-serializer'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
