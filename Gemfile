@@ -13,7 +13,7 @@ gem 'jwt'
 # 権限管理
 gem 'pundit'
 # シリアライザー
-gem 'fast_jsonapi'
+gem 'jsonapi-serializer'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
