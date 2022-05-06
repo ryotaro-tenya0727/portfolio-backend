@@ -1,5 +1,5 @@
 class Api::V1::User::RecommendedMembersController < SecuredController
-  before_action :set_recommended_member, only: [:edit, :update, :destroy]
+  before_action :set_recommended_member, only: %i[edit update destroy]
 
   def index
     authorize([:user, RecommendedMember])
