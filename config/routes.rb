@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get :health_check, to: 'health_check#index'
       resources :users
-      namespace :users do
+      namespace :user do
         resources :recommended_members
       end
     end

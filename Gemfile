@@ -12,6 +12,8 @@ gem 'dotenv-rails'
 gem 'jwt'
 # 権限管理
 gem 'pundit'
+# シリアライザー
+gem 'fast_jsonapi'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
