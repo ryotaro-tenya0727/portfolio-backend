@@ -4,6 +4,7 @@ class Api::V1::Users::RecommendedMembersController < SecuredController
   def create
     authorize([:users, RecommendedMember])
     current_user.recommended_members.create!(recommended_member_params)
+    render json: { "register_member": true }, status: :ok
   end
 
   def edit; end
