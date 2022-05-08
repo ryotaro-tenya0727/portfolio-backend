@@ -16,7 +16,5 @@ class Api::V1::UsersController < SecuredController
     authorization = Authorization::AuthorizationService.new(request.headers)
     user_name = user_params[:name]
     @current_user = authorization.current_user(user_name)
-  rescue JWT::VerificationError, JWT::DecodeError
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
 end
