@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Users', type: :request do
-  describe 'POST /api/v1/users' do
-    let(:headers_with_token) { { CONTENT_TYPE: 'application/json', Authorization: 'jwt_token' } }
+RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
+  describe 'ユーザー登録 POST /api/v1/users' do
+    let(:headers_with_token) { { CONTENT_TYPE: 'application/json', Authorization: 'jwt_test_token' } }
     let(:headers_without_token) { { CONTENT_TYPE: 'application/json' } }
     let(:data) { { user: { name: 'test_name' } } }
 
