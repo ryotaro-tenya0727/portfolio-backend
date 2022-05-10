@@ -10,7 +10,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def create
     authorize([:user, RecommendedMember])
-    recommended_member = current_user.recommended_members.build(recommended_member_params)
+    recommended_member = current_user.recommended_members.build(date_modified_recommended_member_params)
     recommended_member.save!
     render json: { 'register_member': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
@@ -25,7 +25,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def update
     authorize([:user, @recommended_member])
-    @recommended_member.update!(recommended_member_params)
+    @recommended_member.update!(date_modified_recommended_member_params)
     render json: { 'update_member': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, @recommended_member.errors.full_messages)
@@ -41,7 +41,13 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   private
 
   def recommended_member_params
-    params.require(:recommended_member).permit(:nickname, :group).merge(first_met_date: params[:recommended_member][:first_met_date].to_date)
+    params.require(:recommended_member).permit(:nickname, :group, :first_met_date)
+  end
+
+  def date_modified_recommended_member_params
+    new_params = recommended_member_params
+    new_params[:first_met_date] &&= new_params[:first_met_date].to_date
+    new_params
   end
 
   def set_recommended_member
