@@ -68,9 +68,14 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   end
 
   describe 'ユーザーが推しメンを削除 DELETE api/v1/user/recommended_members' do
+    let!(:recommended_member) { create(:recommended_member, user: current_user) }
+    let!(:request_hash) { { headers: headers} }
+    let(:http_request) { delete api_v1_user_recommended_member_path(recommended_member.uuid), request_hash }
     context '正常系' do
       it '推しメンを削除できること' do
-
+        expect{ http_request }.to change { current_user.recommended_members.count }.by(-1)
+        expect(response).to be_successful
+        expect(response).to have_http_status(:ok)
       end
     end
   end
