@@ -29,34 +29,39 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   end
 
   describe 'ユーザーが推しメンを作成 POST api/v1/user/recommended_members' do
-    let!(:request_hash) { {} }
-    let(:http_request) { post api_v1_user_recommended_members_path, request_hash }
     let!(:request_hash) { { headers: headers, params: { recommended_member: attributes_for(:recommended_member) }.to_json } }
+    let(:http_request) { post api_v1_user_recommended_members_path, request_hash }
 
     context '正常系' do
       it '推しメンが新規作成されること' do
-        expect{ http_request }.to change{ RecommendedMember.count }.by(1)
+        expect{ http_request }.to change { current_user.recommended_members.count }.by(1)
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
       end
     end
 
     context '異常系' do
-      it 'ニックネームが未入力の場合、推しメンが作成されないこと' do
+      xit 'ニックネームが未入力の場合、推しメンが作成されないこと' do
 
       end
     end
   end
 
   describe 'ユーザーが推しメンを編集 PUT /api/v1/user/recommended_members/:uuid' do
+    let!(:recommended_member) { create(:recommended_member, user: current_user) }
+    let!(:request_hash) { { headers: headers, params: { recommended_member: { nickname: 'change_nickname' } }.to_json } }
+    let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.uuid), request_hash }
+
     context '正常系' do
       it '推しメンを編集できること' do
-
+        http_request
+        expect(response).to be_successful
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context '異常系' do
-      it 'ニックネームが未入力の場合、推しメンを編集できないこと' do
+      xit 'ニックネームが未入力の場合、推しメンを編集できないこと' do
 
       end
     end
