@@ -41,7 +41,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   private
 
   def recommended_member_params
-    params.require(:recommended_member).permit(:nickname, :group).merge(first_met_date: params[:recommended_member][:first_met_date].to_date)
+    params.require(:recommended_member).permit(:nickname, :group, :first_met_date)
   end
 
   def set_recommended_member
