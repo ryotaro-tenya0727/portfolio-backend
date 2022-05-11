@@ -1,5 +1,10 @@
 class Api::V1::User::DiariesController < ApplicationController
-  def index; end
+  before_action :set_diary, only: %i[show edit update destroy]
+
+  def index
+    diaries = current_user.recommended_members.find_by(uuid: params[:uuid]).diaries.all
+    # exception handling 404 in concern/api/exception_handler.rb
+  end
 
   def create; end
 
@@ -10,4 +15,7 @@ class Api::V1::User::DiariesController < ApplicationController
   def update; end
 
   def destroy; end
+
+  def set_diary
+  end
 end
