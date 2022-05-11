@@ -4,6 +4,7 @@ class Api::V1::User::DiariesController < ApplicationController
   def index
     diaries = current_user.recommended_members.find_by(uuid: params[:uuid]).diaries.all
     # exception handling 404 in concern/api/exception_handler.rb
+    render json: diaries, status: :ok
   end
 
   def create; end
@@ -16,6 +17,5 @@ class Api::V1::User::DiariesController < ApplicationController
 
   def destroy; end
 
-  def set_diary
-  end
+  def set_diary; end
 end

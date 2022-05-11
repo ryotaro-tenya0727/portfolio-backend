@@ -1,4 +1,4 @@
 class DiarySerializer
   include JSONAPI::Serializer
-  attributes 
+  attributes
 end
