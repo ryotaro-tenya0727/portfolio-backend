@@ -57,4 +57,8 @@ class ApplicationPolicy
   def check_current_user
     !!user
   end
+
+  def own?
+    user.id == record.user_id
+  end
 end

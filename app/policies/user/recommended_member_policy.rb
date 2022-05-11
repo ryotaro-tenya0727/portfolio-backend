@@ -14,14 +14,14 @@ class User::RecommendedMemberPolicy < ApplicationPolicy
   end
 
   def update?
-    check_current_user
+    own?
   end
 
   def edit?
-    check_current_user
+    own?
   end
 
   def destroy?
-    check_current_user
+    own?
   end
 end
