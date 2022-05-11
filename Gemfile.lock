@@ -61,7 +61,6 @@ GEM
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
     ast (2.4.2)
-    awesome_print (1.9.2)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -216,7 +215,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print
   bootsnap (>= 1.4.4)
   byebug
   dotenv-rails
