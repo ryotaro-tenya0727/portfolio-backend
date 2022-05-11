@@ -4,5 +4,5 @@ class Diary < ApplicationRecord
 
   validates :uuid, uniqueness: true
 
-  enum role: { public: 0, private: 1 }
+  enum status: { published: 0, non_published: 1 }
 end
