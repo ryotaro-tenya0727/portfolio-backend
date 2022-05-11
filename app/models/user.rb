@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :recommended_members, dependent: :destroy
+  has_many :diaries
 
   enum role: { general: 0, admin: 1 }
 
