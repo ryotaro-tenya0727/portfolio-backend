@@ -31,3 +31,6 @@
 /config/master.key
 
 /.env
+
+# irb
+.irb_history

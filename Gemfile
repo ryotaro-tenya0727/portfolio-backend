@@ -15,6 +15,7 @@ gem 'pundit'
 # シリアライザー
 gem 'jsonapi-serializer'
 
+gem 'awesome_print'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # cors
