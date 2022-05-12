@@ -6,7 +6,7 @@ class Api::V1::User::DiariesController < ApplicationController
     diaries = current_user.recommended_members.find_by(uuid: params[:uuid]).diaries.all
     render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     # exception handling 404 in concern/api/exception_handler.rb
-    render json: diaries, status: :ok
+    render json: render_json, status: :ok
   end
 
   def create; end
