@@ -17,5 +17,11 @@ class Api::V1::User::DiariesController < ApplicationController
 
   def destroy; end
 
+  private
+
+  def diary_params
+
+  end
+
   def set_diary; end
 end
