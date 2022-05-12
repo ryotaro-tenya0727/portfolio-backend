@@ -13,6 +13,10 @@ class User::DiaryPolicy < ApplicationPolicy
     check_current_user
   end
 
+  def show
+    own?
+  end
+
   def update?
     own?
   end
