@@ -2,6 +2,7 @@ class Api::V1::User::DiariesController < ApplicationController
   before_action :set_diary, only: %i[show edit update destroy]
 
   def index
+    authorize([:user, RecommendedMember])
     diaries = current_user.recommended_members.find_by(uuid: params[:uuid]).diaries.all
     render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     # exception handling 404 in concern/api/exception_handler.rb
@@ -20,7 +21,9 @@ class Api::V1::User::DiariesController < ApplicationController
 
   private
 
-  def diary_params; end
+  def diary_params
+    params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count, :impressive_memory, :impressive_memory_detail, :status)
+  end
 
   def set_diary; end
 end
