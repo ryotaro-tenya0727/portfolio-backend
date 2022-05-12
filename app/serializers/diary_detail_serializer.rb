@@ -1,7 +1,7 @@
 class DiaryDetailSerializer
   include JSONAPI::Serializer
   # 画像のURLも必要
-  attributes :uuid, :event_name, :event_date, :event_venue, :event_polaroid_count, :impressive_memory, :impressive_memory_detail
+  attributes :id, :uuid, :event_name, :event_date, :event_venue, :event_polaroid_count, :impressive_memory, :impressive_memory_detail
 
   attribute :diary_user do |object|
     object.user.name.to_s
