@@ -19,9 +19,7 @@ class Api::V1::User::DiariesController < ApplicationController
 
   private
 
-  def diary_params
-
-  end
+  def diary_params; end
 
   def set_diary; end
 end

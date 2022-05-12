@@ -11,7 +11,7 @@ class DiaryDetailSerializer
     object.recommended_member.nickname.to_s
   end
 
-    attribute :diary_member_group do |object|
+  attribute :diary_member_group do |object|
     object.recommended_member.group.to_s
   end
 end
