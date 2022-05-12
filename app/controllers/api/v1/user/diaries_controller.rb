@@ -15,7 +15,7 @@ class Api::V1::User::DiariesController < ApplicationController
     diary.save!
     render json: { 'register_diary': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
-    render400(e, recommended_member.errors.full_messages)
+    render400(e, diary.errors.full_messages)
   end
 
   def show
@@ -35,7 +35,7 @@ class Api::V1::User::DiariesController < ApplicationController
     @diary.update!(diary_update_params)
     render json: { 'update_diary': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
-    render400(e, @recommended_member.errors.full_messages)
+    render400(e, @diary.errors.full_messages)
   end
 
   def destroy
