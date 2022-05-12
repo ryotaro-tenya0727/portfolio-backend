@@ -39,7 +39,7 @@ class Api::V1::User::DiariesController < ApplicationController
   end
 
   def destroy
-    authorize([:user, RecommendedMember])
+    authorize([:user, @diary])
     @diary.destroy!
     # exception handling 500 in concern/api/exception_handler.rb
     render json: { 'destroy_diary': true }, status: :ok
