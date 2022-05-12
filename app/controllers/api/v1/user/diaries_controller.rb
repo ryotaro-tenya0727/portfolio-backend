@@ -1,8 +1,8 @@
-class Api::V1::User::DiariesController < ApplicationController
+class Api::V1::User::DiariesController < SecuredController
   before_action :set_diary, only: %i[show edit update destroy]
 
   def index
-    authorize([:user, RecommendedMember])
+    authorize([:user, Diary])
     diaries = current_user.recommended_members.find_by(uuid: params[:uuid]).diaries.all
     render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     # exception handling 404 in concern/api/exception_handler.rb
@@ -10,7 +10,7 @@ class Api::V1::User::DiariesController < ApplicationController
   end
 
   def create
-    authorize([:user, RecommendedMember])
+    authorize([:user, Diary])
     diary = current_user.diaries.build(diary_params)
     diary.save!
     render json: { 'register_diary': true }, status: :ok
@@ -48,7 +48,8 @@ class Api::V1::User::DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count, :impressive_memory, :impressive_memory_detail, :status).merge(recommended_member_id: params[:recommended_member_id])
+    params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
+                          :impressive_memory, :impressive_memory_detail, :status).merge(recommended_member_id: params[:recommended_member_id])
   end
 
   def diary_update_params
