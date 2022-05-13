@@ -3,7 +3,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def index
     authorize([:user, Diary])
-    diaries = current_user.recommended_members.find_by(uuid: params[:uuid]).diaries.all
+    diaries = current_user.recommended_members.find_by(id: params[:recommended_member_id]).diaries.all
     render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     # exception handling 404 in concern/api/exception_handler.rb
     render json: render_json, status: :ok
@@ -57,7 +57,7 @@ class Api::V1::User::DiariesController < SecuredController
   end
 
   def set_diary
-    @diary = current_user.diaries.find_by(uuid: params[:uuid])
+    @diary = current_user.diaries.find_by(id: params[:id])
     # exception handling 404 in concern/api/exception_handler.rb
   end
 end

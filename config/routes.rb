@@ -5,8 +5,9 @@ Rails.application.routes.draw do
       get :health_check, to: 'health_check#index'
       resources :users, only: [:create]
       namespace :user do
-        resources :recommended_members, param: :uuid, only: [:index, :create, :edit, :update, :destroy]
-        resources :diaries, param: :uuid
+        resources :recommended_members, only: [:index, :create, :edit, :update, :destroy] do
+          resources :diaries
+        end
       end
     end
   end

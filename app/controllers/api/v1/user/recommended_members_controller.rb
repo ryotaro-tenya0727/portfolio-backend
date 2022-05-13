@@ -45,7 +45,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   end
 
   def set_recommended_member
-    @recommended_member = current_user.recommended_members.find_by!(uuid: params[:uuid])
+    @recommended_member = current_user.recommended_members.find_by!(id: params[:id])
     # exception handling 404 in concern/api/exception_handler.rb
   end
 end
