@@ -50,7 +50,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   describe 'ユーザーが推しメンを編集 PUT /api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers, params: { recommended_member: { nickname: 'change_nickname' } }.to_json } }
-    let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.uuid), request_hash }
+    let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.id), request_hash }
 
     context '正常系' do
       it '推しメンを編集できること' do
@@ -70,7 +70,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   describe 'ユーザーが推しメンを削除 DELETE api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers} }
-    let(:http_request) { delete api_v1_user_recommended_member_path(recommended_member.uuid), request_hash }
+    let(:http_request) { delete api_v1_user_recommended_member_path(recommended_member.id), request_hash }
     context '正常系' do
       it '推しメンを削除できること' do
         expect{ http_request }.to change { current_user.recommended_members.count }.by(-1)
