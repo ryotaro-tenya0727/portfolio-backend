@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :recommended_members, dependent: :destroy
+  has_many :diaries
 
   enum role: { general: 0, admin: 1 }
 
@@ -8,7 +9,12 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 20 }
   validates :role, presence: true
 
-  def self.from_token_payload(payload, name)
-    find_by(sub: payload['sub']) || create!(sub: payload['sub'], name: name)
+  def self.from_token_payload(payload, name = nil)
+    # ユーザーがログインし直すとソーシャルログインの名前の変更が反映される。
+    ActiveRecord::Base.transaction do
+      user = find_by(sub: payload['sub']) || create!(sub: payload['sub'], name: name)
+      user.update!(name: name) if name
+      user
+    end
   end
 end

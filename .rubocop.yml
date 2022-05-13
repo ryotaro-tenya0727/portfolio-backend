@@ -80,3 +80,6 @@ Bundler/OrderedGems:
 
 Naming/MemoizedInstanceVariableName:
   Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false

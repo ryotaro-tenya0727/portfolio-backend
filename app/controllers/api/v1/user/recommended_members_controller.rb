@@ -1,5 +1,5 @@
 class Api::V1::User::RecommendedMembersController < SecuredController
-  before_action :set_recommended_member, only: %i[edit update destroy]
+  before_action :set_recommended_member, only: %i[update destroy]
 
   def index
     authorize([:user, RecommendedMember])
@@ -15,12 +15,6 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     render json: { 'register_member': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, recommended_member.errors.full_messages)
-  end
-
-  def edit
-    authorize([:user, @recommended_member])
-    render_json = RecommendedMemberSerializer.new(@recommended_member).serializable_hash.to_json
-    render json: render_json, status: :ok
   end
 
   def update
@@ -45,7 +39,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   end
 
   def set_recommended_member
-    @recommended_member = current_user.recommended_members.find_by!(uuid: params[:uuid])
+    @recommended_member = current_user.recommended_members.find_by!(id: params[:id])
     # exception handling 404 in concern/api/exception_handler.rb
   end
 end

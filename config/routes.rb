@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get :health_check, to: 'health_check#index'
-      resources :users
+      resources :users, only: [:create]
       namespace :user do
-        resources :recommended_members, param: :uuid
+        resources :recommended_members, only: [:index, :create, :edit, :update, :destroy] do
+          resources :diaries
+        end
       end
     end
   end

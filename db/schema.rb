@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_210332) do
+ActiveRecord::Schema.define(version: 2022_05_11_103501) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -35,8 +35,10 @@ ActiveRecord::Schema.define(version: 2022_05_05_210332) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["recommended_member_id", "created_at"], name: "index_diaries_on_recommended_member_id_and_created_at"
     t.index ["recommended_member_id"], name: "index_diaries_on_recommended_member_id"
+    t.index ["user_id"], name: "index_diaries_on_user_id"
     t.index ["uuid"], name: "index_diaries_on_uuid", unique: true
   end
 
@@ -107,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_210332) do
   add_foreign_key "comments", "diaries"
   add_foreign_key "comments", "users"
   add_foreign_key "diaries", "recommended_members"
+  add_foreign_key "diaries", "users"
   add_foreign_key "diary_images", "diaries"
   add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "diaries"

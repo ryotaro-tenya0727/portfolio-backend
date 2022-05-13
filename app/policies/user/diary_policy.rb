@@ -1,4 +1,4 @@
-class User::RecommendedMemberPolicy < ApplicationPolicy
+class User::DiaryPolicy < ApplicationPolicy
   def initialize(user, record)
     raise Pundit::NotAuthorizedError unless user
 
@@ -11,6 +11,10 @@ class User::RecommendedMemberPolicy < ApplicationPolicy
 
   def create?
     check_current_user
+  end
+
+  def show?
+    own?
   end
 
   def update?
