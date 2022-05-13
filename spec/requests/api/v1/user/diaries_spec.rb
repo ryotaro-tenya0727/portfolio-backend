@@ -36,7 +36,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
     let(:http_request) { post api_v1_user_recommended_member_diaries_path(recommended_member.id), request_hash }
     context "正常系" do
       it "ユーザーが選択した推しメンの日記を作成できること" do
-        expect{ http_request }.to change { current_user.recommended_members.find_by(id: recommended_member.id).diaries.count }.by(-1)
+        expect{ http_request }.to change { current_user.recommended_members.find_by(id: recommended_member.id).diaries.count }.by(1)
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
       end
@@ -62,7 +62,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
     let!(:request_hash) { { headers: headers, params: { diary: { event_name: 'change_event_name' } }.to_json } }
     let(:http_request) { put api_v1_user_recommended_member_diary_path(recommended_member, diary), request_hash }
     context "正常系" do
-      fit "ユーザーが選択した推しメンの日記を編集できること" do
+      it "ユーザーが選択した推しメンの日記を編集できること" do
         http_request
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
@@ -75,7 +75,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
     let!(:diary) { create(:diary, user: current_user, recommended_member: recommended_member) }
     let(:http_request) { delete api_v1_user_recommended_member_diary_path(recommended_member, diary), headers: headers }
     context "正常系" do
-      fit "ユーザーが選択した推しメンの日記を削除できること" do
+      it "ユーザーが選択した推しメンの日記を削除できること" do
         expect{ http_request }.to change { current_user.recommended_members.find_by(id: recommended_member.id).diaries.count }.by(-1)
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
