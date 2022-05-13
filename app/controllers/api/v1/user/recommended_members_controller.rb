@@ -17,12 +17,6 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     render400(e, recommended_member.errors.full_messages)
   end
 
-  def edit
-    authorize([:user, @recommended_member])
-    render_json = RecommendedMemberSerializer.new(@recommended_member).serializable_hash.to_json
-    render json: render_json, status: :ok
-  end
-
   def update
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)

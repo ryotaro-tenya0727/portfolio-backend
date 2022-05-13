@@ -13,7 +13,7 @@ class User::DiaryPolicy < ApplicationPolicy
     check_current_user
   end
 
-  def show
+  def show?
     own?
   end
 

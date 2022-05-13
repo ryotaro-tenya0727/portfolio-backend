@@ -24,12 +24,6 @@ class Api::V1::User::DiariesController < SecuredController
     render json: render_json, status: :ok
   end
 
-  def edit
-    authorize([:user, @diary])
-    render_json = DiaryDetailSerializer.new(@diary).serializable_hash.to_json
-    render json: render_json, status: :ok
-  end
-
   def update
     authorize([:user, @diary])
     @diary.update!(diary_update_params)
@@ -49,7 +43,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def diary_params
     params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
-                          :impressive_memory, :impressive_memory_detail, :status).merge(recommended_member_id: params[:recommended_member_id])
+                                  :impressive_memory, :impressive_memory_detail, :status, :recommended_member_id)
   end
 
   def diary_update_params

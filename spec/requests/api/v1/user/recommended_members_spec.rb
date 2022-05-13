@@ -47,7 +47,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     end
   end
 
-  describe 'ユーザーが推しメンを編集 PUT /api/v1/user/recommended_members/:uuid' do
+  describe 'ユーザーが推しメンを編集 PUT /api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers, params: { recommended_member: { nickname: 'change_nickname' } }.to_json } }
     let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.uuid), request_hash }
@@ -67,7 +67,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     end
   end
 
-  describe 'ユーザーが推しメンを削除 DELETE api/v1/user/recommended_members' do
+  describe 'ユーザーが推しメンを削除 DELETE api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers} }
     let(:http_request) { delete api_v1_user_recommended_member_path(recommended_member.uuid), request_hash }
