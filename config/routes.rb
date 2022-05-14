@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get :health_check, to: 'health_check#index'
       resources :users, only: [:create]
       namespace :user do
-        resources :recommended_members, only: [:index, :create, :edit, :update, :destroy] do
+        resources :recommended_members, only: [:index, :create, :edit, :update, :destroy], shallow: true do
           resources :diaries
         end
       end

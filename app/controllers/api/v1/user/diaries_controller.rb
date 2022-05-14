@@ -26,7 +26,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def update
     authorize([:user, @diary])
-    @diary.update!(diary_params)
+    @diary.update!(diary_update_params)
     render json: { 'update_diary': true }, status: :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, @diary.errors.full_messages)
@@ -43,7 +43,12 @@ class Api::V1::User::DiariesController < SecuredController
 
   def diary_params
     params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
-                                  :impressive_memory, :impressive_memory_detail, :status, :recommended_member_id)
+                                  :impressive_memory, :impressive_memory_detail, :status).merge(recommended_member_id: params[:recommended_member_id])
+  end
+
+  def diary_update_params
+    params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
+                                  :impressive_memory, :impressive_memory_detail, :status)
   end
 
   def set_diary
