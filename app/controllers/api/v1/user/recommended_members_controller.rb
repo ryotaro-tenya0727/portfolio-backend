@@ -12,7 +12,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, RecommendedMember])
     recommended_member = current_user.recommended_members.build(recommended_member_params)
     recommended_member.save!
-    render json: { 'register_member': true }, status: :ok
+    head :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, recommended_member.errors.full_messages)
   end
@@ -20,7 +20,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   def update
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)
-    render json: { 'update_member': true }, status: :ok
+    head :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, @recommended_member.errors.full_messages)
   end
@@ -29,7 +29,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
     # exception handling 500 in concern/api/exception_handler.rb
-    render json: { 'destroy_member': true }, status: :ok
+    head :ok
   end
 
   private
