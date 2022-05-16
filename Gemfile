@@ -15,9 +15,10 @@ gem 'pundit'
 # シリアライザー
 gem 'jsonapi-serializer'
 gem 'bootsnap', '>= 1.4.4', require: false
-
 # cors
 gem 'rack-cors'
+# aws
+gem 'aws-sdk-s3', '~> 1.114'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

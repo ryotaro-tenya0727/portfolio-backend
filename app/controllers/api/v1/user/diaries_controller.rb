@@ -4,8 +4,8 @@ class Api::V1::User::DiariesController < SecuredController
   def index
     authorize([:user, Diary])
     diaries = current_user.recommended_members.find_by(id: params[:recommended_member_id]).diaries.all
-    render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     # exception handling 404 in concern/api/exception_handler.rb
+    render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 
@@ -13,7 +13,7 @@ class Api::V1::User::DiariesController < SecuredController
     authorize([:user, Diary])
     diary = current_user.diaries.build(diary_params)
     diary.save!
-    render json: { 'register_diary': true }, status: :ok
+    head :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, diary.errors.full_messages)
   end
@@ -27,7 +27,7 @@ class Api::V1::User::DiariesController < SecuredController
   def update
     authorize([:user, @diary])
     @diary.update!(diary_update_params)
-    render json: { 'update_diary': true }, status: :ok
+    head :ok
   rescue ActiveRecord::RecordInvalid => e
     render400(e, @diary.errors.full_messages)
   end
@@ -36,7 +36,7 @@ class Api::V1::User::DiariesController < SecuredController
     authorize([:user, @diary])
     @diary.destroy!
     # exception handling 500 in concern/api/exception_handler.rb
-    render json: { 'destroy_diary': true }, status: :ok
+    head :ok
   end
 
   private

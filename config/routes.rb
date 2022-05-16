@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         resources :recommended_members, only: [:index, :create, :edit, :update, :destroy], shallow: true do
           resources :diaries
         end
+        get 'presigned-url', to: 's3_presigned_urls#diary_presigned_url'
       end
     end
   end
