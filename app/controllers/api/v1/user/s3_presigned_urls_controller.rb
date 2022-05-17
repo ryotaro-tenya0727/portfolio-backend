@@ -9,7 +9,7 @@ class Api::V1::User::S3PresignedUrlsController < SecuredController
                                          expires_in: 300)
     render json: presigned_url
   rescue ActiveRecord::RecordInvalid => e
-    render400(e, recommended_member.errors.full_messages)
+    render400(e, diary_image.errors.full_messages)
   end
 
   private
