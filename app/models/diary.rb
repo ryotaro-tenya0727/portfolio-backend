@@ -1,4 +1,6 @@
 class Diary < ApplicationRecord
+  has_many :diary_images
+
   belongs_to :user
   belongs_to :recommended_member
 
