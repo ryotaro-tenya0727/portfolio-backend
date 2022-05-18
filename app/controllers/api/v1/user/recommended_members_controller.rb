@@ -28,8 +28,9 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   def destroy
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
-    # exception handling 500 in concern/api/exception_handler.rb
     head :ok
+  rescue ActiveRecord::RecordNotDestroyed => e
+    render500(e, @recommended_member.errors.full_messages)
   end
 
   private
@@ -40,6 +41,7 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def set_recommended_member
     @recommended_member = current_user.recommended_members.find_by!(id: params[:id])
-    # exception handling 404 in concern/api/exception_handler.rb
+  rescue ActiveRecord::RecordNotFound => e
+    render404(e, @recommended_member.errors.full_messages)
   end
 end
