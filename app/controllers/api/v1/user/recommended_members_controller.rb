@@ -13,22 +13,17 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     recommended_member = current_user.recommended_members.build(recommended_member_params)
     recommended_member.save!
     head :ok
-  rescue ActiveRecord::RecordInvalid => e
-    render400(e, recommended_member.errors.full_messages)
   end
 
   def update
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)
     head :ok
-  rescue ActiveRecord::RecordInvalid => e
-    render400(e, @recommended_member.errors.full_messages)
   end
 
   def destroy
     authorize([:user, @recommended_member])
     @recommended_member.destroy!
-    # exception handling 500 in concern/api/exception_handler.rb
     head :ok
   end
 
@@ -40,6 +35,5 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def set_recommended_member
     @recommended_member = current_user.recommended_members.find_by!(id: params[:id])
-    # exception handling 404 in concern/api/exception_handler.rb
   end
 end
