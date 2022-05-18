@@ -14,6 +14,7 @@ class Api::V1::User::DiariesController < SecuredController
       diary = current_user.diaries.build(diary_params)
       diary.save!
       diary_image = diary.diary_images.build(diary_image_url: params[:diary][:diary_image_url])
+      diary_image.save!
     end
     head :ok
   end
