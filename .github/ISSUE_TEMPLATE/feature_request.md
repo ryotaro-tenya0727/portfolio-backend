@@ -7,14 +7,18 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+# バグレポート
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**日付**：2021/12/
+**投稿者**：中山遼太郎
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## 今はどんな不具合が出る?
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+
+## 不具合の再現方法
+
+
+## どう動作すると正しい?
+
+
+## 参考情報（バージョンなど）
