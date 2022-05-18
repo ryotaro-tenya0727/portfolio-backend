@@ -10,8 +10,11 @@ class Api::V1::User::DiariesController < SecuredController
 
   def create
     authorize([:user, Diary])
-    diary = current_user.diaries.build(diary_params)
-    diary.save!
+    ActiveRecord::Base.transaction do
+      diary = current_user.diaries.build(diary_params)
+      diary.save!
+      diary_image = diary.diary_images.build(diary_image_url: params[:diary][:diary_image_url])
+    end
     head :ok
   end
 
