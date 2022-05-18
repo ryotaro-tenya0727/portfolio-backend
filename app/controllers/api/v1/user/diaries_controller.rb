@@ -13,8 +13,6 @@ class Api::V1::User::DiariesController < SecuredController
     diary = current_user.diaries.build(diary_params)
     diary.save!
     head :ok
-  rescue ActiveRecord::RecordInvalid => e
-    render400(e, diary.errors.full_messages)
   end
 
   def show
@@ -27,16 +25,12 @@ class Api::V1::User::DiariesController < SecuredController
     authorize([:user, @diary])
     @diary.update!(diary_update_params)
     head :ok
-  rescue ActiveRecord::RecordInvalid => e
-    render400(e, @diary.errors.full_messages)
   end
 
   def destroy
     authorize([:user, @diary])
     @diary.destroy!
     head :ok
-  rescue ActiveRecord::RecordNotDestroyed => e
-    render500(e, @diary.errors.full_messages)
   end
 
   private
@@ -53,7 +47,5 @@ class Api::V1::User::DiariesController < SecuredController
 
   def set_diary
     @diary = current_user.diaries.find_by!(id: params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    render404(e, @diary.errors.full_messages)
   end
 end
