@@ -19,7 +19,6 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, @recommended_member])
     @recommended_member.update!(recommended_member_params)
     head :ok
-
   end
 
   def destroy

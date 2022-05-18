@@ -14,30 +14,30 @@ module Api::ExceptionHandler
 
   private
 
-  def render500(exception = nil, messages = nil)
+  def render500(exception = nil)
     render_error(500, 'Internal Server Error', exception&.message)
   end
 
-  def render404(exception = nil, messages = nil)
+  def render404(exception = nil)
     render_error(404, 'Record Not Found', exception&.message)
   end
 
-  def render403(exception = nil, messages = nil)
+  def render403(exception = nil)
     render_error(403, 'Forbidden', exception&.message)
   end
 
-  def render401(exception = nil, messages = nil)
+  def render401(exception = nil)
     render_error(401, 'Not Authenticated', exception&.message)
   end
 
-  def render400(exception = nil, messages = nil)
+  def render400(exception = nil)
     render_error(400, 'Bad Request', exception&.message)
   end
 
   def render_error(code, message, *error_messages)
     response = {
       message: message,
-      errors: error_messages.compact
+      errors: error_messages
     }
 
     render json: response, status: code
