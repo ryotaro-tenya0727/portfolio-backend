@@ -1,4 +1,4 @@
-class DiaryListSerializer
+class User::DiaryListSerializer
   include JSONAPI::Serializer
   attributes :id, :uuid, :event_name, :event_date, :event_venue, :event_polaroid_count
 

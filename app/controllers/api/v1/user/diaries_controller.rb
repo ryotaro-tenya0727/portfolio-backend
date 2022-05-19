@@ -4,7 +4,7 @@ class Api::V1::User::DiariesController < SecuredController
   def index
     authorize([:user, Diary])
     diaries = current_user.recommended_members.find_by!(id: params[:recommended_member_id]).diaries.all
-    render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
+    render_json = User::DiaryListSerializer.new(diaries).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 
@@ -21,7 +21,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def show
     authorize([:user, @diary])
-    render_json = DiaryDetailSerializer.new(@diary).serializable_hash.to_json
+    render_json = User::DiaryDetailSerializer.new(@diary).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 

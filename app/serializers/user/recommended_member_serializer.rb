@@ -1,4 +1,4 @@
-class RecommendedMemberSerializer
+class User::RecommendedMemberSerializer
   include FastJsonapi::ObjectSerializer
   attributes :id, :uuid, :nickname, :group, :first_met_date
 
