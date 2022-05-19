@@ -5,7 +5,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   let(:headers) { { CONTENT_TYPE: 'application/json', ACCEPT: 'application/json', Authorization: 'jwt_test_token' } }
 
   before do
-    # authorize_requestメソッドが呼ばれたらcurrent_userを返す。
+    # authorize_requestメソッドが呼ばれたらlet!(:current_user)を返す。
     # SecuredControllerのcurrent_userメソッドが呼ばれたらlet!(:current_user)を返す。
     authorization_stub
   end
@@ -63,6 +63,16 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     context '異常系' do
       xit 'ニックネームが未入力の場合、推しメンを編集できないこと' do
 
+      end
+    end
+
+    context '異常系' do
+      let!(:another_recommended_member) { create(:recommended_member) }
+      let(:another_http_request) { put api_v1_user_recommended_member_path(another_recommended_member.id), request_hash }
+      it '他のユーザーが作成した推しメンを編集できないこと' do
+        another_http_request
+        expect(response).to_not be_successful
+        expect(response).to have_http_status(404)
       end
     end
   end
