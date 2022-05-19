@@ -5,4 +5,8 @@ class User::DiaryListSerializer
   attribute :diary_member_nickname do |object|
     object.recommended_member.nickname.to_s
   end
+
+  attribute :diary_images do |object|
+    object.diary_images.pluck(:diary_image_url)
+  end
 end
