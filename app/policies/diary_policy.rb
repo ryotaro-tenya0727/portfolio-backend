@@ -1,6 +1,5 @@
 class DiaryPolicy < ApplicationPolicy
   def initialize(user, record)
-
     super
   end
 
