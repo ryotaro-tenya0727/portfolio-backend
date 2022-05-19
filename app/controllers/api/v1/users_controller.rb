@@ -9,12 +9,13 @@ class Api::V1::UsersController < SecuredController
   private
 
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :user_image)
   end
 
   def register_user
     authorization = Authorization::AuthorizationService.new(request.headers)
     user_name = user_params[:name]
-    @current_user = authorization.current_user(user_name)
+    user_image = user_params[:user_image]
+    @current_user = authorization.current_user(user_name, user_image)
   end
 end
