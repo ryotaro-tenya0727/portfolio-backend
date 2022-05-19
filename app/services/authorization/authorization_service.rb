@@ -3,7 +3,7 @@ class Authorization::AuthorizationService
     @headers = headers
   end
 
-  def current_user(name, user_image)
+  def current_user(name = nil, user_image = nil)
     @auth_payload, @auth_header = verify_token
     @user = User.from_token_payload(@auth_payload, name, user_image)
   end
