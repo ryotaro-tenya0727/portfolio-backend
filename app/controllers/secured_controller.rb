@@ -1,5 +1,4 @@
 class SecuredController < ApplicationController
-  include Api::ExceptionHandler
   before_action :authorize_request
 
   private

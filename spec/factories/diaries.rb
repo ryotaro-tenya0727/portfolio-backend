@@ -7,5 +7,7 @@ FactoryBot.define do
     sequence(:impressive_memory) { |n| "test-impressive_memory-#{n}" }
     sequence(:impressive_memory_detail) { |n| "test-impressive_memory_detail-#{n}" }
     status { :published }
+    association :recommended_member
+    user { recommended_member.user }
   end
 end

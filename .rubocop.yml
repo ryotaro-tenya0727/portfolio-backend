@@ -83,3 +83,6 @@ Naming/MemoizedInstanceVariableName:
 
 Rails/HasManyOrHasOneDependent:
   Enabled: false
+
+Lint/UselessMethodDefinition:
+  Enabled: false

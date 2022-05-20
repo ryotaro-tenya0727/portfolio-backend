@@ -7,4 +7,6 @@ class Diary < ApplicationRecord
   validates :uuid, uniqueness: true
 
   enum status: { published: 0, non_published: 1 }
+
+  default_scope -> { order(created_at: :desc) }
 end
