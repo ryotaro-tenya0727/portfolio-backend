@@ -61,8 +61,11 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     end
 
     context '異常系' do
-      xit 'ニックネームが未入力の場合、推しメンを編集できないこと' do
-
+      let!(:request_hash) { { headers: headers, params: { recommended_member: { nickname: '' } }.to_json } }
+      it 'ニックネームが未入力の場合、推しメンを編集できないこと' do
+        http_request
+        expect(response).to_not be_successful
+        expect(response).to have_http_status(400)
       end
     end
 

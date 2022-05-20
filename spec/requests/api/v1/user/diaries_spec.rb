@@ -13,7 +13,6 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
   describe "ユーザーが選択した推しメンの日記を閲覧 GET /api/v1/user/recommended_members/:recommended_member_id/diaries" do
     let(:diary_num) { 5 }
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
-    # params[:uuid]でrecommended_memberのuuidを取得
     let(:http_request) { get api_v1_user_recommended_member_diaries_path(recommended_member), headers: headers }
 
     before do
