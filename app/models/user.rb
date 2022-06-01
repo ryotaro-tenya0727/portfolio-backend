@@ -12,7 +12,7 @@ class User < ApplicationRecord
   def self.from_token_payload(payload, name, user_image)
     # ユーザーがログインし直すとソーシャルログインの名前の変更が反映される。
     ActiveRecord::Base.transaction do
-      user = find_by(sub: payload['sub']) || create!(sub: payload['sub'], name: name, user_image: user_image)
+      user = find_by!(sub: payload['sub']) || create!(sub: payload['sub'], name: name, user_image: user_image)
       user.update!(name: name) if name
       user.update!(user_image: user_image) if user_image
       user
