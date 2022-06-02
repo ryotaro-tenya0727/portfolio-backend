@@ -1,6 +1,10 @@
 class Api::V1::UsersController < SecuredController
   skip_before_action :authorize_request, only: [:create]
 
+  def index
+    render json: current_user, status: :ok
+  end
+
   def create
     register_user
     render json: current_user, status: :ok
