@@ -1,5 +1,5 @@
 class Diary < ApplicationRecord
-  has_many :diary_images
+  has_many :diary_images, dependent: :destroy
 
   belongs_to :user
   belongs_to :recommended_member
