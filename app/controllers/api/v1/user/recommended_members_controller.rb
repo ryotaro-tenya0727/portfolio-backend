@@ -1,5 +1,5 @@
 class Api::V1::User::RecommendedMembersController < SecuredController
-  before_action :set_recommended_member, only: %i[update destroy]
+  before_action :set_recommended_member, only: %i[update destroy show]
 
   def index
     authorize([:user, RecommendedMember])
@@ -13,6 +13,12 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     recommended_member = current_user.recommended_members.build(recommended_member_params)
     recommended_member.save!
     head :ok
+  end
+
+  def show
+    authorize([:user, @recommended_member])
+    render_json = User::RecommendedMemberSerializer.new(@recommended_member).serializable_hash.to_json
+    render json: render_json, status: :ok
   end
 
   def update

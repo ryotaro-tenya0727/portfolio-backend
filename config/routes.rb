@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :index]
       resources :diaries, only: [:index, :show], param: :uuid
       namespace :user do
-        resources :recommended_members, only: [:index, :create, :edit, :update, :destroy], shallow: true do
+        resources :recommended_members, shallow: true do
           resources :diaries
         end
         post 's3_presigned_url', to: 's3_presigned_urls#diary_presigned_url'

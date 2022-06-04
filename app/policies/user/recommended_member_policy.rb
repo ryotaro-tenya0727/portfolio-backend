@@ -13,6 +13,10 @@ class User::RecommendedMemberPolicy < ApplicationPolicy
     check_current_user
   end
 
+  def show?
+    own?
+  end
+
   def update?
     own?
   end
