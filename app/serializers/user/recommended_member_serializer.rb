@@ -9,5 +9,9 @@ class User::RecommendedMemberSerializer
     end
     count
   end
-  # チェキ総数、登録した日記、出会ってから経過した日数
+
+  attributes :diaries_count do |object|
+    object.diaries.count
+  end
+  # 出会ってから経過した日数
 end
