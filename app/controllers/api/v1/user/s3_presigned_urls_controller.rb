@@ -3,8 +3,9 @@ class Api::V1::User::S3PresignedUrlsController < SecuredController
     authorize(%i[user s3_presigned_urls], :diary_presigned_url?)
     presigned_url = Signer.presigned_url(:put_object,
                                          bucket: ENV['S3_BUCKET'],
-                                         key: diary_s3_url.to_s)
-    render json: { presigned_url: presigned_url, diary_image_url: "#{ENV[CLOUDFRONT_DISTRIBUTION]}/#{diary_s3_url}" }
+                                         key: diary_s3_url.to_s,
+                                         expires_in: 3600)
+    render json: { presigned_url: presigned_url, diary_image_url: "#{ENV['CLOUDFRONT_DISTRIBUTION']}/#{diary_s3_url}" }
   end
 
   private
