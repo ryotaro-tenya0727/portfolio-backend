@@ -13,6 +13,7 @@ class Api::V1::User::DiariesController < SecuredController
     ActiveRecord::Base.transaction do
       diary = current_user.recommended_members.find_by!(id: params[:recommended_member_id]).diaries.build(diary_params)
       diary.save!
+      # Bulk INSERTを使って複数のイメージを保存
       diary_image = diary.diary_images.build(diary_image_url: params[:diary][:diary_image_url])
       diary_image.save!
     end
