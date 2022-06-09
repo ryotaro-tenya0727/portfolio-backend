@@ -39,7 +39,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def diary_params
     params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
-                                  :impressive_memory, :impressive_memory_detail, :status, diary_images_attributes:[:diary_image_url]).merge(user_id: current_user.id)
+                                  :impressive_memory, :impressive_memory_detail, :status, diary_images_attributes: [:diary_image_url]).merge(user_id: current_user.id)
   end
 
   def diary_update_params
