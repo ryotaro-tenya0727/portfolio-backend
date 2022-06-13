@@ -1,11 +1,12 @@
 require 'faraday'
 require 'faraday/net_http'
 require 'erb'
+include ERB::Util
 
 Faraday.default_adapter = :net_http
 
 class User < ApplicationRecord
-  include ERB::Util
+
   has_many :recommended_members, dependent: :destroy
   has_many :diaries
 
