@@ -86,3 +86,6 @@ Rails/HasManyOrHasOneDependent:
 
 Lint/UselessMethodDefinition:
   Enabled: false
+
+Style/MixinUsage:
+  Enabled: false

@@ -6,7 +6,6 @@ include ERB::Util
 Faraday.default_adapter = :net_http
 
 class User < ApplicationRecord
-
   has_many :recommended_members, dependent: :destroy
   has_many :diaries
 
