@@ -23,7 +23,7 @@ Layout/MultilineBlockLayout:
     - 'spec/**/*_spec.rb'
 
 Metrics/AbcSize:
-  Max: 25
+  Max: 30
 
 Metrics/BlockLength:
   Max: 30
@@ -85,4 +85,7 @@ Rails/HasManyOrHasOneDependent:
   Enabled: false
 
 Lint/UselessMethodDefinition:
+  Enabled: false
+
+Style/MixinUsage:
   Enabled: false

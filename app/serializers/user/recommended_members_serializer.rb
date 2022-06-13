@@ -1,4 +1,4 @@
-class User::RecommendedMemberSerializer
+class User::RecommendedMembersSerializer
   include JSONAPI::Serializer
   attributes :id, :uuid, :nickname, :group, :first_met_date
 

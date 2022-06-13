@@ -20,6 +20,10 @@ gem 'rack-cors'
 # aws
 gem 'aws-sdk-s3', '~> 1.114'
 
+# API
+gem 'faraday'
+gem 'faraday-net_http'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.1.0'
