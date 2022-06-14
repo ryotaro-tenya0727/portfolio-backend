@@ -25,7 +25,10 @@ class Api::V1::User::DiariesController < SecuredController
 
   def update
     authorize([:user, @diary])
-    @diary.update!(diary_update_params)
+    ActiveRecord::Base.transaction do
+      @diary.diary_images.destroy_all
+      @diary.update!(diary_update_params)
+    end
     head :ok
   end
 
@@ -44,7 +47,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def diary_update_params
     params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
-                                  :impressive_memory, :impressive_memory_detail, :status)
+                                  :impressive_memory, :impressive_memory_detail, :status, diary_images_attributes: [:diary_image_url])
   end
 
   def set_diary
