@@ -15,6 +15,6 @@ class Api::V1::User::S3PresignedUrlsController < SecuredController
   end
 
   def diary_s3_url
-    "#{ENV['S3_DIARY_OBJECT_KEY']}/#{current_user.uuid}/diary/#{presigned_url_params[:filename]}"
+    "#{ENV['S3_DIARY_OBJECT_KEY']}/#{current_user.id}/diary/#{presigned_url_params[:filename]}"
   end
 end
