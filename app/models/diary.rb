@@ -9,5 +9,5 @@ class Diary < ApplicationRecord
 
   enum status: { published: 0, non_published: 1 }
 
-  default_scope -> { order(created_at: :desc) }
+  # default_scope -> { order(created_at: :desc) }
 end
