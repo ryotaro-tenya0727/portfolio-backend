@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
   validates :uuid, uniqueness: true
   validates :sub, presence: true, uniqueness: true
-  validates :name, presence: true, length: { maximum: 20 }
   validates :role, presence: true
 
   class << self
