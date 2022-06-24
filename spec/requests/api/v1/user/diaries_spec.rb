@@ -16,7 +16,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
     let(:http_request) { get api_v1_user_recommended_member_diaries_path(recommended_member), headers: headers }
 
     before do
-      create_list(:diary, diary_num, recommended_member: recommended_member, user: current_user)
+      create_list(:diary, diary_num, :published, recommended_member: recommended_member, user: current_user)
     end
 
     context "正常系" do
@@ -44,7 +44,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
 
   describe "ユーザーが選択した推しメンの日記の詳細を表示 GET /api/v1/user/recommended_members/:recommended_member_id/diaries/:id" do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
-    let!(:diary) { create(:diary, user: current_user, recommended_member: recommended_member) }
+    let!(:diary) { create(:diary, :published, user: current_user, recommended_member: recommended_member) }
     let(:http_request) { get api_v1_user_diary_path(diary), headers: headers }
     context "正常系" do
       it "ユーザーが選択した推しメンの日記の詳細を閲覧できること" do
@@ -57,7 +57,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
 
   describe "ユーザーが選択した推しメンの日記を編集できること PUT /api/v1/user/recommended_members/:recommended_member_id/diaries/:id" do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
-    let!(:diary) { create(:diary, user: current_user, recommended_member: recommended_member) }
+    let!(:diary) { create(:diary, :published, user: current_user, recommended_member: recommended_member) }
     let!(:request_hash) { { headers: headers, params: { diary: { event_name: 'change_event_name' } }.to_json } }
     let(:http_request) { put api_v1_user_diary_path(diary), request_hash }
     context "正常系" do
@@ -71,7 +71,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
 
   describe "ユーザーが選択した推しメンの日記を削除できること DELETE /api/v1/user/recommended_members/:recommended_member_id/diaries/:id" do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
-    let!(:diary) { create(:diary, user: current_user, recommended_member: recommended_member) }
+    let!(:diary) { create(:diary, :published, user: current_user, recommended_member: recommended_member) }
     let(:http_request) { delete api_v1_user_diary_path(diary), headers: headers }
     context "正常系" do
       it "ユーザーが選択した推しメンの日記を削除できること" do

@@ -9,5 +9,13 @@ FactoryBot.define do
     status { :published }
     association :recommended_member
     user { recommended_member.user }
+
+    trait :published do
+      status { :published }
+    end
+
+    trait :non_published do
+      status { :non_published }
+    end
   end
 end
