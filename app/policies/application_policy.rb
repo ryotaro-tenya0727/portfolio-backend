@@ -38,6 +38,8 @@ class ApplicationPolicy
   # ApplicationPolicyのScopeを継承したScopeが作れる。
 
   class Scope
+    attr_reader :user, :scope
+
     def initialize(user, scope)
       @user = user
       @scope = scope
@@ -46,10 +48,6 @@ class ApplicationPolicy
     def resolve
       raise NotImplementedError, '継承先でresolveメソッドが定義されていない'
     end
-
-    private
-
-    attr_reader :user, :scope
   end
 
   private
