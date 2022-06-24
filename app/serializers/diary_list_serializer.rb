@@ -18,7 +18,7 @@ class DiaryListSerializer
     object.recommended_member.group.to_s
   end
 
-  attribute :diary_images do |object|
-    object.diary_images.pluck(:diary_image_url)
+  attribute :diary_image do |object|
+    object.diary_images.pluck(:diary_image_url).first
   end
 end
