@@ -15,9 +15,7 @@ class Api::V1::UsersController < SecuredController
     render json: current_user, status: :ok
   end
 
-  def destroy
-    current_user.destroy
-  end
+  delegate :destroy, to: :current_user
 
   private
 
