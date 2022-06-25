@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get :health_check, to: 'health_check#index'
       resources :users, only: [:create, :index] do
         get 'user_info', on: :collection
+        delete 'destroy', on: :collection
       end
       resources :diaries, only: [:index, :show], param: :uuid
       namespace :user do
