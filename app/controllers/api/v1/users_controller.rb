@@ -8,9 +8,14 @@ class Api::V1::UsersController < SecuredController
 
   def create
     register_user
-    render_json = User::LoginUserSerializer.new(current_user)
-    render json: render_json, status: :ok
+    render json: current_user, status: :ok
   end
+
+  def user_info
+    render json: current_user, status: :ok
+  end
+
+  delegate :destroy, to: :current_user
 
   private
 
