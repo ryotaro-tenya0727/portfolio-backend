@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         get 'user_info', on: :collection
         delete 'destroy', on: :collection
       end
-      resources :diaries, only: [:index, :show], param: :uuid
+      resources :diaries, only: [:index, :show]
       namespace :user do
         resources :recommended_members, shallow: true do
           resources :diaries
