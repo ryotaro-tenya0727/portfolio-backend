@@ -22,7 +22,7 @@ RSpec.describe "非ログインユーザーの日記閲覧機能", type: :reques
 
   describe "非ログインユーザーが日記の詳細を閲覧できること GET /api/v1/diaries" do
     let!(:diary) { create(:diary, :published) }
-    let(:http_request) { get api_v1_diary_path(diary.uuid), headers: headers }
+    let(:http_request) { get api_v1_diary_path(diary.id), headers: headers }
     it "非ログインユーザーがが日記の詳細を閲覧できること" do
       http_request
       expect(response).to be_successful
