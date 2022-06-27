@@ -1,14 +1,13 @@
 class Api::V1::DiariesController < ApplicationController
   def index
     diaries = Diary.all.published.eager_load(:recommended_member, :user).preload(:diary_images)
-    # .preload(:diary_images).eager_load(:recommended_member, :user).order(event_date: :desc)
     render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 
   def show
-    diary = Diary.find_by(uuid: params[:uuid])
-    render_json = DiaryListSerializer.new(diary).serializable_hash.to_json
+    diary = Diary.find_by!(id: params[:id])
+    render_json = DiaryDetailSerializer.new(diary).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 end
