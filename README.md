@@ -1,5 +1,5 @@
 [![ryotaro-tenya0727](https://circleci.com/gh/ryotaro-tenya0727/portfolio-backend.svg?style=shield)](https://app.circleci.com/pipelines/github/ryotaro-tenya0727/portfolio-backend)
-<img src="https://img.shields.io/badge/vrails-6.1.5-red">
+<img src="https://img.shields.io/badge/rails-v6.1.5-red">
   
 こちらは「推し♡だいありー」のバックエンドのリポジトリになります。
 
