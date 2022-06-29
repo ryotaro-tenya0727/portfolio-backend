@@ -104,6 +104,9 @@ jobs:
     executor:
       name: backend_container
     steps:
+      # persist_to_workspaceをアタッチ
+      - attach_workspace:
+          at: ~/backend
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -121,9 +124,6 @@ jobs:
     executor:
       name: backend_container
     steps:
-      # persist_to_workspaceをアタッチ
-      - attach_workspace:
-          at: ~/backend
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
