@@ -61,6 +61,11 @@ jobs:
       - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
+          name: Install Code Climate Test Reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
           name: Waiting stand up database
           command: |
             dockerize -wait \
