@@ -2,7 +2,7 @@
 
 フロントエンドのリポジトリは[こちら](https://github.com/ryotaro-tenya0727/portforio-frontend)
 
-# サービス名：　推し♡だいありー
+# 推し♡だいありー
 
 ## サービス概要
 
