@@ -89,4 +89,11 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+  if ENV['CI']
+    require 'coveralls'
+    Coveralls.wear!
+
+    SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[Coveralls::SimpleCov::Formatter]
+    SimpleCov.start 'test_frameworks'
+  end
 end
