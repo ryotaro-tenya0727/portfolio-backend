@@ -80,8 +80,37 @@ jobs:
           command: |
             TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
             bundle exec rspec --format progress --format RspecJunitFormatter -o tmp/test-results/rspec.xml -- $TESTFILES
+      # テストカバレッジレポートを作成
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+      # 別のjobでも使用できるファイルを指定。rootにはworking_directory:からの相対パス、pathには共有するファイル。
+      - persist_to_workspace:
+          root: coverage
+          paths:
+            - codeclimate.*.json
       - store_test_results:
           path: tmp/test-results
+      - store_artifacts:
+          path: test-artifacts
+
+  upload-coverage:
+    executor:
+      name: backend_container
+    steps:
+      - restore_cache:
+          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Code Climate Test Reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          command: |
+            ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
 
   rubocop:
     executor:
