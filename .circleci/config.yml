@@ -94,7 +94,7 @@ jobs:
       - persist_to_workspace:
           root: coverage
           paths:
-            - coverage/codeclimate.$CIRCLE_NODE_INDEX.json
+            - codeclimate.*.json
       - store_test_results:
           path: tmp/test-results
       - store_artifacts:
@@ -115,12 +115,15 @@ jobs:
             chmod +x ./cc-test-reporter
       - run:
           command: |
-            ./cc-test-reporter sum-coverage --output - codeclimate.$CIRCLE_NODE_INDEX.json | ./cc-test-reporter upload-coverage --debug --input -
+            ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
 
   rubocop:
     executor:
       name: backend_container
     steps:
+      # persist_to_workspaceをアタッチ
+      - attach_workspace:
+          at: ~/backend
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
