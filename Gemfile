@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.1.0'
 	gem 'factory_bot_rails'
   gem 'rspec_junit_formatter', '~> 0.5.1'
+  gem 'simplecov', require: false, group: :test
 end
 
 group :development do

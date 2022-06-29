@@ -34,3 +34,5 @@
 
 # irb
 .irb_history
+
+/coverage
