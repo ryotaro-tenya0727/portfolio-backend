@@ -115,7 +115,7 @@ jobs:
             chmod +x ./cc-test-reporter
       - run:
           command: |
-            ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
+            ./cc-test-reporter sum-coverage --output - codeclimate.$CIRCLE_NODE_INDEX.json | ./cc-test-reporter upload-coverage --debug --input -
 
   rubocop:
     executor:
