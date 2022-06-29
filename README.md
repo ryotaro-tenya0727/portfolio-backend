@@ -1,7 +1,8 @@
 [![ryotaro-tenya0727](https://circleci.com/gh/ryotaro-tenya0727/portfolio-backend.svg?style=shield)](https://app.circleci.com/pipelines/github/ryotaro-tenya0727/portfolio-backend)
 <img src="https://img.shields.io/badge/rails-v6.1.5-red">
 [![Maintainability](https://api.codeclimate.com/v1/badges/f03042d62ad2f2d6026f/maintainability)](https://codeclimate.com/github/ryotaro-tenya0727/portfolio-backend/maintainability)
-  
+<a href="https://codeclimate.com/github/ryotaro-tenya0727/portfolio-backend/test_coverage"><img src="https://api.codeclimate.com/v1/badges/f03042d62ad2f2d6026f/test_coverage" /></a>
+
 こちらは「推し♡だいありー」のバックエンドのリポジトリになります。
 
 フロントエンドのリポジトリは[こちら](https://github.com/ryotaro-tenya0727/portforio-frontend)
