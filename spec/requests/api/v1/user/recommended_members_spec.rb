@@ -47,6 +47,18 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     end
   end
 
+  describe 'ユーザーが推しメンの詳細を閲覧 GET /api/v1/user/recommended_members/:id' do
+    let!(:recommended_member) { create(:recommended_member, user: current_user) }
+    let(:http_request) { get api_v1_user_recommended_member_path(recommended_member.id), headers: headers }
+    context '正常系' do
+      it '推しメンの詳細が閲覧できること' do
+        http_request
+        expect(response).to be_successful
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
   describe 'ユーザーが推しメンを編集 PUT /api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers, params: { recommended_member: { nickname: 'change_nickname' } }.to_json } }
