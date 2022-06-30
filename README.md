@@ -26,6 +26,10 @@
 
 ![ER_figure 2 drawio](https://user-images.githubusercontent.com/71915489/176408993-afc680e7-c584-4245-8cdb-178c367671bd.png)
 
+## インフラ構成図
+
+![infra-figure drawio (3)](https://user-images.githubusercontent.com/71915489/176631462-655fba07-9e80-42a9-8be0-7673af257e94.png)
+
 
 
 ## 実装済みの機能
