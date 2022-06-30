@@ -22,13 +22,15 @@
 <img width="428" alt="スクリーンショット 2022-06-29 19 25 11" src="https://user-images.githubusercontent.com/71915489/176414909-346fb442-41c7-4ee1-bd14-2e3d3f32dbfc.png">
 </div>
 
+## インフラ構成図
+
+![infra-figure drawio (3)](https://user-images.githubusercontent.com/71915489/176631462-655fba07-9e80-42a9-8be0-7673af257e94.png)
+
 ## ER図
 
 ![ER_figure 2 drawio](https://user-images.githubusercontent.com/71915489/176408993-afc680e7-c584-4245-8cdb-178c367671bd.png)
 
-## インフラ構成図
 
-![infra-figure drawio (3)](https://user-images.githubusercontent.com/71915489/176631462-655fba07-9e80-42a9-8be0-7673af257e94.png)
 
 
 
@@ -65,17 +67,5 @@
 - ユーザーの日記を管理する機能
 - 運営からメッセージを送れる機能
 
-
-## なぜこのサービスを作りたいのか？
-アイドルとの思い出をずっと保存しておきたい。
-チェキや写メをイベント名、日付、会場と一緒に日記としてメンバーごとに残せるサービスはずっと欲しいと思っていた。
-同じように思っているアイドルファンの人が多いので自分が作りたい。
-アイドルファンの人、みんなが使うサービスを作りたい。
-
-## 需要
-
-アイドルファンの人にアンケートを取った結果需要はありそう。
-
-<img width="624" alt="スクリーンショット 2022-04-04 13 40 54" src="https://user-images.githubusercontent.com/71915489/161475165-2cff2c34-c381-41ee-be97-0bab39e0fd2d.png">
 
 
