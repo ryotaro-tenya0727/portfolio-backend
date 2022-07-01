@@ -7,6 +7,13 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
   let(:data) { { user: { name: 'test_name' } } }
 
   describe 'ユーザープロフィールの取得 GET /api/v1/users' do
+
+    let!(:recommended_member) { create(:recommended_member, user: current_user) }
+
+    before do
+      create(:diary, :published, recommended_member: recommended_member, user: current_user)
+    end
+
     it 'JWTトークンを持ったユーザーが、ユーザープロフィールを取得できること' do
       authorization_stub
       get '/api/v1/users', headers: headers_with_token
@@ -29,6 +36,8 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
   end
 
   describe 'ユーザー情報の取得 GET /api/v1/users/user_info' do
+
+
     it 'JWTトークンを持ったユーザーが、ユーザー情報を取得できること' do
       authorization_stub
       get '/api/v1/users/user_info', headers: headers_with_token

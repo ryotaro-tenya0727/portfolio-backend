@@ -31,10 +31,10 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
 
   describe "ユーザーが選択した推しメンの日記を作成 POST /api/v1/user/recommended_members/:recommended_member_id/diaries" do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
-    let!(:request_hash) { { headers: headers, params: { diary: attributes_for(:diary) }.to_json } }
+    let!(:request_hash) { { headers: headers, params: { diary: attributes_for(:diary, recommended_member: recommended_member, user: current_user) }.to_json } }
     let(:http_request) { post api_v1_user_recommended_member_diaries_path(recommended_member.id), request_hash }
     context "正常系" do
-      xit "ユーザーが選択した推しメンの日記を作成できること" do
+      it "ユーザーが選択した推しメンの日記を作成できること" do
         expect{ http_request }.to change { current_user.recommended_members.find_by(id: recommended_member.id).diaries.count }.by(1)
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
