@@ -89,3 +89,6 @@ Lint/UselessMethodDefinition:
 
 Style/MixinUsage:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false

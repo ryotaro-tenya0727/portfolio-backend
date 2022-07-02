@@ -31,6 +31,7 @@ group :development, :test do
 	gem 'factory_bot_rails'
   gem 'rspec_junit_formatter', '~> 0.5.1'
   gem 'simplecov', require: false, group: :test
+  gem 'annotate'
 end
 
 group :development do
