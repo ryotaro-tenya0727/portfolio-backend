@@ -14,4 +14,9 @@ class User::RecommendedMembersSerializer
     object.diaries.count
   end
   # 出会ってから経過した日数
+
+  attributes :number_of_days do |object|
+    days = (Time.zone.today - (object.first_met_date || Time.zone.today)).to_i
+    days.negative? ? 0 : days
+  end
 end
