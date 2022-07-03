@@ -12,7 +12,5 @@ COPY . .
 COPY entrypoint.prod.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.prod.sh
 ENTRYPOINT ["entrypoint.prod.sh"]
-VOLUME /backend/public
-VOLUME /backend/tmp
 EXPOSE 3000
 CMD ["unicorn", "-p", "3000", "-c", "config/unicorn.rb", "-E", "production"]
