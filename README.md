@@ -7,6 +7,8 @@
 
 フロントエンドのリポジトリは[こちら](https://github.com/ryotaro-tenya0727/portforio-frontend)
 
+サービスへのリンク: [推し♡だいありー](https://www.oshi-diary.com/)
+
 # 推し♡だいありー
 
 ## サービス概要
