@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin, format: 'json' do
-    resources :users
+    resources :users do
+      resources :diaries
+    end
   end
 end
