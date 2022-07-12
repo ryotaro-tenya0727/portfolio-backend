@@ -1,6 +1,6 @@
 class Admin::AdminUserSerializer
   include JSONAPI::Serializer
-  attributes :name, :me_introduction, :user_image
+  attributes :id, :name, :sub, :user_image
 
   attribute :total_polaroid_count do |object|
     count = 0

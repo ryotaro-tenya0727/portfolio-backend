@@ -1,7 +1,7 @@
 class Admin::UsersController < SecuredController
   def index
     @users = policy_scope(User, policy_scope_class: Admin::UserPolicy::Scope).preload(:diaries)
-    render_json = Admin::AdminUserSerializer.new(@users)
+    render_json = Admin::AdminUserSerializer.new(@users).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 
