@@ -6,7 +6,7 @@ class Admin::UsersController < SecuredController
   end
 
   def destroy
-    @user =  User.find(params[:id])
+    @user = User.find(params[:id])
     authorize([:admin, @user])
     @user.destroy!
     head :ok
