@@ -143,6 +143,8 @@ jobs:
           command: |
             bundle exec rubocop
   build_push:
+    machine:
+      image: ubuntu-2004:202201-02
     steps:
       - build_and_push_command:
           region: '${AWS_REGION}'
