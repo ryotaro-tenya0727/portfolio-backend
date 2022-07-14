@@ -59,8 +59,16 @@ jobs:
       name: backend_container
     parallelism: 2
     steps:
+      - run:
+          name: test
+          command: |
+            ls
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: test
+          command: |
+            ls
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
