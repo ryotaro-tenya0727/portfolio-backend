@@ -150,7 +150,7 @@ workflows:
             - bundle_dependencies
       - rubocop:
           requires:
-            - bundle_dependencies
+            - rspec
       - upload-coverage:
           requires:
-            - rspec
+            - rubocop
