@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2
-orbs:
   aws-ecs: circleci/aws-ecs@3.0.0
 executors:
   backend_container:
@@ -163,9 +162,7 @@ jobs:
           cluster: '${AWS_ECS_CLUSTER}'
           service-name: '${AWS_ECS_SERVICE}'
           family: '${AWS_ECS_TASK_NAME}'
-          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
-
-
+          container-image-name-updates: 'container=rails,tag=${CIRCLE_SHA1}'
 
 workflows:
   version: 2
