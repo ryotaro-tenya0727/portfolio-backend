@@ -75,6 +75,9 @@ jobs:
             tcp://127.0.0.1:3306 -timeout 120s
       - install_bundler
       - run:
+          command: |
+            bundle install
+      - run:
           name: create database
           command: bundle exec rails db:create
       - run:
@@ -128,6 +131,9 @@ jobs:
       - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - install_bundler
+      - run:
+          command: |
+            bundle install
       - run:
           name: Execute rubocop
           command: |
