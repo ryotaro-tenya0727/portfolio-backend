@@ -1,8 +1,6 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2
-commands:
-  build_and_push_command: aws-ecr/build-and-push-image
 executors:
   backend_container:
     docker:
@@ -25,6 +23,7 @@ commands:
     description: Bundler install
     steps:
       - run: gem install bundler -v 2.1.4
+  build_and_push_command: aws-ecr/build-and-push-image
 
 jobs:
   fetch_source_code:
