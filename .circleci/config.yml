@@ -78,7 +78,7 @@ jobs:
       - install_bundler
       - run:
           command: |
-            bundle install
+            bundle config set --local path 'vendor/bundle'
       - run:
           name: create database
           command: bundle exec rails db:create
@@ -137,7 +137,7 @@ jobs:
       - install_bundler
       - run:
           command: |
-            bundle install
+            bundle config set --local path 'vendor/bundle'
       - run:
           name: Execute rubocop
           command: |
