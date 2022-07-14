@@ -138,15 +138,17 @@ jobs:
           command: |
             bundle exec rubocop
   build_push:
-    machine:
-      image: ubuntu-1604:201903-01
+    executor:
+      name: backend_container
     steps:
-      - checkout
-      - aws-ecr/build-and-push-image:
-        repo: rails-idol-otaku-project
-        dockerfile: Dockerfile.prod
-        path: .
-        tag: '${CIRCLE_SHA1}'
+      - restore_cache:
+          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+      - command:
+          - aws-ecr/build-and-push-image:
+            repo: rails-idol-otaku-project
+            dockerfile: Dockerfile.prod
+            path: .
+            tag: '${CIRCLE_SHA1}'
 
 workflows:
   version: 2
