@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Bundle Install oshi-diary
           command: |
-            bundle config set --local path 'vendor/bundle'
+            bundle install --path vendor/bundle
       - save_cache:
           key: v1-oshi-diary-{{ checksum "Gemfile.lock" }}
           paths:
@@ -78,7 +78,7 @@ jobs:
       - install_bundler
       - run:
           command: |
-            bundle config set --local path 'vendor/bundle'
+            bundle install --path vendor/bundle
       - run:
           name: create database
           command: bundle exec rails db:create
@@ -137,7 +137,7 @@ jobs:
       - install_bundler
       - run:
           command: |
-            bundle config set --local path 'vendor/bundle'
+            bundle install --path vendor/bundle
       - run:
           name: Execute rubocop
           command: |
