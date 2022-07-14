@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2
+commands:
+  build_and_push_command: aws-ecr/build-and-push-image
 executors:
   backend_container:
     docker:
@@ -143,12 +145,11 @@ jobs:
     steps:
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          build-and-push-image:
-            repo: rails-idol-otaku-project
-            dockerfile: Dockerfile.prod
-            path: .
-            tag: '${CIRCLE_SHA1}'
+      - build_and_push_command:
+          repo: rails-idol-otaku-project
+          dockerfile: Dockerfile.prod
+          path: .
+          tag: '${CIRCLE_SHA1}'
 
 workflows:
   version: 2
