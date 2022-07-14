@@ -7,7 +7,7 @@ executors:
     docker:
       - image: cimg/ruby:2.7.4
         environment:
-          CC_TEST_REPORTER_ID: 5df56710761ce8545b8cf471f6fc0be0870c8eab3bbbb7d4776e072fd638b037
+          CC_TEST_REPORTER_ID: $CC_TEST_REPORTER_ID
           BUNDLER_VERSION: 2.1.4
           RAILS_ENV: 'test'
           DB_HOST: 127.0.0.1
