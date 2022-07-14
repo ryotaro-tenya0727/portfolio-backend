@@ -145,8 +145,6 @@ jobs:
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - build_and_push_command:
-          account-url: AWS_ECR_ACCOUNT_URL
-          region: AWS_REGION
           repo: rails-idol-otaku-project
           dockerfile: Dockerfile.prod
           path: .
