@@ -144,7 +144,7 @@ jobs:
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - commands:
-          - aws-ecr/build-and-push-image:
+          build-and-push-image:
             repo: rails-idol-otaku-project
             dockerfile: Dockerfile.prod
             path: .
