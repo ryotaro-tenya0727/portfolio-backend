@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2
+orbs:
+  aws-ecs: circleci/aws-ecs@3.0.0
 executors:
   backend_container:
     docker:
@@ -24,6 +26,7 @@ commands:
     steps:
       - run: gem install bundler -v 2.1.4
   build_and_push_command: aws-ecr/build-and-push-image
+  deploy_command: aws-ecs/update-service
 
 jobs:
   fetch_source_code:
@@ -152,6 +155,17 @@ jobs:
           dockerfile: Dockerfile.prod
           path: .
           tag: '${CIRCLE_SHA1}'
+  deploy:
+    machine:
+      image: ubuntu-2004:202201-02
+    steps:
+      - deploy_command:
+          cluster: '${AWS_ECS_CLUSTER}'
+          service-name: '${AWS_ECS_SERVICE}'
+          family: '${AWS_ECS_TASK_NAME}'
+          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
+
+
 
 workflows:
   version: 2
@@ -173,6 +187,13 @@ workflows:
       - build_push:
           requires:
             - upload-coverage
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - build_push
           filters:
             branches:
               only:
