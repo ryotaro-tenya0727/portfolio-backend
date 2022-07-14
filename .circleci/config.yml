@@ -62,7 +62,9 @@ jobs:
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
       - run:
           name: Install Code Climate Test Reporter
           command: |
@@ -129,7 +131,9 @@ jobs:
       - restore_cache:
           key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
       - install_bundler
       - run:
           command: |
