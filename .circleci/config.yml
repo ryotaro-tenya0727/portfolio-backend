@@ -143,11 +143,7 @@ jobs:
           command: |
             bundle exec rubocop
   build_push:
-    executor:
-      name: backend_container
     steps:
-      - restore_cache:
-          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
       - build_and_push_command:
           region: '${AWS_REGION}'
           repo: rails-idol-otaku-project
