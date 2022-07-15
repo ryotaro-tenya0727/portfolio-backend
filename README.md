@@ -60,7 +60,7 @@
 - ModuleCSS
 
 ### 🔻インフラ
-- AWS(ECS Fargate&nbsp;ECR&nbsp;RDS&nbsp;ALB)
+- AWS(ECS&nbsp;Fargate&nbsp;,&nbsp;ECR&nbsp;,&nbsp;RDS&nbsp;,&nbsp;ALB&nbsp;,&nbsp;Route53&nbsp;,&nbsp;Lambda@Edge&nbsp;,&nbsp;CloudFront)
 
 
 
