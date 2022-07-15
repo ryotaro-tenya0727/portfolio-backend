@@ -40,7 +40,7 @@
 
 ### 🔻バックエンド
 - Ruby(2.7.4)
-- Ruby　on　Rails(6.1.5)*APIモード
+- Ruby&nbsp;on&nbsp;Rails(6.1.5)*APIモード
 
 ### 🔻Gem
 - Faraday
@@ -52,7 +52,14 @@
 ### 🔻フロントエンド
 - Javascript
 - React(18.0.0)
-- 
+- React&nbsp;Query
+- React&nbsp;Router
+- ReactHookForm
+- Axios
+- MUI
+- ModuleCSS
+
+
 
 
 
