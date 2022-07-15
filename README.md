@@ -30,7 +30,7 @@
 - Faraday
 - JWT
 - Pundit
-- Jsonapi-serializer
+- Jsonapi-Serializer
 - Aws-sdk-s3
 
 ### 🔻フロントエンド
