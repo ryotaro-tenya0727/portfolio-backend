@@ -17,22 +17,6 @@
 
 メンバー一人一人との思い出をいつでも簡単に振り返ることができる。
 
-## 実際に作成した推しメンとの日記
-
-以下のように日記のような形で推しメンとの思い出をメンバーごとに記録していく。　
-<div align="center">
-<img width="428" alt="スクリーンショット 2022-06-29 19 25 11" src="https://user-images.githubusercontent.com/71915489/176414909-346fb442-41c7-4ee1-bd14-2e3d3f32dbfc.png">
-</div>
-
-## インフラ構成図
-![infra-figure drawio (3)](https://user-images.githubusercontent.com/71915489/176634308-bd77985e-34c3-4d72-9f6e-61d2a929dfc2.png)
-
-
-
-## ER図
-
-![ER_figure 2 drawio](https://user-images.githubusercontent.com/71915489/176408993-afc680e7-c584-4245-8cdb-178c367671bd.png)
-
 ## 使用技術
 
 ### 🔻認証
@@ -67,6 +51,24 @@
 - CircleCI
 - Mysql
 
+
+
+## インフラ構成図
+![infra-figure drawio (3)](https://user-images.githubusercontent.com/71915489/176634308-bd77985e-34c3-4d72-9f6e-61d2a929dfc2.png)
+
+
+
+## ER図
+
+![ER_figure 2 drawio](https://user-images.githubusercontent.com/71915489/176408993-afc680e7-c584-4245-8cdb-178c367671bd.png)
+
+
+## 実際に作成した推しメンとの日記
+
+以下のように日記のような形で推しメンとの思い出をメンバーごとに記録していく。　
+<div align="center">
+<img width="428" alt="スクリーンショット 2022-06-29 19 25 11" src="https://user-images.githubusercontent.com/71915489/176414909-346fb442-41c7-4ee1-bd14-2e3d3f32dbfc.png">
+</div>
 
 
 
