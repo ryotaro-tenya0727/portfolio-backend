@@ -59,6 +59,9 @@
 - MUI
 - ModuleCSS
 
+### 🔻インフラ
+- AWS(ECS Fargate&nbsp;ECR&nbsp;RDS&nbsp;ALB)
+
 
 
 
