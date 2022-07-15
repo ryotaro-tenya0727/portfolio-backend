@@ -33,7 +33,17 @@
 
 ![ER_figure 2 drawio](https://user-images.githubusercontent.com/71915489/176408993-afc680e7-c584-4245-8cdb-178c367671bd.png)
 
+## 使用技術
 
+### 🔻バックエンド
+- Ruby(2.7.4)
+- Ruby　on　Rails(6.1.5)*APIモード
+
+### 🔻Gem
+- Faraday
+- JWT
+- Pundit
+- Jsonapi-serializer
 
 
 
