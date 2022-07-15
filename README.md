@@ -60,8 +60,12 @@
 - ModuleCSS
 
 ### 🔻インフラ
+- Nginx
+- Unicorn
+- Docker
 - AWS(ECS&nbsp;Fargate&nbsp;,&nbsp;ECR&nbsp;,&nbsp;RDS&nbsp;,&nbsp;ALB&nbsp;,&nbsp;Route53&nbsp;,&nbsp;Lambda@Edge&nbsp;,&nbsp;CloudFront&nbsp;,&nbsp;S3)
-
+- CircleCI
+- Mysql
 
 
 
