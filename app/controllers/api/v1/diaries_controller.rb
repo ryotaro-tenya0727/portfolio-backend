@@ -1,6 +1,6 @@
 class Api::V1::DiariesController < ApplicationController
   def index
-    diaries = Diary.all.published.eager_load(:recommended_member, :user).preload(:diary_images)
+    diaries = Diary.all.published.preload(:diary_images, :recommended_member, :user).limit(10)
     render_json = DiaryListSerializer.new(diaries).serializable_hash.to_json
     render json: render_json, status: :ok
   end
