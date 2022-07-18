@@ -25,6 +25,8 @@
   user: user,
   recommended_member: member,
   event_name: "イベント#{n}",
+  event_venue: "会場#{n}",
+  event_polaroid_count: n,
   status: :published
   )
 end
