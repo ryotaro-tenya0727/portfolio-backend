@@ -62,7 +62,7 @@ test:
 production:
   <<: *default
   database: <%= ENV['BACKEND_DATABASE'] %>
-  url: <%= ENV['DATABASE_URL] %>
+  url: <%= ENV['DATABASE_URL'] %>
   username: <%= ENV['BACKEND_DATABASE_USER'] %>
   password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
   host: <%= ENV['BACKEND_DATABASE_URL'] %>
