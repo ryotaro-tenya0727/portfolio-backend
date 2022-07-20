@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/backend
   bundle_dependencies:
@@ -42,18 +42,18 @@ jobs:
       name: backend_container
     steps:
       - restore_cache:
-          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "Gemfile.lock" }}
+            - v2-dependencies-
       - install_bundler
       - run:
           name: Bundle Install dependencies
           command: |
             bundle config set --local path 'vendor/bundle'
       - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
   rspec:
@@ -62,11 +62,11 @@ jobs:
     parallelism: 2
     steps:
       - restore_cache:
-          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "Gemfile.lock" }}
+            - v2-dependencies-
       - run:
           name: Install Code Climate Test Reporter
           command: |
@@ -115,9 +115,9 @@ jobs:
       - attach_workspace:
           at: ~/backend
       - restore_cache:
-          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Code Climate Test Reporter
           command: |
@@ -131,11 +131,11 @@ jobs:
       name: backend_container
     steps:
       - restore_cache:
-          key: v1-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "Gemfile.lock" }}
+            - v2-dependencies-
       - install_bundler
       - run:
           command: |
