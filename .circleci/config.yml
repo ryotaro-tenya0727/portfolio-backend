@@ -111,7 +111,7 @@ jobs:
     executor:
       name: backend_container
     steps:
-      # persist_to_workspaceをアタッチ
+      # persist_to_workspaceをattach
       - attach_workspace:
           at: ~/backend
       - restore_cache:
