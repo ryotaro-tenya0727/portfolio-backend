@@ -50,8 +50,8 @@ jobs:
       - install_bundler
       - run:
           name: Bundle Install dependencies
-          command: bundle config set --local path 'vendor/bundle'
           command: |
+            bundle config set --local path 'vendor/bundle'
             bundle install
       - save_cache:
           key: v3-dependencies-{{ checksum "Gemfile.lock" }}
@@ -80,8 +80,8 @@ jobs:
             tcp://127.0.0.1:3306 -timeout 120s
       - install_bundler
       - run:
-          command: bundle config set --local path 'vendor/bundle'
           command: |
+            bundle config set --local path 'vendor/bundle'
             bundle install
       - run:
           name: create database
@@ -140,8 +140,8 @@ jobs:
             - v3-dependencies-
       - install_bundler
       - run:
-          command: bundle config set --local path 'vendor/bundle'
           command: |
+            bundle config set --local path 'vendor/bundle'
             bundle install
       - run:
           name: Execute rubocop
