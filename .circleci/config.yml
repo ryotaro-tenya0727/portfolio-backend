@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Bundle Install dependencies
           command: |
-            bundle config set --local path 'vendor/bundle'
+            bundle install --path vendor/bundle
       - save_cache:
           key: v2-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
