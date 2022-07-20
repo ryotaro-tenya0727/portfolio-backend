@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v3-backend-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/backend
   bundle_dependencies:
@@ -42,18 +42,19 @@ jobs:
       name: backend_container
     steps:
       - restore_cache:
-          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v3-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Gemfile.lock" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "Gemfile.lock" }}
+            - v3-dependencies-
       - install_bundler
       - run:
           name: Bundle Install dependencies
+          command: bundle config set --local path 'vendor/bundle'
           command: |
-            bundle install --path vendor/bundle
+            bundle install
       - save_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v3-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
   rspec:
@@ -62,11 +63,11 @@ jobs:
     parallelism: 2
     steps:
       - restore_cache:
-          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v3-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Gemfile.lock" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "Gemfile.lock" }}
+            - v3-dependencies-
       - run:
           name: Install Code Climate Test Reporter
           command: |
@@ -79,8 +80,9 @@ jobs:
             tcp://127.0.0.1:3306 -timeout 120s
       - install_bundler
       - run:
+          command: bundle config set --local path 'vendor/bundle'
           command: |
-            bundle install --path vendor/bundle
+            bundle install
       - run:
           name: create database
           command: bundle exec rails db:create
@@ -115,9 +117,9 @@ jobs:
       - attach_workspace:
           at: ~/backend
       - restore_cache:
-          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v3-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v3-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Code Climate Test Reporter
           command: |
@@ -131,15 +133,16 @@ jobs:
       name: backend_container
     steps:
       - restore_cache:
-          key: v2-backend-{{ .Environment.CIRCLE_SHA1 }}
+          key: v3-backend-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Gemfile.lock" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "Gemfile.lock" }}
+            - v3-dependencies-
       - install_bundler
       - run:
+          command: bundle config set --local path 'vendor/bundle'
           command: |
-            bundle install --path vendor/bundle
+            bundle install
       - run:
           name: Execute rubocop
           command: |
