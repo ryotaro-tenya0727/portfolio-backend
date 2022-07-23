@@ -1,6 +1,6 @@
 class Admin::AdminDiarySerializer
   include JSONAPI::Serializer
-  attributes :id, :uuid, :event_name, :event_date, :event_venue, :event_polaroid_count, :status, :impressive_memory, :impressive_memory_detail
+  attributes :id, :uuid, :event_name, :event_date, :event_venue, :status, :impressive_memory, :impressive_memory_detail
 
   attribute :diary_member_nickname do |object|
     object.recommended_member.nickname.to_s

@@ -9,4 +9,8 @@ class Admin::AdminUserSerializer
     end
     count
   end
+
+  attributes :diaries_count do |object|
+    object.diaries.count
+  end
 end
