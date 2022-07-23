@@ -1,4 +1,5 @@
 class Admin::DiariesController < SecuredController
+
   def index
     user_diaries = User.find(params[:user_id]).diaries.preload(:diary_images).order(event_date: :desc)
     diaries = policy_scope(user_diaries, policy_scope_class: Admin::DiaryPolicy::Scope)
@@ -7,5 +8,9 @@ class Admin::DiariesController < SecuredController
   end
 
   def destroy
+    diary = Diary.find(params[:id])
+    authorize([:admin, diary])
+    diary.destroy!
+    head :ok
   end
 end
