@@ -24,7 +24,7 @@ RSpec.describe "ユーザー管理機能 Admin::Users", type: :request do
       it '管理者権限を持たないユーザーが全ユーザーの情報を取得できない' do
         authorization_stub
         get '/admin/users', headers: headers_with_token
-        expect(body['data']).to eq(nil)
+        expect(response).to have_http_status(403)
       end
     end
   end
