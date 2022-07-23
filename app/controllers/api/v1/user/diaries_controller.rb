@@ -3,7 +3,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def index
     authorize([:user, Diary])
-    diaries = current_user.recommended_members.find_by!(id: params[:recommended_member_id]).diaries.all.preload(:diary_images).order(event_date: :desc)
+    diaries = current_user.recommended_members.find_by!(id: params[:recommended_member_id]).diaries.preload(:diary_images).order(event_date: :desc)
     render_json = User::DiaryListSerializer.new(diaries).serializable_hash.to_json
     render json: render_json, status: :ok
   end
