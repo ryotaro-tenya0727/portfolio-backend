@@ -1,5 +1,4 @@
 class Admin::DiariesController < SecuredController
-
   def index
     user_diaries = User.find(params[:user_id]).diaries.preload(:diary_images).order(event_date: :desc)
     diaries = policy_scope(user_diaries, policy_scope_class: Admin::DiaryPolicy::Scope)
