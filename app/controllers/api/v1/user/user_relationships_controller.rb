@@ -1,7 +1,7 @@
 class Api::V1::User::UserRelationshipsController < ApplicationController
   def index
     users = User.all.preload(:followers, :recommended_members, :diaries)
-    render_json = UsersSerializer.new(users, current_user: current_user)
+    render_json = UsersSerializer.new(users, current_user: current_user).serializable_hash.to_json
     render json: render_json
   end
 

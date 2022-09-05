@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :index] do
         get 'user_info', on: :collection
         delete 'destroy', on: :collection
+        collection do
+          get :following, :followers
+        end
       end
       resources :diaries, only: [:index, :show]
 
