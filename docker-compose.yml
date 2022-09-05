@@ -8,7 +8,7 @@ services:
     build:
     # build context
       context: .
-    # -f に相当
+    # -f に相当。contextがルート
       dockerfile: Dockerfile
     volumes:
       - '.:/backend/'
