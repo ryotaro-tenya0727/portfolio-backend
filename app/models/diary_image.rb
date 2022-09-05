@@ -20,6 +20,4 @@
 #
 class DiaryImage < ApplicationRecord
   belongs_to :diary
-
-  validates :uuid, uniqueness: true
 end

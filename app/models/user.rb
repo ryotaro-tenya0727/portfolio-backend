@@ -40,7 +40,6 @@ class User < ApplicationRecord
 
   enum role: { general: 0, admin: 1 }
 
-  validates :uuid, uniqueness: true
   validates :sub, presence: true, uniqueness: true
   validates :role, presence: true
 
