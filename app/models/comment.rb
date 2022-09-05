@@ -21,4 +21,5 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+  validates :uuid, uniqueness: true
 end
