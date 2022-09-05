@@ -28,11 +28,33 @@ class User < ApplicationRecord
   has_many :recommended_members, dependent: :destroy
   has_many :diaries
 
+  # フォロー機能
+  has_many :active_relationships, class_name: 'UserRelationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
+  has_many :following, through: :active_relationships, source: :follow
+  has_many :passive_relationships, class_name: 'UserRelationship',
+                                   foreign_key: 'follow_id',
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
   enum role: { general: 0, admin: 1 }
 
   validates :uuid, uniqueness: true
   validates :sub, presence: true, uniqueness: true
   validates :role, presence: true
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(follow_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    other_user.followers.include?(self)
+  end
 
   def self.from_token_payload(payload, name, user_image)
     user = find_by(sub: payload['sub'])

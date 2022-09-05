@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_12_195740) do
+ActiveRecord::Schema.define(version: 2022_09_05_175338) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -83,15 +83,14 @@ ActiveRecord::Schema.define(version: 2022_06_12_195740) do
   end
 
   create_table "user_relationships", charset: "utf8mb4", force: :cascade do |t|
-    t.string "uuid", null: false
-    t.integer "follower_id", null: false
-    t.integer "followed_id", null: false
+    t.bigint "follow_id", null: false
+    t.bigint "follower_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_user_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_user_relationships_on_follower_id_and_followed_id", unique: true
+    t.string "uuid", null: false
+    t.index ["follow_id", "follower_id"], name: "index_user_relationships_on_follow_id_and_follower_id", unique: true
+    t.index ["follow_id"], name: "index_user_relationships_on_follow_id"
     t.index ["follower_id"], name: "index_user_relationships_on_follower_id"
-    t.index ["uuid"], name: "index_user_relationships_on_uuid", unique: true
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -117,4 +116,6 @@ ActiveRecord::Schema.define(version: 2022_06_12_195740) do
   add_foreign_key "notifications", "users", column: "notified_id"
   add_foreign_key "notifications", "users", column: "notifier_id"
   add_foreign_key "recommended_members", "users"
+  add_foreign_key "user_relationships", "users", column: "follow_id"
+  add_foreign_key "user_relationships", "users", column: "follower_id"
 end
