@@ -7,7 +7,7 @@ class User::LoginUserSerializer
   end
 
   attribute :diaries_count do |object|
-    object.diaries.count
+    object.diaries.size
   end
 
   attribute :total_polaroid_count do |object|

@@ -7,7 +7,7 @@ class User::RecommendedMembersSerializer
   end
 
   attribute :diaries_count do |object|
-    object.diaries.count
+    object.diaries.size
   end
   # 出会ってから経過した日数
 

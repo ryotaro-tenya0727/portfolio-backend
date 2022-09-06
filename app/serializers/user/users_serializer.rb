@@ -8,11 +8,11 @@ class User::UsersSerializer
   end
 
   attribute :recommended_members_count do |object|
-    object.recommended_members.count
+    object.recommended_members.size
   end
 
   attribute :diaries_count do |object|
-    object.diaries.count
+    object.diaries.size
   end
 
   attribute :total_polaroid_count do |object|
