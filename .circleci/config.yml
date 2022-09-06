@@ -151,7 +151,6 @@ jobs:
     machine:
       image: ubuntu-2004:202201-02
     steps:
-      # 最初にcheckoutをしてくれる。
       - build_and_push_command:
           region: '${AWS_REGION}'
           repo: rails-idol-otaku-project
