@@ -184,14 +184,14 @@ workflows:
       - upload-coverage:
           requires:
             - rubocop
-      - build_push:
-          requires:
-            - upload-coverage
-          filters:
-            branches:
-              only:
-                - master
-      # - deploy:
+      # - build_push:
+      #     requires:
+      #       - upload-coverage
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      # # - deploy:
       #     requires:
       #       - build_push
       #     filters:
