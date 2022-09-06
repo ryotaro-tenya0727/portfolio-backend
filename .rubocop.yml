@@ -3,7 +3,6 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-performance
   - rubocop-rails
-  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -23,7 +22,7 @@ Layout/MultilineBlockLayout:
     - 'spec/**/*_spec.rb'
 
 Metrics/AbcSize:
-  Max: 30
+  Max: 50
 
 Metrics/BlockLength:
   Max: 30
@@ -91,4 +90,20 @@ Style/MixinUsage:
   Enabled: false
 
 Metrics/BlockLength:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+Style/ClassVars:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Rails/InverseOf:
   Enabled: false

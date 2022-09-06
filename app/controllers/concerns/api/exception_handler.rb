@@ -3,6 +3,7 @@ module Api::ExceptionHandler
 
   included do
     rescue_from StandardError, with: :render500
+    rescue_from NoMethodError, with: :render500
     rescue_from Aws::S3::Errors::ServiceError, with: :render500
     rescue_from ActiveRecord::RecordNotDestroyed, with: :render500
     rescue_from ActiveRecord::RecordNotFound, with: :render404

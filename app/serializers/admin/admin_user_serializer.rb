@@ -3,14 +3,10 @@ class Admin::AdminUserSerializer
   attributes :id, :name, :sub, :user_image
 
   attribute :total_polaroid_count do |object|
-    count = 0
-    object.diaries.each do |diary|
-      count += diary.event_polaroid_count || 0
-    end
-    count
+    object.diaries.pluck(:event_polaroid_count).sum
   end
 
   attributes :diaries_count do |object|
-    object.diaries.count
+    object.diaries.size
   end
 end

@@ -8,7 +8,6 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
 
   describe 'ユーザープロフィールの取得 GET /api/v1/users' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
-
     before do
       create(:diary, :published, recommended_member: recommended_member, user: current_user)
     end
@@ -35,8 +34,6 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
   end
 
   describe 'ユーザー情報の取得 GET /api/v1/users/user_info' do
-
-
     it 'JWTトークンを持ったユーザーが、ユーザー情報を取得できること' do
       authorization_stub
       get '/api/v1/users/user_info', headers: headers_with_token
@@ -50,6 +47,42 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
       expect{ delete '/api/v1/users/destroy', headers: headers_with_token }.to change { User.count }.by(-1)
       expect(response).to be_successful
       expect(response).to have_http_status(204)
+    end
+  end
+
+  describe 'ユーザーがフォローしているユーザーを閲覧GET /api/v1/users/followers' do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:other_user3) { create(:user) }
+    let!(:request_hash) { { headers: headers} }
+    let(:http_request) { get following_api_v1_users_path, request_hash }
+    it 'ユーザーがフォローしているユーザーを閲覧できること' do
+      authorization_stub
+      current_user.follow(other_user1)
+      current_user.follow(other_user2)
+      current_user.follow(other_user3)
+      http_request
+      expect(body['data'].count).to eq(3)
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+  end
+
+    describe 'ユーザーがフォローされているユーザーを閲覧 GET /api/v1/users/following' do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:other_user3) { create(:user) }
+    let!(:request_hash) { { headers: headers} }
+    let(:http_request) { get followers_api_v1_users_path, request_hash }
+    it 'ユーザーがフォローしているユーザーを閲覧できること' do
+      authorization_stub
+      other_user1.follow(current_user)
+      other_user2.follow(current_user)
+      other_user3.follow(current_user)
+      http_request
+      expect(body['data'].count).to eq(3)
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
     end
   end
 end

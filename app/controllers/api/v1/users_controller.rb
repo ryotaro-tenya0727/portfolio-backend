@@ -2,7 +2,7 @@ class Api::V1::UsersController < SecuredController
   skip_before_action :authorize_request, only: [:create]
 
   def index
-    render_json = User::LoginUserSerializer.new(current_user)
+    render_json = User::LoginUserSerializer.new(current_user).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 
@@ -13,6 +13,18 @@ class Api::V1::UsersController < SecuredController
 
   def user_info
     render json: current_user, status: :ok
+  end
+
+  def following
+    following_users = current_user.following
+    render_json = User::UsersSerializer.new(following_users, current_user: current_user).serializable_hash.to_json
+    render json: render_json
+  end
+
+  def followers
+    followers = current_user.followers
+    render_json = User::UsersSerializer.new(followers, current_user: current_user).serializable_hash.to_json
+    render json: render_json
   end
 
   delegate :destroy, to: :current_user

@@ -2,19 +2,15 @@ class User::LoginUserSerializer
   include JSONAPI::Serializer
   attributes :name, :me_introduction, :user_image
 
-  attributes :recommended_members_count do |object|
+  attribute :recommended_members_count do |object|
     object.recommended_members.count
   end
 
-  attributes :diaries_count do |object|
-    object.diaries.count
+  attribute :diaries_count do |object|
+    object.diaries.size
   end
 
   attribute :total_polaroid_count do |object|
-    count = 0
-    object.diaries.each do |diary|
-      count += diary.event_polaroid_count || 0
-    end
-    count
+    object.diaries.pluck(:event_polaroid_count).sum
   end
 end

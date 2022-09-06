@@ -55,7 +55,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Diaries", type:
     end
   end
 
-  describe "ユーザーが選択した推しメンの日記を編集できること PUT /api/v1/user/recommended_members/:recommended_member_id/diaries/:id" do
+  describe "ユーザーが選択した推しメンの日記を編集 PUT /api/v1/user/recommended_members/:recommended_member_id/diaries/:id" do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:diary) { create(:diary, :published, user: current_user, recommended_member: recommended_member) }
     let!(:request_hash) { { headers: headers, params: { diary: { event_name: 'change_event_name' } }.to_json } }
