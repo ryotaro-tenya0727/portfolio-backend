@@ -147,16 +147,16 @@ jobs:
           name: Execute rubocop
           command: |
             bundle exec rubocop
-  build_push:
-    machine:
-      image: ubuntu-2004:202201-02
-    steps:
-      - build_and_push_command:
-          region: '${AWS_REGION}'
-          repo: rails-idol-otaku-project
-          dockerfile: Dockerfile.prod
-          path: .
-          tag: '${CIRCLE_SHA1}'
+  # build_push:
+  #   machine:
+  #     image: ubuntu-2004:202201-02
+  #   steps:
+  #     - build_and_push_command:
+  #         region: '${AWS_REGION}'
+  #         repo: rails-idol-otaku-project
+  #         dockerfile: Dockerfile.prod
+  #         path: .
+  #         tag: '${CIRCLE_SHA1}'
   # deploy:
   #   machine:
   #     image: ubuntu-2004:202201-02

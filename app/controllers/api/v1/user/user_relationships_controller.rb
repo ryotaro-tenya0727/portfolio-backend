@@ -6,6 +6,7 @@ class Api::V1::User::UserRelationshipsController < SecuredController
   end
 
   def create
+    authorize([:user, UserRelationship])
     ActiveRecord::Base.transaction do
       other_user = User.find_by(id: params[:id])
       current_user.follow(other_user)
@@ -14,6 +15,7 @@ class Api::V1::User::UserRelationshipsController < SecuredController
   end
 
   def destroy
+    authorize([:user, UserRelationship])
     ActiveRecord::Base.transaction do
       other_user = User.find_by(id: params[:id])
       current_user.unfollow(other_user)
