@@ -22,4 +22,16 @@ class Api::V1::User::UserRelationshipsController < SecuredController
     end
     head :ok
   end
+
+  def search
+    users = SearchUsersForm.new(search_params).search
+    render_json = User::UsersSerializer.new(users, current_user: current_user).serializable_hash.to_json
+    render json: render_json
+  end
+
+  private
+
+  def search_params
+    params.require(:search).permit(:name)
+  end
 end

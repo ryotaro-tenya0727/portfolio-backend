@@ -17,7 +17,11 @@ Rails.application.routes.draw do
           resources :diaries
         end
 
-        resources :user_relationships, only: [:index, :create, :destroy]
+        resources :user_relationships, only: [:index, :create, :destroy] do
+          collection do
+            post 'search'
+          end
+        end
         post 's3_presigned_url', to: 's3_presigned_urls#diary_presigned_url'
       end
     end

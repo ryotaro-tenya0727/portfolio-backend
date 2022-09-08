@@ -25,7 +25,7 @@ Faraday.default_adapter = :net_http
 
 class User < ApplicationRecord
   has_many :recommended_members, dependent: :destroy
-  has_many :diaries
+  has_many :diaries, dependent: :destroy
 
   # フォロー機能
   has_many :active_relationships, class_name: 'UserRelationship',
@@ -41,6 +41,8 @@ class User < ApplicationRecord
 
   validates :sub, presence: true, uniqueness: true
   validates :role, presence: true
+
+  scope :name_contain, ->(name) { where('name LIKE (?)', "%#{name}%")}
 
   def follow(other_user)
     following << other_user
