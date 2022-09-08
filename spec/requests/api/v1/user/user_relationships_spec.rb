@@ -48,4 +48,21 @@ RSpec.describe "フォロー機能 Api::V1::User::UserRelationships", type: :req
       end
     end
   end
+
+  describe "ユーザーが指定したワードでユーザーを検索 POST /api/v1/user/user_relationships/search" do
+    let!(:request_hash) { { headers: headers, params: {search: {name: "検索"}}.to_json} }
+    let(:http_request) { post search_api_v1_user_user_relationships_path, request_hash }
+    let!(:search_user) { create(:user, name: "検索") }
+    before do
+      create_list(:user, 3)
+    end
+    context "正常系" do
+      it "ユーザーが選択したワードでユーザーを検索できること" do
+        http_request
+        expect(body['data'][0]['attributes']['name']).to eq("検索")
+        expect(response).to be_successful
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end

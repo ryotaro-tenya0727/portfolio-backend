@@ -42,7 +42,7 @@ class User < ApplicationRecord
   validates :sub, presence: true, uniqueness: true
   validates :role, presence: true
 
-  scope :name_contain, ->(name) { where('name LIKE (?)', "%#{name}%")}
+  scope :name_contain, ->(name) { where('name LIKE (?)', "%#{name}%") }
 
   def follow(other_user)
     following << other_user

@@ -6,6 +6,6 @@ class SearchUsersForm
 
   def search
     relation = User.distinct
-    relation = relation.name_contain(name)
+    relation.name_contain(name)
   end
 end
