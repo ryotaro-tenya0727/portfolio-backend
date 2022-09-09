@@ -24,7 +24,7 @@ class Api::V1::User::UserRelationshipsController < SecuredController
   end
 
   def search
-    users = SearchUsersForm.new(search_params).search
+    users = SearchUsersForm.new(search_params).search.preload(:followers, :recommended_members, :diaries)
     render_json = User::UsersSerializer.new(users, current_user: current_user).serializable_hash.to_json
     render json: render_json
   end
