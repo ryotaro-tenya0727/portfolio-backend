@@ -1,7 +1,7 @@
 require 'net/http'
 require 'uri'
 
-class VerifyJwtToken::VerifyJwtTokenService
+class Authorization::VerifyJwtTokenService
   def self.verify(token)
     JWT.decode(token, nil,
                true,
