@@ -1,11 +1,6 @@
 class Api::V1::UsersController < SecuredController
   skip_before_action :authorize_request, only: [:create]
 
-  def index
-    render_json = User::LoginUserSerializer.new(current_user).serializable_hash.to_json
-    render json: render_json, status: :ok
-  end
-
   def create
     register_user
     render json: current_user, status: :ok

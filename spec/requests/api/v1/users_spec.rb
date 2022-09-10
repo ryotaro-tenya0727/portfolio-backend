@@ -6,19 +6,6 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
   let(:headers_without_token) { { CONTENT_TYPE: 'application/json', ACCEPT: 'application/json' } }
   let(:data) { { user: { name: 'test_name' } } }
 
-  describe 'ユーザープロフィールの取得 GET /api/v1/users' do
-    let!(:recommended_member) { create(:recommended_member, user: current_user) }
-    before do
-      create(:diary, :published, recommended_member: recommended_member, user: current_user)
-    end
-
-    it 'JWTトークンを持ったユーザーが、ユーザープロフィールを取得できること' do
-      authorization_stub
-      get '/api/v1/users', headers: headers_with_token
-      expect(response).to have_http_status(:ok)
-    end
-  end
-
   describe 'ユーザー登録 POST /api/v1/users' do
     it 'JWTトークンを持ったユーザーが、ユーザー登録できること' do
       registration_stub
