@@ -18,4 +18,12 @@ RSpec.describe "ログイン後の通信 Api::V1::User::Users", type: :request d
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe 'ユーザー情報の取得 GET /api/v1/users/user_info' do
+    it 'JWTトークンを持ったユーザーが、ユーザー情報を取得できること' do
+      authorization_stub
+      get user_info_api_v1_user_users_path, headers: headers_with_token
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end

@@ -6,10 +6,6 @@ class Api::V1::UsersController < SecuredController
     render json: current_user, status: :ok
   end
 
-  def user_info
-    render json: current_user, status: :ok
-  end
-
   def following
     authorize User
     following_users = current_user.following

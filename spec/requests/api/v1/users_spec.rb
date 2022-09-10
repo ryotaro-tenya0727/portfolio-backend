@@ -20,14 +20,6 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
     end
   end
 
-  describe 'ユーザー情報の取得 GET /api/v1/users/user_info' do
-    it 'JWTトークンを持ったユーザーが、ユーザー情報を取得できること' do
-      authorization_stub
-      get '/api/v1/users/user_info', headers: headers_with_token
-      expect(response).to have_http_status(:ok)
-    end
-  end
-
   describe 'ユーザーの退会 GET /api/v1/users/destroy' do
     it 'JWTトークンを持ったユーザーが、退会できること' do
       authorization_stub
