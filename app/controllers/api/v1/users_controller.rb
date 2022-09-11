@@ -16,6 +16,6 @@ class Api::V1::UsersController < SecuredController
     authorization = Authorization::AuthorizationService.new(request.headers)
     user_name = user_params[:name]
     user_image = user_params[:user_image]
-    @current_user = authorization.current_user(user_name, user_image)
+    @current_user = authorization.create_user(user_name, user_image)
   end
 end
