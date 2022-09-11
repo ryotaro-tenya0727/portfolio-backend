@@ -58,8 +58,12 @@ class User < ApplicationRecord
 
   def self.from_token_payload(payload, name, user_image)
     user = find_by(sub: payload['sub'])
-    user || ActiveRecord::Base.transaction do
-      create_user(payload['sub'], name, user_image)
+    if user
+      user.update!(name: name, user_image: user_image)
+    else
+      ActiveRecord::Base.transaction do
+        create_user(payload['sub'], name, user_image)
+      end
     end
   end
 
