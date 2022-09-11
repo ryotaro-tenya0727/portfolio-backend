@@ -3,12 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get :health_check, to: 'health_check#index'
 
-      resources :users, only: [:create, :index] do
-        delete 'destroy', on: :collection
-        collection do
-          get :following, :followers
-        end
-      end
+      resources :users, only: [:create, :index]
       resources :diaries, only: [:index, :show]
 
       namespace :user do
@@ -24,7 +19,11 @@ Rails.application.routes.draw do
           end
         end
         resources :users, only: [:index] do
-          get 'user_info', on: :collection
+          collection do
+            get 'user_info'
+            delete 'destroy'
+            get :following, :followers
+          end
         end
       end
     end
