@@ -1,14 +1,21 @@
 Rails.application.routes.draw do
+  namespace :admin, format: 'json' do
+    resources :users, shallow: true do
+      resources :diaries
+    end
+  end
+
   namespace :api, format: 'json' do
     namespace :v1 do
-      get :health_check, to: 'health_check#index'
-
-      resources :users, only: [:create, :index]
-      resources :diaries, only: [:index, :show]
-
       namespace :user do
         resources :recommended_members, shallow: true do
           resources :diaries
+        end
+
+        resources :rankings, only: [] do
+          collection do
+            get 'total_polaroid_count'
+          end
         end
 
         post 's3_presigned_url', to: 's3_presigned_urls#diary_presigned_url'
@@ -26,12 +33,12 @@ Rails.application.routes.draw do
           end
         end
       end
-    end
-  end
 
-  namespace :admin, format: 'json' do
-    resources :users, shallow: true do
-      resources :diaries
+      resources :diaries, only: [:index, :show]
+
+      get :health_check, to: 'health_check#index'
+
+      resources :users, only: [:create, :index]
     end
   end
 end

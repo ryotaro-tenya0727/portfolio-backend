@@ -33,7 +33,7 @@ FactoryBot.define do
     sequence(:event_name) { |n| "test-event_name-#{n}" }
     event_date { Date.today.last_year }
     sequence(:event_venue) { |n| "test-event_venue-#{n}" }
-    sequence(:event_polaroid_count) { 5 }
+    sequence(:event_polaroid_count) { Random.rand(1 .. 10) }
     sequence(:impressive_memory) { |n| "test-impressive_memory-#{n}" }
     sequence(:impressive_memory_detail) { |n| "test-impressive_memory_detail-#{n}" }
     status { :published }
