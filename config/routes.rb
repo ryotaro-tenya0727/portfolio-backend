@@ -4,7 +4,6 @@ Rails.application.routes.draw do
       get :health_check, to: 'health_check#index'
 
       resources :users, only: [:create, :index] do
-        get 'user_info', on: :collection
         delete 'destroy', on: :collection
         collection do
           get :following, :followers
@@ -17,12 +16,16 @@ Rails.application.routes.draw do
           resources :diaries
         end
 
+        post 's3_presigned_url', to: 's3_presigned_urls#diary_presigned_url'
+
         resources :user_relationships, only: [:index, :create, :destroy] do
           collection do
             post 'search'
           end
         end
-        post 's3_presigned_url', to: 's3_presigned_urls#diary_presigned_url'
+        resources :users, only: [:index] do
+          get 'user_info', on: :collection
+        end
       end
     end
   end
