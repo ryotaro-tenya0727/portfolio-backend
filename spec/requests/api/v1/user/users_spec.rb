@@ -14,7 +14,7 @@ RSpec.describe "ログイン後の通信 Api::V1::User::Users", type: :request d
 
     it 'JWTトークンを持ったユーザーが、ユーザープロフィールを取得できること' do
       authorization_stub
-      get api_v1_user_users_path, headers: headers_with_token
+      get '/api/v1/user/users', headers: headers_with_token
       expect(response).to have_http_status(:ok)
     end
   end
@@ -24,6 +24,15 @@ RSpec.describe "ログイン後の通信 Api::V1::User::Users", type: :request d
       authorization_stub
       get user_info_api_v1_user_users_path, headers: headers_with_token
       expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'ユーザーの退会 GET /api/v1/users/destroy' do
+    it 'JWTトークンを持ったユーザーが、退会できること' do
+      authorization_stub
+      expect{ delete api_v1_user_users_path, headers: headers_with_token }.to change { User.count }.by(-1)
+      expect(response).to be_successful
+      expect(response).to have_http_status(204)
     end
   end
 end

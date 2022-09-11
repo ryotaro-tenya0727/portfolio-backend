@@ -20,7 +20,7 @@ class Api::V1::UsersController < SecuredController
     render json: render_json
   end
 
-  delegate :destroy, to: :current_user
+
 
   private
 

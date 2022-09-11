@@ -7,4 +7,6 @@ class Api::V1::User::UsersController < SecuredController
   def user_info
     render json: current_user, status: :ok
   end
+
+  delegate :destroy, to: :current_user
 end

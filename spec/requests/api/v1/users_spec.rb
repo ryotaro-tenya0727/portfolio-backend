@@ -20,15 +20,6 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
     end
   end
 
-  describe 'ユーザーの退会 GET /api/v1/users/destroy' do
-    it 'JWTトークンを持ったユーザーが、退会できること' do
-      authorization_stub
-      expect{ delete '/api/v1/users/destroy', headers: headers_with_token }.to change { User.count }.by(-1)
-      expect(response).to be_successful
-      expect(response).to have_http_status(204)
-    end
-  end
-
   describe 'ユーザーがフォローしているユーザーを閲覧GET /api/v1/users/followers' do
     let!(:other_user1) { create(:user) }
     let!(:other_user2) { create(:user) }

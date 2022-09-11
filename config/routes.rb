@@ -4,7 +4,6 @@ Rails.application.routes.draw do
       get :health_check, to: 'health_check#index'
 
       resources :users, only: [:create, :index] do
-        delete 'destroy', on: :collection
         collection do
           get :following, :followers
         end
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
         end
         resources :users, only: [:index] do
           get 'user_info', on: :collection
+          delete 'destroy', on: :collection
         end
       end
     end
