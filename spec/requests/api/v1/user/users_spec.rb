@@ -35,4 +35,40 @@ RSpec.describe "ログイン後の通信 Api::V1::User::Users", type: :request d
       expect(response).to have_http_status(204)
     end
   end
+
+  describe 'ユーザーがフォローしているユーザーを閲覧GET /api/v1/users/followers' do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:other_user3) { create(:user) }
+    let!(:request_hash) { { headers: headers} }
+    let(:http_request) { get following_api_v1_user_users_path, request_hash }
+    it 'ユーザーがフォローしているユーザーを閲覧できること' do
+      authorization_stub
+      current_user.follow(other_user1)
+      current_user.follow(other_user2)
+      current_user.follow(other_user3)
+      http_request
+      expect(body['data'].count).to eq(3)
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe 'ユーザーがフォローされているユーザーを閲覧 GET /api/v1/users/following' do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:other_user3) { create(:user) }
+    let!(:request_hash) { { headers: headers} }
+    let(:http_request) { get followers_api_v1_user_users_path, request_hash }
+    it 'ユーザーがフォローしているユーザーを閲覧できること' do
+      authorization_stub
+      other_user1.follow(current_user)
+      other_user2.follow(current_user)
+      other_user3.follow(current_user)
+      http_request
+      expect(body['data'].count).to eq(3)
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+    end
+  end
 end

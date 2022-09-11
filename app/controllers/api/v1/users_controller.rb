@@ -6,22 +6,6 @@ class Api::V1::UsersController < SecuredController
     render json: current_user, status: :ok
   end
 
-  def following
-    authorize User
-    following_users = current_user.following
-    render_json = User::UsersSerializer.new(following_users, current_user: current_user).serializable_hash.to_json
-    render json: render_json
-  end
-
-  def followers
-    authorize User
-    followers = current_user.followers
-    render_json = User::UsersSerializer.new(followers, current_user: current_user).serializable_hash.to_json
-    render json: render_json
-  end
-
-
-
   private
 
   def user_params
