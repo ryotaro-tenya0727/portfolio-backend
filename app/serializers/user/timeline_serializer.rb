@@ -1,6 +1,6 @@
 class User::TimelineSerializer
   include JSONAPI::Serializer
-  attributes :id, :uuid, :impressive_memory, :event_name, :event_date, :event_venue, :event_polaroid_count, :impressive_memory
+  attributes :id, :uuid, :impressive_memory, :event_name, :event_date, :event_venue, :event_polaroid_count
 
   attribute :diary_user_name do |object|
     object.user.name.to_s
@@ -14,11 +14,7 @@ class User::TimelineSerializer
     object.recommended_member.nickname.to_s
   end
 
-  attribute :diary_member_group do |object|
-    object.recommended_member.group.to_s
-  end
-
-  attribute :diary_images do |object|
-    object.diary_images.pluck(:diary_image_url)
+  attribute :diary_image do |object|
+    object.diary_images.pluck(:diary_image_url).first
   end
 end

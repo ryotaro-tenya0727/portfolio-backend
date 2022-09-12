@@ -1,6 +1,6 @@
 class DiaryListSerializer
   include JSONAPI::Serializer
-  attributes :id, :uuid, :impressive_memory, :event_name, :event_date, :event_venue, :event_polaroid_count, :impressive_memory
+  attributes :id, :uuid, :impressive_memory, :event_name, :event_date, :event_venue, :event_polaroid_count
 
   attribute :diary_user_name do |object|
     object.user.name.to_s
