@@ -15,6 +15,6 @@ class User::TimelineSerializer
   end
 
   attribute :diary_image do |object|
-    object.diary_images.pluck(:diary_image_url).first
+    object.diary_images.pick(:diary_image_url)
   end
 end
