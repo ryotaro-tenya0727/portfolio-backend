@@ -56,11 +56,18 @@ class User < ApplicationRecord
     other_user.followers.include?(self)
   end
 
+  # タイムライン
+  def time_line
+    following_ids = 'SELECT follow_id FROM user_relationships WHERE follower_id = :user_id'
+    Diary.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+  end
+
   # 現在のユーザーを取得
   def self.current_user_from_token_payload(payload)
     find_by(sub: payload['sub'])
   end
 
+  # ユーザーを作成
   def self.from_token_payload(payload, name, user_image)
     user = find_by(sub: payload['sub'])
     if user
