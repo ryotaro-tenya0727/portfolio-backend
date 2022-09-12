@@ -60,6 +60,7 @@ class User < ApplicationRecord
   def time_line
     following_ids = 'SELECT follow_id FROM user_relationships WHERE follower_id = :user_id'
     Diary.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+         .preload(:diary_images, :recommended_member, :user)
   end
 
   # 現在のユーザーを取得
