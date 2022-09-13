@@ -14,8 +14,9 @@
 #
 # Indexes
 #
-#  index_users_on_sub   (sub) UNIQUE
-#  index_users_on_uuid  (uuid) UNIQUE
+#  index_users_on_created_at  (created_at)
+#  index_users_on_sub         (sub) UNIQUE
+#  index_users_on_uuid        (uuid) UNIQUE
 #
 FactoryBot.define do
   factory :user do

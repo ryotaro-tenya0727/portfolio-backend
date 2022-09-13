@@ -25,7 +25,7 @@ RSpec.describe "タイムラインの取得 Api::V1::User::Timelines", type: :re
     context '正常系' do
       it 'タイムラインを閲覧できること' do
         http_request
-        expect(body['data'].count).to eq(15)
+        expect(body['data'].count).to eq(5)
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
       end

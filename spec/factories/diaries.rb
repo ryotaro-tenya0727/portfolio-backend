@@ -18,6 +18,7 @@
 #
 # Indexes
 #
+#  index_diaries_on_created_at                            (created_at)
 #  index_diaries_on_recommended_member_id                 (recommended_member_id)
 #  index_diaries_on_recommended_member_id_and_created_at  (recommended_member_id,created_at)
 #  index_diaries_on_user_id                               (user_id)

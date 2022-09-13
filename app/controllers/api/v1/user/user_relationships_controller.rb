@@ -1,18 +1,10 @@
 class Api::V1::User::UserRelationshipsController < SecuredController
   def index
-    users = if current_user.nil?
-              User.all
-                  .page(params[:page])
-                  .without_count
-                  .preload(:followers, :recommended_members, :diaries)
-                  .order(created_at: 'DESC')
-            else
-              User.all
-                  .page(params[:page])
-                  .without_count
-                  .preload(:followers, :recommended_members, :diaries)
-                  .order(created_at: 'DESC')
-            end
+    users =  User.all
+                 .page(params[:page])
+                 .without_count
+                 .preload(:followers, :recommended_members, :diaries)
+                 .order(created_at: 'DESC')
     render_json = User::UsersSerializer.new(users, current_user: current_user).serializable_hash.to_json
     render json: render_json
   end

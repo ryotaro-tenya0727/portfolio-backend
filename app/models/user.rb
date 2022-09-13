@@ -14,8 +14,10 @@
 #
 # Indexes
 #
-#  index_users_on_sub   (sub) UNIQUE
-#  index_users_on_uuid  (uuid) UNIQUE
+#  index_users_on_created_at  (created_at)
+#  index_users_on_sub         (sub) UNIQUE
+#  index_users_on_uuid        (uuid) UNIQUE
+#
 require 'faraday'
 require 'faraday/net_http'
 require 'erb'
