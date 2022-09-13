@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_05_175338) do
+ActiveRecord::Schema.define(version: 2022_09_13_221541) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_175338) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.index ["created_at"], name: "index_diaries_on_created_at"
     t.index ["recommended_member_id", "created_at"], name: "index_diaries_on_recommended_member_id_and_created_at"
     t.index ["recommended_member_id"], name: "index_diaries_on_recommended_member_id"
     t.index ["user_id"], name: "index_diaries_on_user_id"
@@ -102,6 +103,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_175338) do
     t.text "user_image"
     t.string "uuid", null: false
     t.text "me_introduction"
+    t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["sub"], name: "index_users_on_sub", unique: true
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end

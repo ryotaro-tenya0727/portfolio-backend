@@ -19,7 +19,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 # aws
 gem 'aws-sdk-s3', '~> 1.114'
-
+# 無限スクロール
+gem 'kaminari'
 # API
 gem 'faraday'
 gem 'faraday-net_http'

@@ -28,6 +28,4 @@ class RecommendedMember < ApplicationRecord
 
   validates :nickname, presence: true, length: { maximum: 8 }
   validates :group, length: { maximum: 15 }
-
-  default_scope -> { order(created_at: :desc) }
 end

@@ -14,8 +14,10 @@
 #
 # Indexes
 #
-#  index_users_on_sub   (sub) UNIQUE
-#  index_users_on_uuid  (uuid) UNIQUE
+#  index_users_on_created_at  (created_at)
+#  index_users_on_sub         (sub) UNIQUE
+#  index_users_on_uuid        (uuid) UNIQUE
+#
 require 'faraday'
 require 'faraday/net_http'
 require 'erb'
@@ -57,9 +59,11 @@ class User < ApplicationRecord
   end
 
   # タイムライン
-  def time_line
+  def time_line(page)
     following_ids = 'SELECT follow_id FROM user_relationships WHERE follower_id = :user_id'
     Diary.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+         .page(page)
+         .without_count
          .preload(:diary_images, :recommended_member, :user)
   end
 
