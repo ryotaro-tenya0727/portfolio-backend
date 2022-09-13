@@ -57,9 +57,11 @@ class User < ApplicationRecord
   end
 
   # タイムライン
-  def time_line
+  def time_line(page)
     following_ids = 'SELECT follow_id FROM user_relationships WHERE follower_id = :user_id'
     Diary.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+         .page(page)
+         .without_count
          .preload(:diary_images, :recommended_member, :user)
   end
 

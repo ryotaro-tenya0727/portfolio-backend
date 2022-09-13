@@ -4,8 +4,10 @@ class SearchUsersForm
 
   attribute :name, :string
 
-  def search
+  def search(page)
     relation = User.distinct
     relation.name_contain(name)
+            .page(page)
+            .without_count
   end
 end
