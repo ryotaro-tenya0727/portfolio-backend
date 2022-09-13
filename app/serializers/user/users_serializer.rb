@@ -20,7 +20,7 @@ class User::UsersSerializer
   end
 
   attribute :following do |user|
-    if  @@current_user.nil?
+    if @@current_user.nil?
       'Not Loggin'
     else
       @@current_user.following?(user)
@@ -28,12 +28,10 @@ class User::UsersSerializer
   end
 
   attribute :me do |user|
-    if  @@current_user.nil?
+    if @@current_user.nil?
       false
-    elsif @@current_user.id == user.id
-      true
     else
-      false
+      @@current_user.id == user.id
     end
   end
 end
