@@ -1,4 +1,4 @@
-class Api::V1::User::LikesController < ApplicationController
+class Api::V1::User::LikesController < SecuredController
   def create
     authorize([:user, Like])
     ActiveRecord::Base.transaction do
