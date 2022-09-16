@@ -12,6 +12,8 @@ Rails.application.routes.draw do
           resources :diaries
         end
 
+        resources :likes, only: [:create, :destroy]
+
         resources :rankings, only: [] do
           collection do
             get 'total_polaroid_count'
