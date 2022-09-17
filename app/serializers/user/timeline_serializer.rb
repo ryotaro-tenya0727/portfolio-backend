@@ -23,15 +23,19 @@ class User::TimelineSerializer
     object.diary_images.pick(:diary_image_url)
   end
 
-  attribute :like_count do |object|
-    object.like_users.size
-  end
-
   attribute :liked do |diary|
     if @@current_user.nil?
       'Not Loggin'
     else
       @@current_user.like?(diary)
+    end
+  end
+
+  attribute :me do |diary|
+    if @@current_user.nil?
+      false
+    else
+      @@current_user.id == diary.user_id
     end
   end
 end

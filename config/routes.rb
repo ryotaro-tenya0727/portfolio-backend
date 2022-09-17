@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 
         post 's3_presigned_url', to: 's3_presigned_urls#diary_presigned_url'
 
-        resources :timeline, only: [:index]
+        resources :timeline, only: [:index] do
+          collection do
+            get 'follow'
+          end
+        end
 
         resources :user_relationships, only: [:index, :create, :destroy] do
           collection do

@@ -81,7 +81,7 @@ class User < ApplicationRecord
     Diary.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
          .page(page)
          .without_count
-         .preload(:diary_images, :recommended_member, :user)
+         .preload(:diary_images, :recommended_member, :user, :like_users)
   end
 
   # 現在のユーザーを取得
