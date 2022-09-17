@@ -10,7 +10,7 @@ class Api::V1::User::TimelineController < SecuredController
                   current_user.time_line(params[:page])
                               .order(created_at: :desc)
                 end
-    render_json = User::TimelineSerializer.new(time_line).serializable_hash.to_json
+    render_json = User::TimelineSerializer.new(time_line, current_user: current_user).serializable_hash.to_json
     render json: render_json, status: :ok
   end
 end
