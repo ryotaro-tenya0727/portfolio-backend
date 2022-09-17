@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class User::UserPolicy < ApplicationPolicy
   def initialize(user, record)
     raise Pundit::NotAuthorizedError unless user
 

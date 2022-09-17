@@ -11,14 +11,14 @@ class Api::V1::User::UsersController < SecuredController
   delegate :destroy, to: :current_user
 
   def following
-    authorize User
+    authorize([:user, User])
     following_users = current_user.following
     render_json = User::UsersSerializer.new(following_users, current_user: current_user).serializable_hash.to_json
     render json: render_json
   end
 
   def followers
-    authorize User
+    authorize([:user, User])
     followers = current_user.followers
     render_json = User::UsersSerializer.new(followers, current_user: current_user).serializable_hash.to_json
     render json: render_json
