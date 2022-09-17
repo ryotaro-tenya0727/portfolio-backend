@@ -31,4 +31,27 @@ RSpec.describe "タイムラインの取得 Api::V1::User::Timelines", type: :re
       end
     end
   end
+
+  describe "フォローしたユーザーのタイムライン閲覧 GET /follow" do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:other_user3) { create(:user) }
+    let(:http_request) { get api_v1_user_timeline_index_path, headers: headers }
+    before do
+      create_list(:diary, 5, user: other_user1)
+      create_list(:diary, 5, user: other_user2)
+      create_list(:diary, 5, user: other_user3)
+      current_user.follow(other_user1)
+      current_user.follow(other_user2)
+      current_user.follow(other_user3)
+    end
+    context '正常系' do
+      it 'フォローしたユーザーのタイムラインを閲覧できること' do
+        http_request
+        expect(body['data'].count).to eq(5)
+        expect(response).to be_successful
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end
