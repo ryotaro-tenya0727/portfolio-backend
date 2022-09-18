@@ -33,6 +33,7 @@ group :development, :test do
   gem 'rspec_junit_formatter', '~> 0.5.1'
   gem 'simplecov', require: false, group: :test
   gem 'annotate'
+  gem 'awesome_print'
 end
 
 group :development do

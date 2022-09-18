@@ -36,7 +36,8 @@ class Diary < ApplicationRecord
   belongs_to :user
   belongs_to :recommended_member
 
-  enum status: { published: 0, non_published: 1 }
+  has_many :likes
+  has_many :like_users, through: :likes, source: :user
 
-  # default_scope -> { order(created_at: :desc) }
+  enum status: { published: 0, non_published: 1 }
 end

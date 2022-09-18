@@ -1,15 +1,15 @@
-class UserPolicy < ApplicationPolicy
+class User::LikePolicy < ApplicationPolicy
   def initialize(user, record)
     raise Pundit::NotAuthorizedError unless user
 
     super
   end
 
-  def following?
+  def create?
     check_current_user
   end
 
-  def followers?
+  def destroy?
     check_current_user
   end
 end

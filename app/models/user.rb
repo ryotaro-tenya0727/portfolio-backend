@@ -38,6 +38,9 @@ class User < ApplicationRecord
                                    foreign_key: 'follow_id',
                                    dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+  # いいね機能
+  has_many :likes
+  has_many :like_diaries, through: :likes, source: :diary
 
   enum role: { general: 0, admin: 1 }
 
@@ -46,6 +49,20 @@ class User < ApplicationRecord
 
   scope :name_contain, ->(name) { where('name LIKE (?)', "%#{name}%") }
 
+  # いいね
+  def like(diary)
+    like_diaries << diary
+  end
+
+  def unlike(diary)
+    likes.find_by(diary_id: diary.id).destroy
+  end
+
+  def like?(diary)
+    diary.like_users.include?(self)
+  end
+
+  # フォロー
   def follow(other_user)
     following << other_user
   end
@@ -64,7 +81,7 @@ class User < ApplicationRecord
     Diary.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
          .page(page)
          .without_count
-         .preload(:diary_images, :recommended_member, :user)
+         .preload(:diary_images, :recommended_member, :user, :like_users)
   end
 
   # 現在のユーザーを取得
