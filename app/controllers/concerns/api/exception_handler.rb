@@ -16,10 +16,12 @@ module Api::ExceptionHandler
   private
 
   def render500(exception = nil)
+    logger.error exception
     render_error(500, 'Internal Server Error', exception&.message)
   end
 
   def render404(exception = nil)
+    logger.error exception
     render_error(404, 'Record Not Found', exception&.message)
   end
 
@@ -28,10 +30,12 @@ module Api::ExceptionHandler
   end
 
   def render401(exception = nil)
+    logger.error exception
     render_error(401, 'Not Authenticated', exception&.message)
   end
 
   def render400(exception = nil)
+    logger.error exception
     render_error(400, 'Bad Request', exception&.message)
   end
 
