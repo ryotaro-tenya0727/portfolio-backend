@@ -41,6 +41,9 @@ class User < ApplicationRecord
   # いいね機能
   has_many :likes
   has_many :like_diaries, through: :likes, source: :diary
+  # 通知機能
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'notifier_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notified_id', dependent: :destroy
 
   enum role: { general: 0, admin: 1 }
 
