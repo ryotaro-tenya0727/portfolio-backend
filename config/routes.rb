@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         end
 
         resources :likes, only: [:create, :destroy]
+        resources :notifications, only: :index
 
         resources :rankings, only: [] do
           collection do
