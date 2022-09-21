@@ -78,7 +78,13 @@ class User < ApplicationRecord
     other_user.followers.include?(self)
   end
 
-  # 通知を作成
+  # 通知
+  ## 新しい通知の数
+  def new_notifications_count
+    notifications_count = Notification.where('notified_id = (:notified_id)', notified_id: id).pluck(:checked).tally[false]
+    !notifications_count.nil? ? notifications_count : 0
+  end
+
   ## フォロー通知
   def create_follow_notification(notified_user)
     notification = Notification.where(['notifier_id = ? and notified_id = ? and action = ? ', id, notified_user.id, 'follow'])
@@ -90,6 +96,8 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+
 
   # タイムライン
   def time_line(page)
