@@ -33,6 +33,4 @@ RSpec.describe "通知機能 Api::V1::User::Notifications", type: :request do
       end
     end
   end
-
-
 end
