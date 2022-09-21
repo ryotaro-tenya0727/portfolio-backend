@@ -88,6 +88,7 @@ class User < ApplicationRecord
         action: 'follow'
       )
       notification.save if notification.valid?
+      puts notification.errors.full_messages
     end
   end
 

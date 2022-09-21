@@ -33,5 +33,5 @@ class Notification < ApplicationRecord
 
   belongs_to :notifier, class_name: 'User'
   belongs_to :notified, class_name: 'User'
-  belongs_to :diary
+  belongs_to :diary, optional: true
 end
