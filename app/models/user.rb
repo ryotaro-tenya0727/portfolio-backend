@@ -97,8 +97,6 @@ class User < ApplicationRecord
     end
   end
 
-
-
   # タイムライン
   def time_line(page)
     following_ids = 'SELECT follow_id FROM user_relationships WHERE follower_id = :user_id'
