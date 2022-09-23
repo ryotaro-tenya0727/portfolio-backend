@@ -16,6 +16,7 @@
 # Indexes
 #
 #  index_notifications_on_comment_id   (comment_id)
+#  index_notifications_on_created_at   (created_at)
 #  index_notifications_on_diary_id     (diary_id)
 #  index_notifications_on_notified_id  (notified_id)
 #  index_notifications_on_notifier_id  (notifier_id)

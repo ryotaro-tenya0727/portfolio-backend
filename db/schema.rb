@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_16_110818) do
+ActiveRecord::Schema.define(version: 2022_09_23_165044) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_09_16_110818) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["created_at"], name: "index_notifications_on_created_at"
     t.index ["diary_id"], name: "index_notifications_on_diary_id"
     t.index ["notified_id"], name: "index_notifications_on_notified_id"
     t.index ["notifier_id"], name: "index_notifications_on_notifier_id"
