@@ -7,7 +7,7 @@ RSpec.describe 'ユーザー登録 Api::V1::Users', type: :request do
   let(:data) { { user: { name: 'test_name' } } }
 
   describe 'ユーザー登録 POST /api/v1/users' do
-    fit 'JWTトークンを持ったユーザーが、ユーザー登録できること' do
+    it 'JWTトークンを持ったユーザーが、ユーザー登録できること' do
       registration_stub
       post '/api/v1/users', params: data, headers: headers_with_token
       expect(response).to have_http_status(:ok)
