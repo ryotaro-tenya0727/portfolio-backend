@@ -14,6 +14,7 @@ class Api::V1::User::UserRelationshipsController < SecuredController
     ActiveRecord::Base.transaction do
       other_user = User.find_by(id: params[:id])
       current_user.follow(other_user)
+      current_user.create_follow_notification(other_user)
     end
     head :ok
   end

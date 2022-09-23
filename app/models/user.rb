@@ -41,6 +41,9 @@ class User < ApplicationRecord
   # いいね機能
   has_many :likes
   has_many :like_diaries, through: :likes, source: :diary
+  # 通知機能
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'notifier_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notified_id', dependent: :destroy
 
   enum role: { general: 0, admin: 1 }
 
@@ -75,6 +78,25 @@ class User < ApplicationRecord
     other_user.followers.include?(self)
   end
 
+  # 通知
+  ## 新しい通知の数
+  def new_notifications_count
+    notifications_count = Notification.where('notified_id = (:notified_id)', notified_id: id).pluck(:checked).tally[false]
+    !notifications_count.nil? ? notifications_count : 0
+  end
+
+  ## フォロー通知
+  def create_follow_notification(notified_user)
+    notification = Notification.where(['notifier_id = ? and notified_id = ? and action = ? ', id, notified_user.id, 'follow'])
+    if notification.blank?
+      notification = active_notifications.new(
+        notified_id: notified_user.id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
   # タイムライン
   def time_line(page)
     following_ids = 'SELECT follow_id FROM user_relationships WHERE follower_id = :user_id'
@@ -90,7 +112,7 @@ class User < ApplicationRecord
   end
 
   # ユーザーを作成
-  def self.from_token_payload(payload, name, user_image)
+  def self.create_user_from_token_payload(payload, name, user_image)
     user = find_by(sub: payload['sub'])
     if user
       user.update(name: name, user_image: user_image)

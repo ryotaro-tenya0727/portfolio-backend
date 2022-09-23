@@ -29,4 +29,9 @@
 #  fk_rails_...  (notifier_id => users.id)
 #
 class Notification < ApplicationRecord
+  default_scope -> { order(created_at: :desc) }
+
+  belongs_to :notifier, class_name: 'User'
+  belongs_to :notified, class_name: 'User'
+  belongs_to :diary, optional: true
 end
