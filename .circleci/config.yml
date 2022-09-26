@@ -184,6 +184,7 @@ workflows:
       - upload-coverage:
           requires:
             - rubocop
+      # ECSにデプロイ
       # - build_push:
       #     requires:
       #       - upload-coverage
