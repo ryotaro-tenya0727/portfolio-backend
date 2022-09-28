@@ -3,7 +3,9 @@ class Api::V1::User::LikesController < SecuredController
     authorize([:user, Like])
     ActiveRecord::Base.transaction do
       diary = Diary.find(params[:id])
+      notified_user = diary.user
       current_user.like(diary)
+      current_user.create_like_diary_notification(notified_user, diary)
     end
     head :ok
   end
