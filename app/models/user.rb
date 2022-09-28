@@ -85,12 +85,27 @@ class User < ApplicationRecord
     !notifications_count.nil? ? notifications_count : 0
   end
 
-  ## フォロー通知
-  def create_follow_notification(notified_user)
-    notification = Notification.where(['notifier_id = ? and notified_id = ? and action = ? ', id, notified_user.id, 'follow'])
+  def create_like_diary_notification(notified_user, diary)
+    notified_user_id = notified_user.id
+    diary_id = diary.id
+    notification = Notification.where(['notifier_id = ? and notified_id = ? and diary_id = ? and action = ? ', id, notified_user_id, diary_id, 'like'])
     if notification.blank?
       notification = active_notifications.new(
-        notified_id: notified_user.id,
+        notified_id: notified_user_id,
+        diary_id: diary_id,
+        action: 'like'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
+  ## フォロー通知
+  def create_follow_notification(notified_user)
+    notified_user_id = notified_user.id
+    notification = Notification.where(['notifier_id = ? and notified_id = ? and action = ? ', id, notified_user_id, 'follow'])
+    if notification.blank?
+      notification = active_notifications.new(
+        notified_id: notified_user_id,
         action: 'follow'
       )
       notification.save if notification.valid?
