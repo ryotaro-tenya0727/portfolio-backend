@@ -31,12 +31,13 @@
 #
 class Diary < ApplicationRecord
   has_many :diary_images, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   accepts_nested_attributes_for :diary_images
 
   belongs_to :user
   belongs_to :recommended_member
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
 
   enum status: { published: 0, non_published: 1 }
