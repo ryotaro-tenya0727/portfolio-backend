@@ -130,7 +130,8 @@ class User < ApplicationRecord
   def self.create_user_from_token_payload(payload, name, user_image)
     user = find_by(sub: payload['sub'])
     if user
-      user.update(name: name, user_image: user_image)
+      me_introduction = get_auth0_me_introduction(payload['sub'])
+      user.update(name: name, user_image: user_image, me_introduction: me_introduction)
       user
     else
       ActiveRecord::Base.transaction do
@@ -140,6 +141,11 @@ class User < ApplicationRecord
   end
 
   def self.create_user(sub, name, user_image)
+    me_introduction = get_auth0_me_introduction(sub)
+    create!(sub: sub, name: name, user_image: user_image, me_introduction: me_introduction)
+  end
+
+  def self.get_user_information(sub)
     params = URI.encode_www_form([%w[grant_type client_credentials], ['client_id', ENV['AUTH0_API_CLIENT_ID']],
                                   ['client_secret', ENV['AUTH0_API_CLIENT_SECRET']], ['audience', ENV['AUTH0_AUDIENCE']]])
 
@@ -159,8 +165,10 @@ class User < ApplicationRecord
     response_for_user = connection.get("#{ENV['AUTH0_DOMEIN']}/api/v2/users/#{user_id}") do |request|
       request.headers['Authorization'] = "Bearer #{token}"
     end
+  end
 
-    me_introduction = JSON.parse(response_for_user.body)['description']
-    create!(sub: sub, name: name, user_image: user_image, me_introduction: me_introduction)
+  def self.get_auth0_me_introduction(sub)
+    response_for_user = get_user_information(sub)
+    JSON.parse(response_for_user.body)['description']
   end
 end

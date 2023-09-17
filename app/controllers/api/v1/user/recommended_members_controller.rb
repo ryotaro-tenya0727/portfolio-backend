@@ -12,6 +12,17 @@ class Api::V1::User::RecommendedMembersController < SecuredController
     authorize([:user, RecommendedMember])
     recommended_member = current_user.recommended_members.build(recommended_member_params)
     recommended_member.save!
+    # pusher = Pusher::Client.new(
+    #   app_id: ENV['PUSER_APP_ID'],
+    #   key: ENV['PUSER_KEY'],
+    #   secret: ENV['PUSER_SECRET'],
+    #   cluster: ENV['PUSER_CLUSTER'],
+    #   encrypted: true
+    # )
+
+    # pusher.trigger('my-channel', 'my-event', {
+    #   message: 'hello world'
+    # })
     head :ok
   end
 
