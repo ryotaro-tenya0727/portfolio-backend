@@ -3,8 +3,9 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def index
     authorize([:user, RecommendedMember])
-    recommended_members = current_user.recommended_members.all.preload(:diaries)
+    recommended_members = current_user.recommended_members.all.preload(:diaries).order(created_at: :desc)
     render_json = User::RecommendedMembersSerializer.new(recommended_members).serializable_hash.to_json
+
     render json: render_json, status: :ok
   end
 
