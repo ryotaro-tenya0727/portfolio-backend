@@ -127,17 +127,19 @@ class User < ApplicationRecord
   end
 
   # ユーザーを作成
-  def self.create_user_from_token_payload(payload, name, user_image)
-    user = find_by(sub: payload['sub'])
-    if user
-      me_introduction = get_auth0_me_introduction(payload['sub'])
-      user.update(name: name, user_image: user_image, me_introduction: me_introduction)
-      user
-    else
-      ActiveRecord::Base.transaction do
-        create_user(payload['sub'], name, user_image)
-      end
-    end
+  def self.create_user_from_token_payload(payload, name, image)
+    user = find_or_initialize_by(sub: payload['sub'], name: name, user_image: image)
+    user.save!
+    # if user
+    #   me_introduction = get_auth0_me_introduction(payload['sub'])
+    #   user.update(name: name)
+    #   user
+    # else
+    #   ActiveRecord::Base.transaction do
+    #     create_user(payload['sub'], name)
+    #   end
+    # end
+    # create!(name: name)
   end
 
   def self.create_user(sub, name, user_image)

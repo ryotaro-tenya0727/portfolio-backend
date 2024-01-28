@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
         resources :users, only: [:index] do
           collection do
-            get 'user_info'
+            post 'user_info'
             delete 'destroy'
             get :following, :followers
           end

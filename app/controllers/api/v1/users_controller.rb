@@ -3,7 +3,7 @@ class Api::V1::UsersController < SecuredController
 
   def create
     register_user
-    render json: { name: current_user.name, new_notifications_count: current_user.new_notifications_count }, status: :ok
+    head :created
   end
 
   private

@@ -8,9 +8,9 @@ class Authorization::AuthorizationService
     @user = User.current_user_from_token_payload(@auth_payload)
   end
 
-  def create_user(name, user_image)
+  def create_user(name, image)
     @auth_payload, @auth_header = verify_token
-    @user = User.create_user_from_token_payload(@auth_payload, name, user_image)
+    @user = User.create_user_from_token_payload(@auth_payload, name, image)
   end
 
   private
