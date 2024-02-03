@@ -9,7 +9,7 @@ class SecuredController < ApplicationController
     authorization = Authorization::AuthorizationService.new(request.headers)
     @current_user = authorization.current_user
     if @current_user
-      if request.path.include?("user_info") && secured_params[:image] != current_user.user_image
+      if request.path.include?("user_info") && current_user.user_image.nil?
         current_user.update!(user_image: secured_params[:image])
       end
       @current_user
