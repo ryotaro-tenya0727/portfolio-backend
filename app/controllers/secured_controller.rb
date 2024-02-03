@@ -23,6 +23,4 @@ class SecuredController < ApplicationController
   def secured_params
     params.permit(:name, :image)
   end
-
-
 end
