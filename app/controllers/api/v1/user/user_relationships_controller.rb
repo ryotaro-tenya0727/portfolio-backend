@@ -11,19 +11,22 @@ class Api::V1::User::UserRelationshipsController < SecuredController
 
   def create
     authorize([:user, UserRelationship])
+    followed_user = User.find_by(id: params[:id])
     ActiveRecord::Base.transaction do
-      other_user = User.find_by(id: params[:id])
-      current_user.follow(other_user)
-      current_user.create_follow_notification(other_user)
+      current_user.follow(followed_user)
+      current_user.create_follow_notification(followed_user)
     end
+    AppPusher.trigger("private-notification-user-#{followed_user.id}-channel", 'new-notification-event', {
+      new_notifications_count: followed_user.new_notifications_count
+    })
     head :ok
   end
 
   def destroy
     authorize([:user, UserRelationship])
     ActiveRecord::Base.transaction do
-      other_user = User.find_by(id: params[:id])
-      current_user.unfollow(other_user)
+      followed_user = User.find_by(id: params[:id])
+      current_user.unfollow(followed_user)
     end
     head :ok
   end

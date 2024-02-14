@@ -102,14 +102,11 @@ class User < ApplicationRecord
   ## フォロー通知
   def create_follow_notification(notified_user)
     notified_user_id = notified_user.id
-    notification = Notification.where(['notifier_id = ? and notified_id = ? and action = ? ', id, notified_user_id, 'follow'])
-    if notification.blank?
-      notification = active_notifications.new(
-        notified_id: notified_user_id,
-        action: 'follow'
-      )
-      notification.save if notification.valid?
-    end
+    notification = active_notifications.new(
+      notified_id: notified_user_id,
+      action: 'follow'
+    )
+    notification.save if notification.valid?
   end
 
   # タイムライン

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
         resources :likes, only: [:create, :destroy]
         resources :notifications, only: :index
+        resources :notification_counts, only: :index
 
         resources :rankings, only: [] do
           collection do
@@ -42,9 +43,11 @@ Rails.application.routes.draw do
             get :following, :followers
           end
         end
+        post '/pusher_auth', to: 'pusher_auth#create'
       end
 
       resources :diaries, only: [:index, :show]
+
 
       get :health_check, to: 'health_check#index'
 
