@@ -127,6 +127,7 @@ class User < ApplicationRecord
   def self.create_user_from_token_payload(payload, name, image)
     user = find_or_initialize_by(sub: payload['sub'], name: name, user_image: image)
     user.save!
+    user
     # if user
     #   me_introduction = get_auth0_me_introduction(payload['sub'])
     #   user.update(name: name)
