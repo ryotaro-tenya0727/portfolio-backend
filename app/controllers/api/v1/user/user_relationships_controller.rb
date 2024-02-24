@@ -16,9 +16,7 @@ class Api::V1::User::UserRelationshipsController < SecuredController
       current_user.follow(followed_user)
       current_user.create_follow_notification(followed_user)
     end
-    AppPusher.trigger("private-notification-user-#{followed_user.id}-channel", 'new-notification-event', {
-      new_notifications_count: followed_user.new_notifications_count
-    })
+    Websocket::Notification::MypageNewNotificationCountPusher.new(followed_user).notify
     head :ok
   end
 

@@ -6,6 +6,7 @@ class Api::V1::User::LikesController < SecuredController
       notified_user = diary.user
       current_user.like(diary)
       current_user.create_like_diary_notification(notified_user, diary)
+      Websocket::Notification::MypageNewNotificationCountPusher.new(notified_user).notify
     end
     head :ok
   end
