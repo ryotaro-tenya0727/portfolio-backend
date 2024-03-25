@@ -21,7 +21,7 @@ RSpec.describe "通知機能 Api::V1::User::Notifications", type: :request do
       it "ユーザーをフォローーすると通知が作成されること" do
         expect{ follow_request }.to change { Notification.all.size }.by(1)
         expect(Notification.first.checked).to eq(false)
-        expect(response).to be_successful
+        # expect(response).to be_successful
         expect(response).to have_http_status(:ok)
       end
 
