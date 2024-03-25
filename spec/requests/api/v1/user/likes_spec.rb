@@ -17,7 +17,8 @@ RSpec.describe "いいね機能 Api::V1::User::Likes", type: :request do
     context "正常系" do
       it "ユーザーが選択した日記をいいねできること" do
         http_request
-        # expect(response).to be_successful
+        puts response.body
+        expect(response).to be_successful
         expect(response).to have_http_status(:ok)
       end
     end
