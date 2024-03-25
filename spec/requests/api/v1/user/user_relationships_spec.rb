@@ -29,7 +29,7 @@ RSpec.describe "フォロー機能 Api::V1::User::UserRelationships", type: :req
     context "正常系" do
       it "ユーザーが選択したユーザーをフォローできること" do
         http_request
-        expect(response).to be_successful
+        # expect(response).to be_successful
         expect(response).to have_http_status(:ok)
       end
     end
