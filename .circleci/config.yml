@@ -153,6 +153,7 @@ jobs:
       name: backend_container
     steps:
       - checkout
+      - heroku/install
       - heroku/deploy-via-git:
           pre-deploy:
             - run: rails db:migrate
