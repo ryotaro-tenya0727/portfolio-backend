@@ -155,8 +155,7 @@ jobs:
       - checkout
       - heroku/install
       - deploy_command
-        - pre-deploy:
-            - run: rails db:migrate
+        - pre-deploy: rails db:migrate
 
 
   # build_push:
