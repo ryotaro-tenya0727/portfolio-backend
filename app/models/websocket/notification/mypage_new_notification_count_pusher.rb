@@ -1,7 +1,6 @@
 module Websocket
   module Notification
     class MypageNewNotificationCountPusher
-
       attr_reader :user
 
       def initialize(user)
@@ -10,8 +9,8 @@ module Websocket
 
       def notify
         AppPusher.trigger("private-notification-user-#{user.id}-channel", 'new-notification-event', {
-          new_notifications_count: user.new_notifications_count
-        })
+                            new_notifications_count: user.new_notifications_count
+                          })
       end
     end
   end

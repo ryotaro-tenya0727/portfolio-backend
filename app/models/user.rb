@@ -162,7 +162,7 @@ class User < ApplicationRecord
 
     token = JSON.parse(response_for_token.body)['access_token']
     user_id = url_encode(sub)
-    response_for_user = connection.get("#{ENV['AUTH0_DOMEIN']}/api/v2/users/#{user_id}") do |request|
+    connection.get("#{ENV['AUTH0_DOMEIN']}/api/v2/users/#{user_id}") do |request|
       request.headers['Authorization'] = "Bearer #{token}"
     end
   end
