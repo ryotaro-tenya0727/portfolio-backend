@@ -154,9 +154,8 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - deploy_command
-        - pre-deploy: rails db:migrate
-
+      - deploy_command:
+          pre-deploy: rails db:migrate
 
   # build_push:
   #   machine:
