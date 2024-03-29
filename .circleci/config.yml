@@ -153,11 +153,10 @@ jobs:
       name: backend_container
     steps:
       - checkout
-      - run:
-          - heroku/deploy-via-git:
-              post-steps:
-                - run:
-                    command: rails db:migrate
+      - heroku/deploy-via-git:
+          post-steps:
+            - run:
+                command: rails db:migrate
 
   # build_push:
   #   machine:
