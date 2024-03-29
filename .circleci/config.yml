@@ -185,16 +185,15 @@ workflows:
       - upload-coverage:
           requires:
             - rubocop
-  deploy_heroku:
-    heroku_deploy:
-      jobs:
-        - heroku/deploy-via-git:
-            post-steps:
-              - run: rails db:migrate
-      filters:
-        branches:
-          only:
-            - master
+      - heroku/deploy-via-git:
+          post-steps:
+            - run: rails db:migrate
+        requires:
+          - upload-coverage
+        filters:
+          branches:
+            only:
+              - master
     # ECSにデプロイ
     # - build_push:
     #     requires:
