@@ -147,6 +147,15 @@ jobs:
           name: Execute rubocop
           command: |
             bundle exec rubocop
+  deploy_heroku:
+    executor:
+      name: backend_container
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: |
+            echo "Deploy to Heroku"
   # build_push:
   #   machine:
   #     image: ubuntu-2004:202201-02
@@ -184,6 +193,12 @@ workflows:
       - upload-coverage:
           requires:
             - rubocop
+      - deploy_heroku:
+          requires:
+            - upload-coverage
+          branches:
+            only:
+              - master
       # ECSにデプロイ
       # - build_push:
       #     requires:
