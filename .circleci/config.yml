@@ -155,8 +155,7 @@ jobs:
       - checkout
       - heroku/deploy-via-git:
           post-steps:
-            - run:
-                command: rails db:migrate
+            - run: rails db:migrate
 
   # build_push:
   #   machine:
