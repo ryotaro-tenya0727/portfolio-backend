@@ -178,7 +178,7 @@ jobs:
 
 workflows:
   version: 2
-  test_build_push_deploy:
+  test_and_build_and_deploy:
     jobs:
       - fetch_source_code
       - bundle_dependencies:
@@ -196,22 +196,18 @@ workflows:
       - deploy_heroku:
           requires:
             - upload-coverage
-          filters:
-            branches:
-              only:
-                - master
-      # ECSにデプロイ
-      # - build_push:
-      #     requires:
-      #       - upload-coverage
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      # # - deploy:
-      #     requires:
-      #       - build_push
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
+    # ECSにデプロイ
+    # - build_push:
+    #     requires:
+    #       - upload-coverage
+    #     filters:
+    #       branches:
+    #         only:
+    #           - master
+    # # - deploy:
+    #     requires:
+    #       - build_push
+    #     filters:
+    #       branches:
+    #         only:
+    #           - master
