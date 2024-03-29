@@ -188,12 +188,12 @@ workflows:
       - heroku/deploy-via-git:
           post-steps:
             - run: rails db:migrate
-        requires:
-          - upload-coverage
-        filters:
-          branches:
-            only:
-              - master
+          requires:
+            - upload-coverage
+          filters:
+            branches:
+              only:
+                - master
     # ECSにデプロイ
     # - build_push:
     #     requires:
