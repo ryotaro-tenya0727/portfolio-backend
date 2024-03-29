@@ -196,9 +196,10 @@ workflows:
       - deploy_heroku:
           requires:
             - upload-coverage
-          branches:
-            only:
-              - master
+          filters:
+            branches:
+              only:
+                - master
       # ECSにデプロイ
       # - build_push:
       #     requires:
