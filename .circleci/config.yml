@@ -26,7 +26,7 @@ commands:
     steps:
       - run: gem install bundler -v 2.1.4
   build_and_push_command: aws-ecr/build-and-push-image
-  deploy_command: heroku/deploy-via-git:
+  deploy_command: heroku/deploy-via-git
 
 jobs:
   fetch_source_code:
