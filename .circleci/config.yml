@@ -26,7 +26,6 @@ commands:
     steps:
       - run: gem install bundler -v 2.1.4
   build_and_push_command: aws-ecr/build-and-push-image
-  deploy_command: heroku/deploy-via-git
 
 jobs:
   fetch_source_code:
@@ -148,14 +147,6 @@ jobs:
           name: Execute rubocop
           command: |
             bundle exec rubocop
-  deploy_heroku:
-    executor:
-      name: backend_container
-    steps:
-      - checkout
-      - heroku/install
-      - deploy_command:
-          pre-deploy: rails db:migrate
 
   # build_push:
   #   machine:
@@ -194,9 +185,18 @@ workflows:
       - upload-coverage:
           requires:
             - rubocop
-      - deploy_heroku:
-          requires:
-            - upload-coverage
+  deploy_heroku:
+    heroku_deploy:
+      jobs:
+        - heroku/deploy-via-git:
+            post-steps:
+              - run: rails db:migrate
+      filters:
+        branches:
+          only:
+            - master
+    requires:
+      - upload-coverage
     # ECSにデプロイ
     # - build_push:
     #     requires:
