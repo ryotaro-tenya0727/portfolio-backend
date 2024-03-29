@@ -186,6 +186,7 @@ workflows:
           requires:
             - rubocop
       - heroku/deploy-via-git:
+          checkout: true
           post-steps:
             - run: rails db:migrate
           requires:
