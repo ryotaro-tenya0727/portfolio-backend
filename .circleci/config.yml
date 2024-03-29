@@ -195,8 +195,6 @@ workflows:
         branches:
           only:
             - master
-    requires:
-      - upload-coverage
     # ECSにデプロイ
     # - build_push:
     #     requires:
