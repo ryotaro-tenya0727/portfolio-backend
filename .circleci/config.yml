@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2
   aws-ecs: circleci/aws-ecs@3.0.0
+  heroku: circleci/heroku@2.0
 executors:
   backend_container:
     docker:
@@ -153,9 +154,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy to Heroku
-          command: |
-            echo "Deploy to Heroku"
+          - heroku/deploy-via-git:
+              post-steps:
+                - run: rails db:migrate
+
   # build_push:
   #   machine:
   #     image: ubuntu-2004:202201-02
