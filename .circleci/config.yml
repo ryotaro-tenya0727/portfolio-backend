@@ -148,11 +148,12 @@ jobs:
           command: |
             bundle exec rubocop
   deploy:
-    name: Deploy Master to Heroku
     executor:
       name: backend_container
-    command: |
-      git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+    - run:
+        name: Deploy to Heroku
+        command: |
+          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
   # build_push:
   #   machine:
