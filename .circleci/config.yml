@@ -150,10 +150,11 @@ jobs:
   deploy:
     executor:
       name: backend_container
-    - run:
-        name: Deploy to Heroku
-        command: |
-          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+    steps:
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
   # build_push:
   #   machine:
