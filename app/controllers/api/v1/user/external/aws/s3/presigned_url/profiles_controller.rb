@@ -9,9 +9,9 @@ module Api
                 def create
                   authorize(%i[user external aws s3 presigned_url profile], :create?)
                   presigned_url = Signer.presigned_url(:put_object,
-                                                      bucket: ENV['IMAGE_S3_BUCKET'],
-                                                      key: profile_image_s3_url.to_s,
-                                                      expires_in: 3600)
+                                                       bucket: ENV['IMAGE_S3_BUCKET'],
+                                                       key: profile_image_s3_url.to_s,
+                                                       expires_in: 3600)
                   render json: { presigned_url: presigned_url, diary_image_url: "#{ENV['IMAGE_CLOUDFRONT_DISTRIBUTION']}/#{profile_image_s3_url}" }
                 end
 
