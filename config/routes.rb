@@ -12,6 +12,8 @@ Rails.application.routes.draw do
           resources :diaries
         end
 
+        put 'profile', to: 'profiles#update'
+
         resources :likes, only: [:create, :destroy]
         resources :notifications, only: :index
         resources :notification_counts, only: :index
@@ -44,6 +46,16 @@ Rails.application.routes.draw do
           end
         end
         post '/pusher_auth', to: 'pusher_auth#create'
+
+        namespace :external do
+          namespace :aws do
+            namespace :s3 do
+              namespace :presigned_url do
+                resources :profiles, only: :create
+              end
+            end
+          end
+        end
       end
 
       resources :diaries, only: [:index, :show]
