@@ -2,7 +2,6 @@ module Api
   module V1
     module User
       class ProfilesController < SecuredController
-
         def show
           authorize(%i[user profile])
           render json: {
