@@ -5,6 +5,10 @@ class User::ProfilePolicy < ApplicationPolicy
     super
   end
 
+  def show?
+    check_current_user
+  end
+
   def update?
     check_current_user
   end
