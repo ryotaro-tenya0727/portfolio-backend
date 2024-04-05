@@ -12,7 +12,8 @@ Rails.application.routes.draw do
           resources :diaries
         end
 
-        put 'profile', to: 'profiles#update'
+        resource :profile, only: [:show, :update]
+
 
         resources :likes, only: [:create, :destroy]
         resources :notifications, only: :index
