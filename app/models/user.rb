@@ -173,6 +173,8 @@ class User < ApplicationRecord
   end
 
   def self.redis_test
-    Rails.cache.fetch("all_users", expires_in: 12.hours) do User.all.pluck(:id) end
+    Rails.cache.fetch("all_users", expires_in: 12.hours) do
+      User.all.pluck(:id)
+    end
   end
 end
