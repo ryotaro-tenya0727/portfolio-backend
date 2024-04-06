@@ -31,9 +31,11 @@
 /config/master.key
 
 /.env
-/redis/
+
 
 # irb
 .irb_history
 
 /coverage
+/redis/conf
+/redis/data
