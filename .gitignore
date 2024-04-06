@@ -31,7 +31,7 @@
 /config/master.key
 
 /.env
-/redis/*
+/redis/
 
 # irb
 .irb_history
