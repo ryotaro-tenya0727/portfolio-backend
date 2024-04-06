@@ -32,10 +32,9 @@
 
 /.env
 
-
 # irb
 .irb_history
 
 /coverage
-/redis/conf
-/redis/data
+/redis/conf/
+/redis/data/
