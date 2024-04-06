@@ -36,5 +36,5 @@
 .irb_history
 
 /coverage
-/redis/conf/
-/redis/data/
+
+/redis/data/*
