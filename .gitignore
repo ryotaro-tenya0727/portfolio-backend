@@ -36,3 +36,5 @@
 .irb_history
 
 /coverage
+
+redis/data/*

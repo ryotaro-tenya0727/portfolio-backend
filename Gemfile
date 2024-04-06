@@ -5,6 +5,7 @@ ruby '2.7.4'
 gem 'rails', '~> 6.1.5'
 gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.0'
+gem 'redis', '~> 5.1'
 
 # 環境変数
 gem 'dotenv-rails'

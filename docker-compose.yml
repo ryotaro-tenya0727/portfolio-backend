@@ -18,6 +18,7 @@ services:
     stdin_open: true
     depends_on:
       - db
+      - redis
   db:
     image: mysql:5.7
     volumes:
@@ -26,3 +27,11 @@ services:
       MYSQL_ROOT_PASSWORD: ENV['DB_PASSWORD']
     ports:
       - '3306:3306'
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    command: ["redis-server"]
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf:/usr/local/etc/redis
