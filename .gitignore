@@ -37,4 +37,4 @@
 
 /coverage
 
-/redis/data/*
+redis/data/*
