@@ -61,9 +61,26 @@ Rails.application.routes.draw do
 
       resources :diaries, only: [:index, :show]
 
+      basic_constraint = lambda do |request|
+        authenticate_or_request_with_http_basic do |username, password|
+          username == "ryotaro" && password == "ryotaro_2024"
+        end
+      end
 
-      get :health_check, to: 'health_check#index'
 
+      class AdminCoverBandConstraint
+        def matches?(request)
+          authorization = Authorization::AuthorizationService.new(request.headers)
+          @current_user = authorization.current_user
+          return true if @current_user.admin?
+          return false
+        end
+      end
+
+      mount Coverband::Reporters::Web.new, at: '/coverband'
+
+
+      get :health_check, to: 'health_check#index', constraints: basic_constraint
       resources :users, only: [:create, :index]
     end
   end

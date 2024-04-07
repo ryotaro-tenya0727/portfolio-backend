@@ -12,6 +12,8 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
+# エラーが出ないよう明示的にテスト環境ではCoverbandを無効にする。
+require 'coverband' if Rails.env.production? || Rails.env.staging? || Rails.env.development?
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
