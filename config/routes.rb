@@ -53,6 +53,7 @@ Rails.application.routes.draw do
             namespace :s3 do
               namespace :presigned_url do
                 resources :profiles, only: :create
+                resources :diary_videos, only: :create
               end
             end
           end
