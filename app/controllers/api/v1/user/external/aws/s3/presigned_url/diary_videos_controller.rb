@@ -12,7 +12,7 @@ module Api
                                                        bucket: ENV['VIDEO_S3_BUCKET'],
                                                        key: diary_video_s3_url.to_s,
                                                        expires_in: 3600)
-                  render json: { presigned_url: presigned_url, diary_video_url: "#{ENV['VIDEO_CLOUDFRONT_DISTRIBUTION']}/#{diary_video_s3_url}" }
+                  render json: { presigned_url: presigned_url, diary_video_url: "#{diary_video_s3_url}" }
                 end
 
                 private
