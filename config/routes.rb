@@ -57,6 +57,12 @@ Rails.application.routes.draw do
               end
             end
           end
+
+          namespace :cloudflare do
+            namespace :stream do
+              resources :video_uploads, only: :create
+            end
+          end
         end
       end
 

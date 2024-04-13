@@ -9,13 +9,14 @@ module Api
 
     attr_reader :url, :body, :headers, :connection
 
-    def post
+    def post_request
       token = @headers[:authorization_token]
-      @connection.post do |request|
+      response = @connection.post do |request|
         request.headers["Content-Type"] = "application/json"
         request.body = @body.to_json
         request.headers['Authorization'] = "Bearer #{token}" if token
       end
+      JSON.parse(body)
     end
 
     def self.test
@@ -25,7 +26,7 @@ module Api
                                 headers: { authorization_token: ENV['CLOUD_FLARE_VIDEO_STREAM_API_TOKEN'] }
                               )
       response = client.post
-      puts response.body
+      response.body
     end
   end
 end
