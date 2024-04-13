@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_23_165044) do
+ActiveRecord::Schema.define(version: 2024_04_13_052950) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 2022_09_23_165044) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["diary_id"], name: "index_diary_images_on_diary_id"
     t.index ["uuid"], name: "index_diary_images_on_uuid", unique: true
+  end
+
+  create_table "diary_videos", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "diary_id"
+    t.string "video_uid", null: false
+    t.string "thumbnail_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["diary_id"], name: "index_diary_videos_on_diary_id"
   end
 
   create_table "likes", charset: "utf8mb4", force: :cascade do |t|
@@ -125,6 +134,7 @@ ActiveRecord::Schema.define(version: 2022_09_23_165044) do
   add_foreign_key "diaries", "recommended_members"
   add_foreign_key "diaries", "users"
   add_foreign_key "diary_images", "diaries"
+  add_foreign_key "diary_videos", "diaries"
   add_foreign_key "likes", "diaries"
   add_foreign_key "likes", "users"
   add_foreign_key "notifications", "comments"
