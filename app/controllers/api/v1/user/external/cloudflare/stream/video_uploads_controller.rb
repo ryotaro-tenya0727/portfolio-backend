@@ -11,7 +11,7 @@ module Api
                   url: ENV['CLOUDFLARE_STREAM_API_URL'],
                   body: { url: video_upload_params[:url] },
                   headers: { authorization_token: ENV['CLOUD_FLARE_VIDEO_STREAM_API_TOKEN'] }
-                )
+                  )
                 response = client.post_request
                 render json: { video_uid: response['result']['uid'], thumbnail_url: response['result']['thumbnail'] }, status: :ok
               end
