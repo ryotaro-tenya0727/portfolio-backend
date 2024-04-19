@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_13_052950) do
+ActiveRecord::Schema.define(version: 2024_04_19_152212) do
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.string "uuid", null: false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2024_04_13_052950) do
     t.string "thumbnail_url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uuid", null: false
     t.index ["diary_id"], name: "index_diary_videos_on_diary_id"
   end
 

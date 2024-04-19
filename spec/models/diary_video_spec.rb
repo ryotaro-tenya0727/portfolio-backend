@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  thumbnail_url :string(255)      not null
+#  uuid          :string(255)      not null
 #  video_uid     :string(255)      not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
