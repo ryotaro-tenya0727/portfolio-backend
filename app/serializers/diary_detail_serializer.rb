@@ -15,6 +15,10 @@ class DiaryDetailSerializer
   end
 
   attribute :diary_images do |object|
-    object.diary_images.pluck(:diary_image_url)
+    object.diary_images.pluck(:diary_image_url) if object.diary_images.present?
+  end
+
+  attribute :diary_video_uid do |object|
+    object.diary_video.video_uid if object.diary_video.present?
   end
 end
