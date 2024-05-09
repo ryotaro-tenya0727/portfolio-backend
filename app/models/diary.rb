@@ -31,6 +31,7 @@
 #
 class Diary < ApplicationRecord
   has_many :diary_images, dependent: :destroy
+  has_one :diary_video, dependent: :destroy
   has_many :notifications, dependent: :destroy
   accepts_nested_attributes_for :diary_images
 

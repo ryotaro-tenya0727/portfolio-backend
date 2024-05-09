@@ -13,6 +13,8 @@ class Api::V1::User::DiariesController < SecuredController
     ActiveRecord::Base.transaction do
       diary = current_user.recommended_members.find_by!(id: params[:recommended_member_id]).diaries.build(diary_params)
       diary.save!
+      diary.reload
+      create_diary_video(diary)
     end
     head :ok
   end
@@ -37,9 +39,20 @@ class Api::V1::User::DiariesController < SecuredController
 
   private
 
+  def create_diary_video(diary)
+    diary_videos = diary_video_params[:diary_videos].to_h
+    if diary_videos.keys.size > 0
+      diary.create_diary_video!(diary_video_params[:diary_videos])
+    end
+  end
+
   def diary_params
     params.require(:diary).permit(:event_name, :event_date, :event_venue, :event_polaroid_count,
                                   :impressive_memory, :impressive_memory_detail, :status, diary_images_attributes: [:diary_image_url]).merge(user_id: current_user.id)
+  end
+
+  def diary_video_params
+    params.require(:diary).permit(diary_videos: [:thumbnail_url, :video_uid])
   end
 
   def diary_update_params

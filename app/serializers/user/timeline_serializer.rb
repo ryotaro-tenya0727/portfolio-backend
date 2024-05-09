@@ -23,6 +23,10 @@ class User::TimelineSerializer
     object.diary_images.pick(:diary_image_url)
   end
 
+  attribute :diary_video_thumbnail_url do |object|
+    object.diary_video.thumbnail_url if object.diary_video.present?
+  end
+
   attribute :liked do |diary|
     if @@current_user.nil?
       'Not Loggin'

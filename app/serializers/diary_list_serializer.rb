@@ -21,4 +21,8 @@ class DiaryListSerializer
   attribute :diary_images do |object|
     object.diary_images.pluck(:diary_image_url)
   end
+
+  attribute :diary_video_thumbnail_url do |object|
+    object.diary_video.thumbnail_url if object.diary_video.present?
+  end
 end
