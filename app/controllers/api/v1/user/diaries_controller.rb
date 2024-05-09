@@ -41,7 +41,7 @@ class Api::V1::User::DiariesController < SecuredController
 
   def create_diary_video(diary)
     diary_videos = diary_video_params[:diary_videos].to_h
-    if diary_videos.keys.size > 0
+    if diary_videos.keys.size.positive?
       diary.create_diary_video!(diary_video_params[:diary_videos])
     end
   end
@@ -52,7 +52,7 @@ class Api::V1::User::DiariesController < SecuredController
   end
 
   def diary_video_params
-    params.require(:diary).permit(diary_videos: [:thumbnail_url, :video_uid])
+    params.require(:diary).permit(diary_videos: %i[thumbnail_url video_uid])
   end
 
   def diary_update_params
