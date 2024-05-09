@@ -18,15 +18,5 @@ module Api
       end
       JSON.parse(response.body)
     end
-
-    def self.test
-      client = Api::Client.new(
-        url: ENV['CLOUDFLARE_STREAM_API_URL'],
-        body: { url: 'https://idol-project-video.s3.ap-northeast-1.amazonaws.com/development_videos/2326/diary/071e65dd-e203-4412-84d5-cf83d47fd1a2.mov' },
-        headers: { authorization_token: ENV['CLOUD_FLARE_VIDEO_STREAM_API_TOKEN'] }
-      )
-      response = client.post_request
-      response.body
-    end
   end
 end
