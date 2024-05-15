@@ -6,6 +6,8 @@ gem 'rails', '~> 6.1.5'
 gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.0'
 gem 'redis', '~> 5.1'
+# 環境毎に有効/無効を設定するためロードしない
+gem 'coverband', require: false
 
 # 環境変数
 gem 'dotenv-rails'

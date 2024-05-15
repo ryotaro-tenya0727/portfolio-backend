@@ -68,9 +68,18 @@ Rails.application.routes.draw do
 
       resources :diaries, only: [:index, :show]
 
+      class AdminCoverBandConstraint
+        def matches?(request)
+          authorization = Authorization::AuthorizationService.new(request.headers)
+          @current_user = authorization.current_user
+          return true if @current_user.admin?
+          return false
+        end
+      end
 
-      get :health_check, to: 'health_check#index'
+      mount Coverband::Reporters::Web.new, at: '/coverband'
 
+      get :health_check, to: 'health_check#index', constraints: basic_constraint
       resources :users, only: [:create, :index]
     end
   end
