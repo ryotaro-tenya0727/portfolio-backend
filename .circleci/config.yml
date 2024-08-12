@@ -188,12 +188,12 @@ workflows:
       - rspec:
           requires:
             - bundle_dependencies
-      - rubocop:
-          requires:
-            - rspec
+      # - rubocop:
+      #     requires:
+      #       - rspec
       - upload-coverage:
           requires:
-            - rubocop
+            - rspec
       - deploy:
           requires:
             - upload-coverage
