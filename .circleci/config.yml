@@ -6,7 +6,7 @@ orbs:
 executors:
   backend_container:
     docker:
-      - image: cimg/ruby:2.7.4
+      - image: cimg/ruby:3.2.5
         environment:
           CC_TEST_REPORTER_ID: $CC_TEST_REPORTER_ID
           BUNDLER_VERSION: 2.1.4

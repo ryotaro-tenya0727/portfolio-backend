@@ -3,8 +3,14 @@ class Api::V1::User::RecommendedMembersController < SecuredController
 
   def index
     authorize([:user, RecommendedMember])
-    recommended_members = current_user.recommended_members.all.preload(:diaries).order(created_at: :desc)
-    render_json = User::RecommendedMembersSerializer.new(recommended_members).serializable_hash.to_json
+    if params[:search_word]
+      recommended_members = base_recommended_members.where('nickname LIKE ?', "%#{params[:search_word]}%")
+    else
+      recommended_members = base_recommended_members
+    end
+    data_count = recommended_members.size
+    recommended_members = recommended_members.page(params[:page]).per(4)
+    render_json = User::RecommendedMembersSerializer.new(recommended_members).serializable_hash.merge({data_count: data_count})
 
     render json: render_json, status: :ok
   end
@@ -36,6 +42,13 @@ class Api::V1::User::RecommendedMembersController < SecuredController
   end
 
   private
+
+  def base_recommended_members
+    recommended_members = current_user.recommended_members
+                                      .all
+                                      .preload(:diaries)
+                                      .order(created_at: :desc)
+  end
 
   def recommended_member_params
     params.require(:recommended_member).permit(:nickname, :group, :first_met_date)

@@ -10,7 +10,7 @@ RSpec.describe "署名URLの取得 Api::V1::User::External::Aws::S3::PresignedUr
 
   describe 'ユーザーがS3へアップロードするための署名URLを取得 POST /api/v1/user/external/aws/s3/presigned_url/profiles' do
     let!(:request_hash) { { headers: headers, params: { presigned_url: {filename: "test"} }.to_json } }
-    let(:http_request) { post '/api/v1/user/external/aws/s3/presigned_url/diary_videos', request_hash }
+    let(:http_request) { post '/api/v1/user/external/aws/s3/presigned_url/diary_videos', headers: headers, params: { presigned_url: {filename: "test"} }.to_json }
 
     before do
       allow(Signer).to receive(:presigned_url).and_return("presigned_url")

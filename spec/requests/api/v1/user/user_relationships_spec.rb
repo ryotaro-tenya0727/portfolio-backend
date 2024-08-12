@@ -11,10 +11,10 @@ RSpec.describe "フォロー機能 Api::V1::User::UserRelationships", type: :req
   end
 
   describe "ユーザーがユーザー一覧を閲覧 GET /api/v1/user/user_relationships" do
-    let!(:request_hash) { { headers: headers} }
-    let(:http_request) { get api_v1_user_user_relationships_path, request_hash }
+    let(:http_request) { get api_v1_user_user_relationships_path, headers: headers }
     context "正常系" do
       it "ユーザーがユーザー一覧を閲覧できること" do
+        # byebug
         http_request
         expect(response).to be_successful
         expect(response).to have_http_status(:ok)
@@ -24,8 +24,7 @@ RSpec.describe "フォロー機能 Api::V1::User::UserRelationships", type: :req
 
   describe "ユーザーが選択したユーザーをフォロー POST /api/v1/user/user_relationships" do
     let!(:other_user) { create(:user) }
-    let!(:request_hash) { { headers: headers, params: { id: other_user.id }.to_json } }
-    let(:http_request) { post api_v1_user_user_relationships_path, request_hash }
+    let(:http_request) { post api_v1_user_user_relationships_path, headers: headers, params: { id: other_user.id }.to_json  }
     context "正常系" do
       it "ユーザーが選択したユーザーをフォローできること" do
         http_request
@@ -38,8 +37,7 @@ RSpec.describe "フォロー機能 Api::V1::User::UserRelationships", type: :req
 
   describe "ユーザーが選択したユーザーのフォローを解除 DELETE /api/v1/user/user_relationships/:id" do
     let!(:other_user) { create(:user) }
-    let!(:request_hash) { { headers: headers} }
-    let(:http_request) { delete api_v1_user_user_relationship_path(other_user.id), request_hash }
+    let(:http_request) { delete api_v1_user_user_relationship_path(other_user.id), headers: headers }
     context "正常系" do
       it "ユーザーが選択したユーザーのフォローを解除できること" do
         current_user.follow(other_user)
@@ -51,8 +49,7 @@ RSpec.describe "フォロー機能 Api::V1::User::UserRelationships", type: :req
   end
 
   describe "ユーザーが指定したワードでユーザーを検索 POST /api/v1/user/user_relationships/search" do
-    let!(:request_hash) { { headers: headers, params: {search: {name: "検索"}}.to_json} }
-    let(:http_request) { post search_api_v1_user_user_relationships_path, request_hash }
+    let(:http_request) { post search_api_v1_user_user_relationships_path, headers: headers, params: {search: {name: "検索"}}.to_json }
     let!(:search_user) { create(:user, name: "検索") }
     before do
       create_list(:user, 3)

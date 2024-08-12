@@ -1,4 +1,4 @@
-FROM ruby:2.7.4
+FROM ruby:3.2.5
 ENV TZ Asia/Tokyo
 RUN apt-get update
 RUN apt-get install -y build-essential \
@@ -6,6 +6,7 @@ RUN apt-get install -y build-essential \
   sudo
 WORKDIR /backend
 COPY Gemfile /backend/
+RUN gem update --system
 RUN bundle install
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

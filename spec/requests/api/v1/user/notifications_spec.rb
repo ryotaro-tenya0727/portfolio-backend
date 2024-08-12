@@ -13,10 +13,8 @@ RSpec.describe "通知機能 Api::V1::User::Notifications", type: :request do
   describe "フォローされたときの通知を取得 GET /api/v1/user/notifications" do
     let!(:other_user) { create(:user) }
     let!(:other_user2) { create(:user) }
-    let!(:follow_request_hash) { { headers: headers, params: { id: other_user.id }.to_json } }
-    let(:follow_request) { post api_v1_user_user_relationships_path, follow_request_hash }
-    let!(:notification_request_hash) { { headers: headers } }
-    let(:notification_request) { get api_v1_user_notifications_path, notification_request_hash }
+    let(:follow_request) { post api_v1_user_user_relationships_path, headers: headers, params: { id: other_user.id }.to_json  }
+    let(:notification_request) { get api_v1_user_notifications_path, headers: headers }
     context "正常系" do
       it "ユーザーをフォローーすると通知が作成されること" do
         expect{ follow_request }.to change { Notification.all.size }.by(1)
