@@ -193,7 +193,7 @@ workflows:
       #       - rspec
       - upload-coverage:
           requires:
-            - rubocop
+            - rspec
       - deploy:
           requires:
             - upload-coverage
