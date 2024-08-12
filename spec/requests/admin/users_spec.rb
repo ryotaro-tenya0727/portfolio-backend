@@ -31,8 +31,7 @@ RSpec.describe "ユーザー管理機能 Admin::Users", type: :request do
 
   describe "ユーザーの削除 DELETE /admin/users/:user_id/diaries/:id" do
     let!(:general_user) {create(:user)}
-    let(:request_hash) { { headers: headers_with_token} }
-    let(:http_request) { delete admin_user_path(general_user), request_hash }
+    let(:http_request) { delete admin_user_path(general_user), headers: headers_with_token }
 
     context '正常系' do
       let!(:current_user) { create(:user, role: 'admin') }
