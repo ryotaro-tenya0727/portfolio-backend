@@ -35,7 +35,7 @@ RSpec.describe "日記管理機能 Admin::Diaries", type: :request do
     describe "管理ユーザーの日記削除機能 DELETE /admin/diaries/:id" do
     let!(:diary) {create(:diary)}
     let(:request_hash) { { headers: headers_with_token} }
-    let(:http_request) { delete admin_diary_path(diary), request_hash }
+    let(:http_request) { delete admin_diary_path(diary), headers: headers_with_token }
     context '正常系' do
       let!(:current_user) { create(:user, role: 'admin') }
       it 'ユーザーが管理者権限を持つ場合あるユーザーの日記を削除できること' do

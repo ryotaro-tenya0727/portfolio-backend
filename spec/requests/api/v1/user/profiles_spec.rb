@@ -12,7 +12,7 @@ RSpec.describe "推しメンの日記登録機能 Api::V1::User::Profiles", type
 
   describe "ユーザーがpyリフィイールを編集 PUT /api/v1/user/profile" do
     let!(:request_hash) { { headers: headers, params: { profile: { name: 'test_name', user_image: "test_image_url", me_introduction: "test_me_introduction" } }.to_json } }
-    let(:http_request) { put api_v1_user_profile_path, request_hash }
+    let(:http_request) { put api_v1_user_profile_path, headers: headers, params: { profile: { name: 'test_name', user_image: "test_image_url", me_introduction: "test_me_introduction" } }.to_json }
     context "正常系" do
       it "ユーザーが選択した推しメンの日記を編集できること" do
         http_request
