@@ -11,7 +11,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   end
 
   describe 'ユーザーが推しメンを閲覧 GET api/v1/user/recommended_members' do
-    let(:recommended_member_num) { 5 }
+    let(:recommended_member_num) { 4 }
     let(:http_request) { get api_v1_user_recommended_members_path, headers: headers }
 
     before do
@@ -30,7 +30,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
 
   describe 'ユーザーが推しメンを作成 POST api/v1/user/recommended_members' do
     let!(:request_hash) { { headers: headers, params: { recommended_member: attributes_for(:recommended_member) }.to_json } }
-    let(:http_request) { post api_v1_user_recommended_members_path, request_hash }
+    let(:http_request) { post api_v1_user_recommended_members_path, headers: headers, params: { recommended_member: attributes_for(:recommended_member) }.to_json  }
 
     context '正常系' do
       it '推しメンが新規作成されること' do
@@ -41,7 +41,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     end
 
     context '異常系' do
-      let!(:request_hash) { { headers: headers, params: { recommended_member: attributes_for(:recommended_member, nickname: '') }.to_json } }
+      let(:http_request) { post api_v1_user_recommended_members_path, headers: headers, params: { recommended_member: attributes_for(:recommended_member, nickname: '')}.to_json  }
       it 'ニックネームが未入力の場合、推しメンが作成されないこと' do
         http_request
         expect(response).to_not be_successful
@@ -70,7 +70,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   describe 'ユーザーが推しメンを編集 PUT /api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers, params: { recommended_member: { nickname: 'change' } }.to_json } }
-    let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.id), request_hash }
+    let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.id), headers: headers, params: { recommended_member: { nickname: 'change' } }.to_json }
 
     context '正常系' do
       it '推しメンを編集できること' do
@@ -81,7 +81,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
     end
 
     context '異常系' do
-      let!(:request_hash) { { headers: headers, params: { recommended_member: attributes_for(:recommended_member, nickname: '') }.to_json } }
+      let(:http_request) { put api_v1_user_recommended_member_path(recommended_member.id), headers: headers, params: { recommended_member: attributes_for(:recommended_member, nickname: '') }.to_json }
       it 'ニックネームが未入力の場合、推しメンを編集できないこと' do
         http_request
         expect(response).to_not be_successful
@@ -91,7 +91,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
 
     context '異常系' do
       let!(:another_recommended_member) { create(:recommended_member) }
-      let(:another_http_request) { put api_v1_user_recommended_member_path(another_recommended_member.id), request_hash }
+      let(:another_http_request) { put api_v1_user_recommended_member_path(another_recommended_member.id), headers: headers, params: { recommended_member: { nickname: 'change' } }.to_json }
       it '他のユーザーが作成した推しメンを編集できないこと' do
         another_http_request
         expect(response).to_not be_successful
@@ -103,7 +103,7 @@ RSpec.describe '推しメン登録機能 Api::V1::Users::RecommendedMembers', ty
   describe 'ユーザーが推しメンを削除 DELETE api/v1/user/recommended_members/:id' do
     let!(:recommended_member) { create(:recommended_member, user: current_user) }
     let!(:request_hash) { { headers: headers} }
-    let(:http_request) { delete api_v1_user_recommended_member_path(recommended_member.id), request_hash }
+    let(:http_request) { delete api_v1_user_recommended_member_path(recommended_member.id), headers: headers }
     context '正常系' do
       it '推しメンを削除できること' do
         expect{ http_request }.to change { current_user.recommended_members.count }.by(-1)

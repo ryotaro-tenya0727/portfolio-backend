@@ -40,8 +40,7 @@ RSpec.describe "ログイン後の通信 Api::V1::User::Users", type: :request d
     let!(:other_user1) { create(:user) }
     let!(:other_user2) { create(:user) }
     let!(:other_user3) { create(:user) }
-    let!(:request_hash) { { headers: headers} }
-    let(:http_request) { get following_api_v1_user_users_path, request_hash }
+    let(:http_request) { get following_api_v1_user_users_path, headers: headers }
     it 'ユーザーがフォローしているユーザーを閲覧できること' do
       authorization_stub
       current_user.follow(other_user1)
@@ -58,8 +57,7 @@ RSpec.describe "ログイン後の通信 Api::V1::User::Users", type: :request d
     let!(:other_user1) { create(:user) }
     let!(:other_user2) { create(:user) }
     let!(:other_user3) { create(:user) }
-    let!(:request_hash) { { headers: headers} }
-    let(:http_request) { get followers_api_v1_user_users_path, request_hash }
+    let(:http_request) { get followers_api_v1_user_users_path, headers: headers }
     it 'ユーザーがフォローしているユーザーを閲覧できること' do
       authorization_stub
       other_user1.follow(current_user)
