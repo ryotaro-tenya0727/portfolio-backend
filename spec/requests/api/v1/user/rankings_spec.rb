@@ -11,7 +11,7 @@ RSpec.describe "ユーザーに関するランキングを取得 Api::V1::User::
   end
   describe "総チェキ数のランキングを取得 /api/v1/user/rankings/total_polaroid_count" do
     let!(:request_hash) { { headers: headers} }
-    let(:http_request) { get total_polaroid_count_api_v1_user_rankings_path, request_hash }
+    let(:http_request) { get total_polaroid_count_api_v1_user_rankings_path, headers: headers }
     before do
       create_list(:diary, 5)
     end

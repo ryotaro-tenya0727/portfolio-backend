@@ -13,7 +13,7 @@ RSpec.describe "いいね機能 Api::V1::User::Likes", type: :request do
   describe "ユーザーが選択した日記をいいね POST /api/v1/user/likes" do
     let!(:diary) { create(:diary) }
     let!(:request_hash) { { headers: headers, params: { id: diary.id }.to_json } }
-    let(:http_request) { post api_v1_user_likes_path, request_hash }
+    let(:http_request) { post api_v1_user_likes_path, headers: headers, params: { id: diary.id }.to_json }
     context "正常系" do
       it "ユーザーが選択した日記をいいねできること" do
         http_request
@@ -38,7 +38,7 @@ RSpec.describe "いいね機能 Api::V1::User::Likes", type: :request do
   describe "ユーザーが選択した日記のいいねを解除 DELETE /api/v1/user/likes/:id" do
     let!(:diary) { create(:diary) }
     let!(:request_hash) { { headers: headers} }
-    let(:http_request) { delete api_v1_user_like_path(diary), request_hash }
+    let(:http_request) { delete api_v1_user_like_path(diary), headers: headers }
     context "正常系" do
       it "ユーザーが選択した日記のいいねを解除できること" do
         current_user.like(diary)
