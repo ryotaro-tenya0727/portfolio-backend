@@ -110,8 +110,9 @@
 
 以下のように日記のような形で推しメンとの思い出をメンバーごとに記録していく。　
 <div align="center">
-<img width="428" alt="スクリーンショット 2022-06-29 19 25 11" src="https://user-images.githubusercontent.com/71915489/176414909-346fb442-41c7-4ee1-bd14-2e3d3f32dbfc.png">
+<img width="470" height="600" alt="mosaic_176414909-346fb442-41c7-4ee1-bd14-2e3d3f32dbfc__1_" src="https://github.com/user-attachments/assets/9f0f880b-d3a5-4272-a4c0-29dba47c1899" />
 </div>
+
 
 
 
